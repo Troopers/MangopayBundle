@@ -1,0 +1,44 @@
+{
+    "name": "appventus/mangopay-bundle",
+    "type": "symfony-bundle",
+    "description": "This Bundle include Mangopay php sdk as a service",
+    "keywords": ["mangopay"],
+    "homepage": "http://appventus.com",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Paul Andrieux",
+            "homepage": "https://appventus.com"
+        }
+    ],
+    "require": {
+        "php":                      ">=5.0.0",
+        "symfony/framework-bundle": ">=2.3"
+    },
+
+    "autoload": {
+        "psr-0": { "AppVentus\\MangopayBundle": "" }
+    },
+
+    "target-dir": "AppVentus/MangopayBundle",
+
+    "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "mangopay/mangopay2-php-sdk",
+        "version": "2.0",
+        "dist": {
+          "url": "git@github.com:MangoPay/mangopay2-php-sdk.git",
+          "type": "git"
+        },
+        "autoload": {
+          "classmap": [
+            "MangoPaySDK/"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+services:
+    appventus_mangopay.mango_api:
+        class: AppVentus\MangopayBundle\Service\MangoPayService
+        arguments: ["%mangopay_client_id%", "%mangopay_client_password%", "%mangopay_base_url%"]
