@@ -1,10 +1,10 @@
 <?php
-namespace Yosh\MangopayBundle\Service;
+namespace AppVentus\MangopayBundle\Helper;
 
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
 use MangoPay\CardRegistration;
-use MangoPay\MangoPay;
+use MangoPay\MangoPayApi;
 use MangoPay\UserNatural;
 use Yosh\AppBundle\Entity\User\Yosher;
 
@@ -16,15 +16,15 @@ use Yosh\AppBundle\Entity\User\Yosher;
  * You can use it threw "appventus_mangopay.mango_api" service.
  *
  **/
-class MangoPayHelper extends MangoPay
+class MangopayHelper extends MangoPayApi
 {
     protected $clientId;
     protected $clientPassword;
     protected $baseUrl;
 
-    public function __construct($clientId, $clientPassword, $baseUrl)
+    public function __construct($clientId, $clientPassword, $baseUrl, $debug = false)
     {
-        parent::__construct();
+        parent::__construct($debug);
         $this->Config->ClientId = $clientId;
         $this->Config->ClientPassword = $clientPassword;
         $this->Config->TemporaryFolder = sys_get_temp_dir();
