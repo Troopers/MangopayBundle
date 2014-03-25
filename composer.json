@@ -15,7 +15,7 @@
     "require": {
         "php"                       : ">=5.0.0",
         "symfony/framework-bundle"  : ">=2.3",
-        "mangopay/mangopay2-php-sdk": "2.0"
+        "mangopay/mangopay2-php-sdk": "*"
     },
 
     "autoload": {
