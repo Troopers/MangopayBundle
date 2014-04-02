@@ -21,13 +21,15 @@ class MangopayHelper extends MangoPayApi
     protected $clientId;
     protected $clientPassword;
     protected $baseUrl;
+    protected $dispatcher;
 
-    public function __construct($clientId, $clientPassword, $baseUrl, $debug = false)
+    public function __construct($clientId, $clientPassword, $baseUrl, $dispatcher, $debug = false)
     {
         parent::__construct($debug);
         $this->Config->ClientId = $clientId;
         $this->Config->ClientPassword = $clientPassword;
         $this->Config->TemporaryFolder = sys_get_temp_dir();
         $this->Config->BaseUrl = $baseUrl;
+        $this->dispatcher = $dispatcher;
     }
 }
