@@ -15,35 +15,12 @@
     "require": {
         "php"                       : ">=5.0.0",
         "symfony/framework-bundle"  : ">=2.3",
-        "mangopay/mangopay2-php-sdk": "*"
+        "mangopay/php-sdk-v2": "*"
     },
 
     "autoload": {
         "psr-0": { "AppVentus\\MangopayBundle": "" }
     },
 
-    "target-dir": "AppVentus/MangopayBundle",
-
-    "repositories": [
-
-    {
-      "type": "package",
-      "package": {
-        "name": "mangopay/mangopay2-php-sdk",
-        "version": "master",
-        "source": {
-            "url": "git://github.com/MangoPay/mangopay2-php-sdk.git",
-            "type": "git",
-            "reference": "master"
-        },
-        "dist": {
-            "url": "https://github.com/MangoPay/mangopay2-php-sdk/archive/master.zip",
-            "type": "zip"
-        },
-        "autoload": {
-            "files": ["MangoPaySDK/mangoPayApi.inc"]
-        }
-      }
-    }
-  ]
+    "target-dir": "AppVentus/MangopayBundle"
 }
