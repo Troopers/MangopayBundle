@@ -1,0 +1,133 @@
+
+<div class="container">
+    <div id="payment-container">
+        <h1>Paiement en ligne sécurisé</h1>
+
+        <div class="col-xs-5">
+            <div class="panel panel-default" id="payment-breadcrumb-panel">
+                <div class="panel-body">
+                    <ul class="vertical-breadcrumb" id="payment-step">
+                        <li class="breadcrumb">
+                            Entrez le numéro de carte
+                        </li>
+
+                        <li class="breadcrumb">
+                            Entrez votre nom et la date d'expiration
+                        </li>
+
+                        <li class="breadcrumb">
+                            Entrez le code cryptogramme
+                            <small>Généralement situé à l'arrière de la carte de crédit</small>
+                        </li>
+
+                        <li class="breadcrumb">
+                            Entrez une adresse de facturation
+                        </li>
+                    </ul>
+
+                    <h2 class="pull-left">Total : <strong>{{ order.price }}€</strong></h2>
+
+                    <button onclick="$('#card-form').submit();" id="submit-button" class="btn btn-default btn-lg pull-right"> <i class="fa fa-check"></i> Valider</button>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="payment-info-panel">
+                <div class="panel-body">
+                    <p>
+                        Votre compte ne sera débité que si votre hôte accepte votre demande de
+                        réservation. Il dispose de 72h pour vous répondre. S’il ne répond pas
+                        dans les temps ou s’il refuse votre demande de réservation, aucune somme
+                        ne sera débitée de votre compte.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="payment-form">
+
+                        <div id="payment-form-creditCard">
+                            <div class="form-group" id="cardNumber-group">
+                                {{form_label(form.cardNumber)}}
+                                {{form_widget(form.cardNumber)}}
+                            </div>
+
+                            <div class="form-group" id="cardHolder-group">
+                                {{form_label(form.cardHolder)}}
+                                {{form_widget(form.cardHolder)}}
+                            </div>
+
+                            <div class="form-group" id="cardExpiry-group">
+                                {{form_label(form.cardExpiryMonth)}}
+                                <div class="select" style="width: 55px;">
+                                {{form_widget(form.cardExpiryMonth)}}
+                                </div>
+                                <div class="select" style="width: 55px; margin-bottom: 10px;">
+                                {{form_widget(form.cardExpiryYear)}}
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="ccv-group">
+                                {{form_label(form.ccv)}}
+                                {{form_widget(form.ccv)}}
+                            </div>
+
+                            <p id="payment-form-creditCard-info">Vos informations bancaires resteront strictement confidentielles. <br> * Champs obligatoires</p>
+                        </div>
+
+                        {{form_start(form, {'attr': {'data-toggle': 'ajax', 'id': 'card-form'}})}}
+                        {{form_end(form)}}
+                        {# <form id="card-form" class="row" action="{{form.action}}" method="POST" data-toggle="ajax">
+                                {{form_rest(form)}}
+                                {{form_errors(form)}}
+                        </form> #}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="mango-panel">
+                <div class="panel-body text-center">
+                    <img src="/bundles/appventusmangopay/img/mango-frise.png" alt="Powered by Mango Pay">
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $("#appventus_mangopay_card_expiry_month, #appventus_mangopay_card_expiry_year").on('change', function(e) {
+                if ($(this).val().length < 2) {
+                    $(this).val("0" + $(this).val());
+                }
+            });
+
+            $('input').keypress(function() {
+                if ($('#appventus_mangopay_card_ccv').val() != "") {
+                    $("#payment-step .breadcrumb").eq(2).addClass('active');
+                }
+
+                if (
+                    $('#appventus_mangopay_card_holder').val() != "" &&
+                    $('#appventus_mangopay_card_expiry_month').val() != "" &&
+                    $('#appventus_mangopay_card_expiry_year').val() != ""
+                ) {
+                    $("#payment-step .breadcrumb").eq(1).addClass('active');
+                }
+
+                if ($('#appventus_mangopay_card_number').val() != "") {
+                    $("#payment-step .breadcrumb").eq(0).addClass('active');
+                };
+            });
+
+        </script>
+
+    </div>
+</div>
+
+{% javascripts
+    '@AppVentusMangopayBundle/Resources/js/mangopay.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
