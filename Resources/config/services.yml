@@ -1,4 +1,18 @@
+parameters:
+    appventus_mangopay.mango_api.class: "AppVentus\MangopayBundle\Helper\MangopayHelper"
+
+
 services:
     appventus_mangopay.mango_api:
-        class: AppVentus\MangopayBundle\Helper\MangopayHelper
-        arguments: ["%mangopay_client_id%", "%mangopay_client_password%", "%mangopay_base_url%", "@event_dispatcher", "%mangopay_debug%"]
+        class: %appventus_mangopay.mango_api.class%
+        arguments:
+            - "%mangopay_client_id%"
+            - "%mangopay_client_password%"
+            - "%mangopay_base_url%"
+            - "@event_dispatcher"
+            - "%mangopay_debug%"
+
+    appventus_mangopay.form.card:
+        class: AppVentus\MangopayBundle\Form\CardType
+        tags:
+            - { name: form.type, alias: appventus_mangopaybundle_card_type }

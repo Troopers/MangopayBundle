@@ -1,12 +1,9 @@
 <?php
 namespace AppVentus\MangopayBundle\Helper;
 
-use MangoPay\BankAccount;
-use MangoPay\BankAccountDetailsIBAN;
-use MangoPay\CardRegistration;
+use AppVentus\MangopayBundle\Entity\UserInterface;
 use MangoPay\MangoPayApi;
 use MangoPay\UserNatural;
-use Yosh\AppBundle\Entity\User\Yosher;
 
 /**
  * This class is an interface between raw MongoPay api object and symfony2.
@@ -31,5 +28,29 @@ class MangopayHelper extends MangoPayApi
         $this->Config->TemporaryFolder = sys_get_temp_dir();
         $this->Config->BaseUrl = $baseUrl;
         $this->dispatcher = $dispatcher;
+    }
+
+    public function createMangoUser(UserInterface $user)
+    {
+        $mangoUser = new UserNatural();
+        $mangoUser->Email = $user->getEmail();
+        $mangoUser->FirstName = $user->getFirstname();
+        $mangoUser->LastName = $user->getLastname();
+        $mangoUser->Birthday = $user->getBirthDate()->getTimestamp();
+        $mangoUser->Nationality = $user->getNationality();
+        $mangoUser->CountryOfResidence = $user->getCountry();
+
+        $mangoUser = $this->Users->Create($mangoUser);
+    }
+    public function findOrCreateMangoUser(UserInterface $user)
+    {
+        if ($user->getMangoUserId()) {
+            $mangoUser = $this->Users->get($user->getMangoUserId());
+        // else, create a new mango user
+        } else {
+            $this->createMangoUser($user);
+        }
+
+        return $mangoUser;
     }
 }
