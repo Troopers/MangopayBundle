@@ -14,6 +14,11 @@ interface UserInterface
     public function getMangoUserId();
 
     /**
+     * @var integer
+     */
+    public function getMangoWalletId();
+
+    /**
      * @var string
      * User’s e-mail. A correct email address is expected
      */
