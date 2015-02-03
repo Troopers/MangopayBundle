@@ -2,6 +2,7 @@
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\Entity\UserInterface;
+use MangoPay\CardRegistration;
 use MangoPay\MangoPayApi;
 use MangoPay\UserNatural;
 
@@ -30,25 +31,42 @@ class MangopayHelper extends MangoPayApi
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * post given CardRegistration to mango, and return populated CardRegistration
+     *
+     * @param  CardRegistration $card
+     * @return $card
+     **/
+    public function createCardRegistration(CardRegistration $card)
+    {
+        $card->Currency = "EUR";
+        $card = $this->CardRegistrations->create($card);
+
+        return $card;
+    }
+
     public function createMangoUser(UserInterface $user)
     {
         $mangoUser = new UserNatural();
         $mangoUser->Email = $user->getEmail();
         $mangoUser->FirstName = $user->getFirstname();
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $user->getBirthDate()->getTimestamp();
+        $mangoUser->Birthday = $user->getBirthDate();
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
 
         $mangoUser = $this->Users->Create($mangoUser);
+
+        return $mangoUser;
     }
+
     public function findOrCreateMangoUser(UserInterface $user)
     {
         if ($user->getMangoUserId()) {
             $mangoUser = $this->Users->get($user->getMangoUserId());
         // else, create a new mango user
         } else {
-            $this->createMangoUser($user);
+            $mangoUser = $this->createMangoUser($user);
         }
 
         return $mangoUser;
