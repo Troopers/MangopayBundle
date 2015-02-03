@@ -1,4 +1,10 @@
 
+//This method is used to force the month and year to be two digits
+function pad(num, length) {
+    var s = "00" + num;
+    return s.substr(s.length - length);
+}
+
 
 // Action for button "Pay with Ajax or Redirect"
 function payAjaxOrRedirect(ajaxUrl,
@@ -19,13 +25,13 @@ function payAjaxOrRedirect(ajaxUrl,
     });
 
     // Collect sensitive card data from the form
-    var month = $("#payment-container").find("#appventus_mangopay_card_expiry_month").val();
-    var year = $("#payment-container").find("#appventus_mangopay_card_expiry_year").val();
+    var month = $("#payment-container").find("#appventus_mangopaybundle_card_type_cardExpiryMonth").val();
+    var year = $("#payment-container").find("#appventus_mangopaybundle_card_type_cardExpiryYear").val();
 
     var cardData = {
-        cardNumber : $("#payment-container").find("#appventus_mangopay_card_number").val(),
+        cardNumber : $("#payment-container").find("#appventus_mangopaybundle_card_type_cardNumber").val(),
         cardExpirationDate : pad(month, 2) + "" + pad(year, 2),
-        cardCvx : pad($("#payment-container").find("#appventus_mangopay_ccv").val(), 3)
+        cardCvx : pad($("#payment-container").find("#appventus_mangopaybundle_card_type_ccv").val(), 3)
     };
 
     // Process data
