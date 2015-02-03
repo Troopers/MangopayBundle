@@ -76,12 +76,9 @@
                             <p id="payment-form-creditCard-info">Vos informations bancaires resteront strictement confidentielles. <br> * Champs obligatoires</p>
                         </div>
 
-                        {{form_start(form, {'attr': {'data-toggle': 'ajax', 'id': 'card-form'}})}}
-                        {{form_end(form)}}
-                        {# <form id="card-form" class="row" action="{{form.action}}" method="POST" data-toggle="ajax">
-                                {{form_rest(form)}}
-                                {{form_errors(form)}}
-                        </form> #}
+                        <form action="{{ path('nooster_front_appbundle_order_new', {order: order.id}) }}" data-toggle="ajax" id="card-form" method="POST">
+                            {{ form_rest(form) }}
+                        </form>
                     </div>
 
                 </div>
