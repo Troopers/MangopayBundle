@@ -76,7 +76,7 @@
                             <p id="payment-form-creditCard-info">Vos informations bancaires resteront strictement confidentielles. <br> * Champs obligatoires</p>
                         </div>
 
-                        <form action="{{ path('nooster_front_appbundle_order_new', {order: order.id}) }}" data-toggle="ajax" id="card-form" method="POST">
+                        <form action="{{ path('appventus_mangopaybundle_payment_new', {order: order.id}) }}" data-toggle="ajax" id="card-form" method="POST">
                             {{ form_rest(form) }}
                         </form>
                     </div>
