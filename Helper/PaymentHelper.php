@@ -98,7 +98,7 @@ class PaymentHelper
 
         $debitedFunds = new Money();
         $debitedFunds->Currency = "EUR";
-        $debitedFunds->Amount = $order->getPrice();
+        $debitedFunds->Amount = $order->getMangoPrice();
         $cardPreAuthorisation->DebitedFunds = $debitedFunds;
 
         $cardPreAuthorisation->SecureMode = "DEFAULT";

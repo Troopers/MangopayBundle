@@ -44,6 +44,13 @@ class Order
     protected $payinTransaction;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="mango_price", type="integer")
+     */
+    protected $mangoPrice;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -110,4 +117,27 @@ class Order
         return $this->payinTransaction;
     }
 
+    /**
+     * Get mangoPrice
+     *
+     * @return string
+     */
+    public function getMangoPrice()
+    {
+        return $this->mangoPrice;
+    }
+
+    /**
+     * Set mangoPrice
+     *
+     * @param string $mangoPrice
+     *
+     * @return $this
+     */
+    public function setMangoPrice($mangoPrice)
+    {
+        $this->mangoPrice = $mangoPrice;
+
+        return $this;
+    }
 }
