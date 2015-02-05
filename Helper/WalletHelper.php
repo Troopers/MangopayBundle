@@ -23,14 +23,14 @@ class WalletHelper
         $this->dispatcher = $dispatcher;
     }
 
-    public function findOrCreateWallet(UserInterface $user)
+    public function findOrCreateWallet(UserInterface $user, $description = '')
     {
 
         if ($wallet = $user->getWallet()) {
             $wallet = $this->mangopayHelper->Wallets->get($wallet->getMangoId());
         // else, create a new mango user
         } else {
-            $wallet = $this->createWalletForUser($user);
+            $wallet = $this->createWalletForUser($user, $description);
         }
 
         return $wallet;
