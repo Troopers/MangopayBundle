@@ -46,7 +46,7 @@ class Order
     /**
      * @var int
      *
-     * @ORM\Column(name="mango_price", type="integer")
+     * @ORM\Column(name="mango_price", type="integer", nullable=true)
      */
     protected $mangoPrice;
 
