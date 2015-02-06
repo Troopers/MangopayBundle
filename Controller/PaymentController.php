@@ -2,7 +2,9 @@
 
 namespace AppVentus\MangopayBundle\Controller;
 
+use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\Order;
+use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -143,7 +145,7 @@ class PaymentController extends Controller
 
         $preAuthId = $request->get('preAuthorizationId');
 
-        $preAuth = $mangoPayApi->CardPreAuthorizations->Get($preAuthId);
+        $preAuth = $mangopayApi->CardPreAuthorizations->Get($preAuthId);
 
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status != 'SUCCEEDED') {
 
@@ -153,7 +155,8 @@ class PaymentController extends Controller
             return $this->redirect($this->generateUrl('appventus_mangopaybundle_payment_finalize_secure', array('orderId' => $order->getId())));
         }
 
-        $order->setMangoPreAuthorisationId($preAuth->Id);
+        $event = new PreAuthorisationEvent($order, $preAuth);
+        $this->get('event_dispatcher')->dispatch(AppVentusMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
 
         $order->setStatus(Order::STATUS_PENDING);
 
