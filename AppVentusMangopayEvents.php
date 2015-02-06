@@ -21,6 +21,11 @@ final class AppVentusMangopayEvents
     const NEW_CARD_PREAUTHORISATION = 'appventus_mangopay.card.preauthorisation.new';
 
     /**
+     * The UPDATE_CARD_PREAUTHORISATION event occurs when a card preauthorisation is updated
+     */
+    const UPDATE_CARD_PREAUTHORISATION = 'appventus_mangopay.card.preauthorisation.update';
+
+    /**
      * The NEW_CARD_REGISTRATION event occurs when a card registration is created
      */
     const NEW_CARD_REGISTRATION = 'appventus_mangopay.card.registration.new';
