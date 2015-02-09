@@ -1,33 +1,19 @@
-
 <div class="container">
-    <div id="payment-container">
-        <h1>Paiement en ligne sécurisé</h1>
+    <h1 class="h1 font-semibold" id="payment-heading">Paiement en ligne sécurisé</h1>
 
-        <div class="col-xs-5">
-            <div class="panel panel-default" id="payment-breadcrumb-panel">
-                <div class="panel-body">
-                    <ul class="vertical-breadcrumb" id="payment-step">
-                        <li class="breadcrumb">
-                            Entrez le numéro de carte
-                        </li>
-
-                        <li class="breadcrumb">
-                            Entrez votre nom et la date d'expiration
-                        </li>
-
-                        <li class="breadcrumb">
-                            Entrez le code cryptogramme
-                            <small>Généralement situé à l'arrière de la carte de crédit</small>
-                        </li>
-
-                        <li class="breadcrumb">
-                            Entrez une adresse de facturation
-                        </li>
+    <div class="flex-row" id="payment-flexRow">
+        <div id="payment-col-side">
+            <div class="panel panel-default">
+                <div class="panel-body" id="payment-process">
+                    <ul class="vertical-breadcrumb hidden-xs hidden-sm">
+                        <li class="item">Entrez le numéro de carte</li>
+                        <li class="item">Entrez votre nom et la date d'expiration</li>
+                        <li class="item">Entrez le code cryptogramme <small>Généralement situé à l'arrière de la carte de crédit</small></li>
                     </ul>
 
-                    <h2 class="pull-left">Total : <strong>{{ order.price }}€</strong></h2>
+                    <h2 class="h2 font-light" id="payment-price">Total : <strong>{{ order.price }}€</strong></h2>
 
-                    <button onclick="$('#card-form').submit();" id="submit-button" class="btn btn-default btn-lg pull-right"> <i class="fa fa-check"></i> Valider</button>
+                    <button onclick="$('#card-form').submit();" id="submit-button" class="btn btn-default btn-success btn-block-md"> <i class="fa fa-check"></i> Valider</button>
                 </div>
             </div>
 
@@ -43,38 +29,55 @@
             </div>
         </div>
 
+        <div id="payment-col-main">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div id="payment-form">
 
-                        <div id="payment-form-creditCard">
-                            <div class="form-group" id="cardNumber-group">
-                                {{form_label(form.cardNumber)}}
-                                {{form_widget(form.cardNumber)}}
-                            </div>
-
-                            <div class="form-group" id="cardHolder-group">
-                                {{form_label(form.cardHolder)}}
-                                {{form_widget(form.cardHolder)}}
-                            </div>
-
-                            <div class="form-group" id="cardExpiry-group">
-                                {{form_label(form.cardExpiryMonth)}}
-                                <div class="select" style="width: 55px;">
-                                {{form_widget(form.cardExpiryMonth)}}
+                        <div id="payment-form-front">
+                            <div class="credit-card">
+                                <div id="creditCard-front-number">
+                                    <div class="form-group -creditCard">
+                                        {{form_label(form.cardNumber)}}
+                                        {{form_widget(form.cardNumber)}}
+                                    </div>
                                 </div>
-                                <div class="select" style="width: 55px; margin-bottom: 10px;">
-                                {{form_widget(form.cardExpiryYear)}}
+
+                                <div class="flex-row">
+                                    <div class="form-group -creditCard pull-left" id="creditCard-front-holder">
+                                        {{form_label(form.cardHolder)}}
+                                        {{form_widget(form.cardHolder)}}
+                                    </div>
+
+                                    <div class="form-group -creditCard pull-left" id="creditCard-front-expiration">
+                                        <div>
+                                            {{form_label(form.cardExpiryMonth)}}
+                                        </div>
+
+                                        <div class="pull-left" id="creditCard-front-expiration-month">
+                                            {{form_widget(form.cardExpiryMonth)}}
+                                        </div>
+
+                                        <div class="pull-left" id="creditCard-front-expiration-year">
+                                            {{form_widget(form.cardExpiryYear)}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="form-group" id="ccv-group">
-                                {{form_label(form.ccv)}}
-                                {{form_widget(form.ccv)}}
-                            </div>
-
-                            <p id="payment-form-creditCard-info">Vos informations bancaires resteront strictement confidentielles. <br> * Champs obligatoires</p>
                         </div>
+
+                        <div id="payment-form-back">
+                            <div class="credit-card -back">
+                                <div class="clearfix">
+                                    <div class="pull-right" id="creditCard-back-expiration-ccv">
+                                        {{form_row(form.ccv)}}
+                                    </div>
+                                </div>
+
+                                <p class="small">Vos informations bancaires resteront strictement confidentiel. *Champs obligatoires</p>
+                            </div>
+                        </div>
+
 
                         <form action="{{ path('appventus_mangopaybundle_payment_new', {order: order.id}) }}" data-toggle="ajax" id="card-form" method="POST">
                             {{ form_rest(form) }}
@@ -84,42 +87,37 @@
                 </div>
             </div>
 
-            <div class="panel panel-default" id="mango-panel">
-                <div class="panel-body text-center">
-                    <img src="/bundles/appventusmangopay/img/mango-frise.png" alt="Powered by Mango Pay">
-                </div>
+            <div class="panel panel-default text-center" id="payment-mangoCredit">
+                <img src="/bundles/appventusmangopay/img/mango-frise.png" alt="Powered by Mango Pay">
             </div>
         </div>
-
-        <script type="text/javascript">
-
-            $("#appventus_mangopay_card_expiry_month, #appventus_mangopay_card_expiry_year").on('change', function(e) {
-                if ($(this).val().length < 2) {
-                    $(this).val("0" + $(this).val());
-                }
-            });
-
-            $('input').keypress(function() {
-                if ($('#appventus_mangopay_card_ccv').val() != "") {
-                    $("#payment-step .breadcrumb").eq(2).addClass('active');
-                }
-
-                if (
-                    $('#appventus_mangopay_card_holder').val() != "" &&
-                    $('#appventus_mangopay_card_expiry_month').val() != "" &&
-                    $('#appventus_mangopay_card_expiry_year').val() != ""
-                ) {
-                    $("#payment-step .breadcrumb").eq(1).addClass('active');
-                }
-
-                if ($('#appventus_mangopay_card_number').val() != "") {
-                    $("#payment-step .breadcrumb").eq(0).addClass('active');
-                };
-            });
-
-        </script>
-
     </div>
+
+    <script type="text/javascript">
+        $("#appventus_mangopay_card_expiry_month, #appventus_mangopay_card_expiry_year").on('change', function(e) {
+            if ($(this).val().length < 2) {
+                $(this).val("0" + $(this).val());
+            }
+        });
+
+        $('input').keypress(function() {
+            if ($('#appventus_mangopaybundle_card_type_ccv').val()) {
+                $("#payment-process .vertical-breadcrumb > .item").eq(2).addClass('-active');
+            }
+
+            if (
+                $('#appventus_mangopaybundle_card_type_cardHolder').val() &&
+                $('#appventus_mangopaybundle_card_type_cardExpiryMonth').val() &&
+                $('#appventus_mangopaybundle_card_type_cardExpiryYear').val()
+            ) {
+                $("#payment-process .vertical-breadcrumb > .item").eq(1).addClass('-active');
+            }
+
+            if ($('#appventus_mangopaybundle_card_type_cardNumber').val()) {
+                $("#payment-process .vertical-breadcrumb > .item").eq(0).addClass('-active');
+            };
+        });
+    </script>
 </div>
 
 {% javascripts
