@@ -96,8 +96,8 @@ class PaymentController extends Controller
         // Handle error
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status == 'FAILED') {
 
-            $errorMessage = $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $preAuth->Code));
-            $errorMessage .= "<br>" . $this->get('translator')->trans('error.' . $preAuth->Code, array(), 'mangopay');
+            $errorMessage = $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $preAuth->ResultCode));
+            $errorMessage .= "<br>" . $this->get('translator')->trans('error.' . $preAuth->ResultCode, array(), 'mangopay');
 
             return new JsonResponse(array(
                 'success' => false,
@@ -149,10 +149,13 @@ class PaymentController extends Controller
 
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status != 'SUCCEEDED') {
 
-            $this->setFlash('danger', $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $preAuth->Code)));
-            $errorMessage .= "<br>" . $this->get('translator')->trans('error.' . $preAuth->Code, array(), 'mangopay');
+            if (property_exists($preAuth, 'Code')) {
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $preAuth->Code)));
+            } else {
+                $this->get('session')->getFlashBag()->add('danger', $preAuth->ResultMessage);
+            }
 
-            return $this->redirect($this->generateUrl('appventus_mangopaybundle_payment_finalize_secure', array('orderId' => $order->getId())));
+            return $this->redirect($request->headers->get('referer'));
         }
 
         $event = new PreAuthorisationEvent($order, $preAuth);
