@@ -17,6 +17,7 @@ class Order
     const STATUS_CANCELED            = 'canceled';
     const STATUS_WAITING_FOR_PAYMENT = 'waiting';
     const STATUS_PENDING             = 'pending';
+    const STATUS_VALIDATED           = 'validated';
     const STATUS_PAID                = 'paid';
 
     /**

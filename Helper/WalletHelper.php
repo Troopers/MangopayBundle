@@ -45,10 +45,10 @@ class WalletHelper
 
         $mangoWallet = $this->mangopayHelper->Wallets->create($mangoWallet);
 
-        $event = new WalletEvent($wallet, $user);
+        $event = new WalletEvent($mangoWallet, $user);
         $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_WALLET, $event);
 
-        return $wallet;
+        return $mangoWallet;
     }
 
 }

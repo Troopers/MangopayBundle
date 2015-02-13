@@ -2,6 +2,7 @@
 
 namespace AppVentus\MangopayBundle\Event;
 
+use AppVentus\MangopayBundle\Entity\UserInterface;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\Event;
 

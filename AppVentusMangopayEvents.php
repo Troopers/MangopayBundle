@@ -34,4 +34,14 @@ final class AppVentusMangopayEvents
      * The UPDATE_CARD_REGISTRATION event occurs when a card registration is updated
      */
     const UPDATE_CARD_REGISTRATION = 'appventus_mangopay.card.registration.update';
+
+    /**
+     * The NEW_PAY_IN event occurs when a apyin is created
+     */
+    const NEW_PAY_IN = 'appventus_mangopay.pay_in.new';
+
+    /**
+     * The ERROR_PAY_IN event occurs when a apyin is errored
+     */
+    const ERROR_PAY_IN = 'appventus_mangopay.pay_in.error';
 }
