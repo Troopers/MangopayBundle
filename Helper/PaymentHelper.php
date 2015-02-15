@@ -176,6 +176,17 @@ class PaymentHelper
 
     }
 
+    public function cancelPreAuthForOrder(Order $order, CardPreAuthorization $preAuth)
+    {
+        if ($preAuth->PaymentStatus == "WAITING") {
+            $preAuth->PaymentStatus = 'CANCELED';
+            $this->mangopayHelper->CardPreAuthorizations->Update($preAuth);
+
+            $event = new PreAuthorisationEvent($order, $preAuth);
+            $this->dispatcher->dispatch(AppVentusMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
+        }
+    }
+
     protected function generateSuccessUrl()
     {
         return $this->router->generate('appventus_mangopaybundle_payment_success');
