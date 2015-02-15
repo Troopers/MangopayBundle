@@ -33,7 +33,7 @@ class WalletHelper
             $wallet = $this->createWalletForUser($user, $description);
         }
 
-        return $wallet;
+        return $user->getWallet();
     }
 
     public function createWalletForUser(UserInterface $user, $description = '')
