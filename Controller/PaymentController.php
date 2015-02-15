@@ -111,7 +111,10 @@ class PaymentController extends Controller
                 'redirect' => $preAuth->SecureModeRedirectURL
             ));
         }
-        // @TODO: store payin transaction
+
+        // store payin transaction
+        $event = new PreAuthorisationEvent($order, $preAuth);
+        $this->get('event_dispatcher')->dispatch(AppVentusMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
 
         $order->setStatus(Order::STATUS_PENDING);
 
