@@ -23,7 +23,7 @@ class WalletHelper
         $this->dispatcher = $dispatcher;
     }
 
-    public function findOrCreateWallet(UserInterface $user, $description = '')
+    public function findOrCreateWallet(UserInterface $user, $description = 'current wallet')
     {
 
         if ($wallet = $user->getWallet()) {
@@ -36,7 +36,7 @@ class WalletHelper
         return $user->getWallet();
     }
 
-    public function createWalletForUser(UserInterface $user, $description = '')
+    public function createWalletForUser(UserInterface $user, $description = 'current wallet')
     {
         $mangoWallet = new Wallet();
         $mangoWallet->Owners = array($user->getMangoUserId());
