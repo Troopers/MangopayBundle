@@ -130,13 +130,20 @@ class PaymentHelper
      * @param CardPreAuthorisation $preAuthorisation
      * @param UserInterface        $buyer
      * @param Wallet               $wallet
-     * @param integer              $feesPercentage
+     * @param integer              $feesAmount
      * @param integer              $amount           0 to 100
      *
      * @return void
      */
-    public function executePreAuthorisation(CardPreAuthorisation $preAuthorisation, UserInterface $buyer, Wallet $wallet, $feesPercentage = 0, $amount = null)
+    public function executePreAuthorisation(
+        CardPreAuthorisation $preAuthorisation,
+        UserInterface $buyer,
+        Wallet $wallet,
+        $feesAmount,
+        $amount = null
+    )
     {
+
         if (!$amount) {
             $amount = $preAuthorisation->getDebitedFunds();
         }
@@ -150,14 +157,13 @@ class PaymentHelper
 
         $fees = new Money();
         $fees->Currency = 'EUR';
-        $fees->Amount = $amount * $feesPercentage / 100;
+        $fees->Amount = $feesAmount;
 
         $payIn->Fees = $fees;
 
         $debitedFunds = new Money();
         $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $amount;
-
         $payIn->DebitedFunds = $debitedFunds;
 
         $payIn = $this->mangopayHelper->PayIns->Create($payIn);
@@ -176,13 +182,15 @@ class PaymentHelper
 
     }
 
-    public function cancelPreAuthForOrder(Order $order, CardPreAuthorization $preAuth)
+    public function cancelPreAuthForOrder(Order $order, CardPreAuthorisation $preAuth)
     {
-        if ($preAuth->PaymentStatus == "WAITING") {
-            $preAuth->PaymentStatus = 'CANCELED';
-            $this->mangopayHelper->CardPreAuthorizations->Update($preAuth);
+        if ($preAuth->getPaymentStatus() == "WAITING") {
 
-            $event = new PreAuthorisationEvent($order, $preAuth);
+            $mangoCardPreAuthorisation = $this->mangopayHelper->CardPreAuthorizations->Get($preAuth->getMangoId());
+            $mangoCardPreAuthorisation->PaymentStatus = 'CANCELED';
+            $this->mangopayHelper->CardPreAuthorizations->Update($mangoCardPreAuthorisation);
+
+            $event = new PreAuthorisationEvent($order, $mangoCardPreAuthorisation);
             $this->dispatcher->dispatch(AppVentusMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
         }
     }
