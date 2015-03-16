@@ -20,10 +20,7 @@
             <div class="panel panel-default" id="payment-info-panel">
                 <div class="panel-body">
                     <p>
-                        Votre compte ne sera débité que si votre hôte accepte votre demande de
-                        réservation. Il dispose de 72h pour vous répondre. S’il ne répond pas
-                        dans les temps ou s’il refuse votre demande de réservation, aucune somme
-                        ne sera débitée de votre compte.
+                        {{ 'appventus.mangopay.payment_page.info_block'|trans }}
                     </p>
                 </div>
             </div>
@@ -74,7 +71,9 @@
                                     </div>
                                 </div>
 
-                                <p class="small">Vos informations bancaires resteront strictement confidentiel. *Champs obligatoires</p>
+                                <p class="small">
+                                    {{ 'appventus.mangopay.payment_page.helper_block'|trans }}
+                                </p>
                             </div>
                         </div>
 
