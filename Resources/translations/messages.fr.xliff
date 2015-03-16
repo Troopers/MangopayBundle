@@ -1,0 +1,1290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Loco xml export: XLIFF - Localisation Interchange File Format
+ Project: messages.fr.yml conversion
+ Release: Working copy
+ Locales: fr_FR, fr_FR
+ Exported at: Fri, 16 Jan 2015 16:52:20 +0000
+-->
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+    <header>
+      <tool tool-id="biz.localise" tool-name="Loco" tool-version="1.0.8" build-num="20150114-1" />
+    </header>
+    <file source-language="fr-FR" target-language="fr-FR" datatype="" original="messages.fr.yml">
+        <body>
+            <trans-unit resname="mangopay.error.1999" datatype="plaintext">
+                <source>mangopay.error.1999</source>
+                <target>Erreur de fonctionnement générique</target>
+            </trans-unit>
+            <trans-unit resname="mangopay.error.1001" datatype="plaintext">
+                <source>mangopay.error.1001</source>
+                <target>Équilibre de portefeuille insuffisante</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.1002" datatype="plaintext">
+                <source>mangopay.error.1002</source>
+                <target>Auteur n'est pas le propriétaire de portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.1011" datatype="plaintext">
+                <source>mangopay.error.1011</source>
+                <target>Le montant de la transaction est supérieur au montant maximum autorisé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.1012" datatype="plaintext">
+                <source>mangopay.error.1012</source>
+                <target>Le montant de la transaction est inférieur au montant minimum autorisé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.1021" datatype="plaintext">
+                <source>mangopay.error.1021</source>
+                <target>Le montant maximal a été atteint pour ce portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.11021" datatype="plaintext">
+                <source>mangopay.error.11021</source>
+                <target>Nombre maximum d'utilisateurs atteint pour ce portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.1401" datatype="plaintext">
+                <source>mangopay.error.1401</source>
+                <target>La transaction a déjà été remboursée avec succès</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.5403" datatype="plaintext">
+                <source>mangopay.error.5403</source>
+                <target>Le remboursement ne peut excéder le montant de la transaction initiale</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.5404" datatype="plaintext">
+                <source>mangopay.error.5404</source>
+                <target>Les frais remboursés peuvent pas excéder le montant des frais initial</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105101" datatype="plaintext">
+                <source>mangopay.error.105101</source>
+                <target>Numéro de carte invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105102" datatype="plaintext">
+                <source>mangopay.error.105102</source>
+                <target>Nom du titulaire ivalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105103" datatype="plaintext">
+                <source>mangopay.error.105103</source>
+                <target>Code PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105104" datatype="plaintext">
+                <source>mangopay.error.105104</source>
+                <target>Format PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105299" datatype="plaintext">
+                <source>mangopay.error.105299</source>
+                <target>Jeton d'entrée erreur</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105202" datatype="plaintext">
+                <source>mangopay.error.105202</source>
+                <target>Numéro de la carte : format invalide. Entrez le numéro de carte sans les espaces</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105203" datatype="plaintext">
+                <source>mangopay.error.105203</source>
+                <target>erreur dans la date d'expiration: le format est invalide ou manquant</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105204" datatype="plaintext">
+                <source>mangopay.error.105204</source>
+                <target>CVV : Format manquant ou invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105205" datatype="plaintext">
+                <source>mangopay.error.105205</source>
+                <target>URL de rappel : Format invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105206" datatype="plaintext">
+                <source>mangopay.error.105206</source>
+                <target>Données d'enregistrement : Format invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101001" datatype="plaintext">
+                <source>mangopay.error.101001</source>
+                <target>L'utilisateur ne termine pas la transaction</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101002" datatype="plaintext">
+                <source>mangopay.error.101002</source>
+                <target>L'opération a été annulée par l'utilisateur</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101101" datatype="plaintext">
+                <source>mangopay.error.101101</source>
+                <target>Transaction refusée par la banque ( Ne pas honorer )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101102" datatype="plaintext">
+                <source>mangopay.error.101102</source>
+                <target>Transaction refusée par la banque (limite de montant )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101103" datatype="plaintext">
+                <source>mangopay.error.101103</source>
+                <target>Transaction refusée par le terminal</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101104" datatype="plaintext">
+                <source>mangopay.error.101104</source>
+                <target>Transaction refusée par la banque ( limite de la carte atteint )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101106" datatype="plaintext">
+                <source>mangopay.error.101106</source>
+                <target>La carte est inactive</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101111" datatype="plaintext">
+                <source>mangopay.error.101111</source>
+                <target>Nombre maximal de tentatives atteint</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101112" datatype="plaintext">
+                <source>mangopay.error.101112</source>
+                <target>Montant maximum dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101115" datatype="plaintext">
+                <source>mangopay.error.101115</source>
+                <target>Limite de débit dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101399" datatype="plaintext">
+                <source>mangopay.error.101399</source>
+                <target>Mode sécurisé: l'authentification 3DSecure n'est pas disponible</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.1599" datatype="plaintext">
+                <source>mangopay.error.1599</source>
+                <target>Erreur de traitement Token</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.2999" datatype="plaintext">
+                <source>mangopay.error.2999</source>
+                <target>Bloqué en raison de la limitation KYC</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8999" datatype="plaintext">
+                <source>mangopay.error.8999</source>
+                <target>Fraude erreur politique</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8001" datatype="plaintext">
+                <source>mangopay.error.8001</source>
+                <target>contrefaçon carte</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8002" datatype="plaintext">
+                <source>mangopay.error.8002</source>
+                <target>carte perdue</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8004" datatype="plaintext">
+                <source>mangopay.error.8004</source>
+                <target>Bin carte non autorisée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8005" datatype="plaintext">
+                <source>mangopay.error.8005</source>
+                <target>Violation de la sécurité</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8006" datatype="plaintext">
+                <source>mangopay.error.8006</source>
+                <target>Suspicion de fraude par la banque</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8007" datatype="plaintext">
+                <source>mangopay.error.8007</source>
+                <target>Opposition sur le compte bancaire ( temporaire )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8500" datatype="plaintext">
+                <source>mangopay.error.8500</source>
+                <target>Transaction bloqué par la stratégie de la fraude</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8600" datatype="plaintext">
+                <source>mangopay.error.8600</source>
+                <target>Porte-monnaie bloqué par la politique antifraude</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8700" datatype="plaintext">
+                <source>mangopay.error.8700</source>
+                <target>Utilisateur bloqué par la politique antifraude</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.9199" datatype="plaintext">
+                <source>mangopay.error.9199</source>
+                <target>Erreur technique PSP</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.9499" datatype="plaintext">
+                <source>mangopay.error.9499</source>
+                <target>Erreur technique de la Banque</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.9999" datatype="plaintext">
+                <source>mangopay.error.9999</source>
+                <target>erreur technique</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.121001" datatype="plaintext">
+                <source>mangopay.error.121001</source>
+                <target>Code banque bloqué</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.121002" datatype="plaintext">
+                <source>mangopay.error.121002</source>
+                <target>Carte utilisée pas permis</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.121003" datatype="plaintext">
+                <source>mangopay.error.121003</source>
+                <target>Dépassement de la limite disponible</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.121004" datatype="plaintext">
+                <source>mangopay.error.121004</source>
+                <target>carte invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.121005" datatype="plaintext">
+                <source>mangopay.error.121005</source>
+                <target>PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105101" datatype="plaintext">
+                <source>mangopay.error.105101</source>
+                <target>Numéro de carte invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105102" datatype="plaintext">
+                <source>mangopay.error.105102</source>
+                <target>Invalide le nom du titulaire</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105103" datatype="plaintext">
+                <source>mangopay.error.105103</source>
+                <target>Code PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105104" datatype="plaintext">
+                <source>mangopay.error.105104</source>
+                <target>Format PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105202" datatype="plaintext">
+                <source>mangopay.error.105202</source>
+                <target>Numéro de la carte : format non valable</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105203" datatype="plaintext">
+                <source>mangopay.error.105203</source>
+                <target>Date d'expiration: le format manquant ou invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105204" datatype="plaintext">
+                <source>mangopay.error.105204</source>
+                <target>CVV : Format manquante ou invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105205" datatype="plaintext">
+                <source>mangopay.error.105205</source>
+                <target>URL de rappel : Format invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101002" datatype="plaintext">
+                <source>mangopay.error.101002</source>
+                <target>L'opération a été annulée par l'utilisateur</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101101" datatype="plaintext">
+                <source>mangopay.error.101101</source>
+                <target>Transaction refusée par la banque</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101103" datatype="plaintext">
+                <source>mangopay.error.101103</source>
+                <target>Transaction refusée par le terminal</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101105" datatype="plaintext">
+                <source>mangopay.error.101105</source>
+                <target>La carte a expiré</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101113" datatype="plaintext">
+                <source>mangopay.error.101113</source>
+                <target>Nombre d'utilisation maximal dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101116" datatype="plaintext">
+                <source>mangopay.error.101116</source>
+                <target>La fréquence de la transaction de débit est dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101399" datatype="plaintext">
+                <source>mangopay.error.101399</source>
+                <target>Mode sécurisé: l'authentification 3DSecure n'est pas disponible</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101301" datatype="plaintext">
+                <source>mangopay.error.101301</source>
+                <target>Mode sécurisé: L'authentification 3DSecure a échoué</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.101699" datatype="plaintext">
+                <source>mangopay.error.101699</source>
+                <target>erreur CardRegistration</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8003" datatype="plaintext">
+                <source>mangopay.error.8003</source>
+                <target>vol de la carte</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8004" datatype="plaintext">
+                <source>mangopay.error.8004</source>
+                <target>Bin carte non autorisée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8006" datatype="plaintext">
+                <source>mangopay.error.8006</source>
+                <target>Suspicion de fraude par la banque</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8007" datatype="plaintext">
+                <source>mangopay.error.8007</source>
+                <target>Opposition sur le compte bancaire ( temporaire )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.8500" datatype="plaintext">
+                <source>mangopay.error.8500</source>
+                <target>Transaction bloqué par la stratégie de la fraude</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.9199" datatype="plaintext">
+                <source>mangopay.error.9199</source>
+                <target>Erreur technique PSP</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.9499" datatype="plaintext">
+                <source>mangopay.error.9499</source>
+                <target>Erreur technique de la Banque</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.9999" datatype="plaintext">
+                <source>mangopay.error.9999</source>
+                <target>erreur technique</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105202" datatype="plaintext">
+                <source>mangopay.error.105202</source>
+                <target>Numéro de la carte : format non valable</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105203" datatype="plaintext">
+                <source>mangopay.error.105203</source>
+                <target>Date d'expiration: le format manquant ou invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105204" datatype="plaintext">
+                <source>mangopay.error.105204</source>
+                <target>CVV : Format manquante ou invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.105205" datatype="plaintext">
+                <source>mangopay.error.105205</source>
+                <target>URL de rappel : Format invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01100" datatype="plaintext">
+                <source>mangopay.error.01100</source>
+                <target>Ne pas honorer</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01101" datatype="plaintext">
+                <source>mangopay.error.01101</source>
+                <target>carte expirée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01102" datatype="plaintext">
+                <source>mangopay.error.01102</source>
+                <target>Date de naissance incorrecte</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01103" datatype="plaintext">
+                <source>mangopay.error.01103</source>
+                <target>Contactez votre banque pour autorisation</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01108" datatype="plaintext">
+                <source>mangopay.error.01108</source>
+                <target>Contactez votre banque pour connaître l'état spécial</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01109" datatype="plaintext">
+                <source>mangopay.error.01109</source>
+                <target>marchand invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01110" datatype="plaintext">
+                <source>mangopay.error.01110</source>
+                <target>montant invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01111" datatype="plaintext">
+                <source>mangopay.error.01111</source>
+                <target>Numéro de carte invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01113" datatype="plaintext">
+                <source>mangopay.error.01113</source>
+                <target>Dépenses non admises</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01114" datatype="plaintext">
+                <source>mangopay.error.01114</source>
+                <target>Ce compte n'existe pas</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01115" datatype="plaintext">
+                <source>mangopay.error.01115</source>
+                <target>Cette fonction n'existe pas</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01116" datatype="plaintext">
+                <source>mangopay.error.01116</source>
+                <target>Limite de montant</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01117" datatype="plaintext">
+                <source>mangopay.error.01117</source>
+                <target>Code PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01118" datatype="plaintext">
+                <source>mangopay.error.01118</source>
+                <target>Cette carte n'est pas enregistrée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01119" datatype="plaintext">
+                <source>mangopay.error.01119</source>
+                <target>Cette opération n'est pas autorisée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01120" datatype="plaintext">
+                <source>mangopay.error.01120</source>
+                <target>Transaction refusée par le terminal</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01121" datatype="plaintext">
+                <source>mangopay.error.01121</source>
+                <target>Limite de débit dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01122" datatype="plaintext">
+                <source>mangopay.error.01122</source>
+                <target>Violation de la sécurité</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01123" datatype="plaintext">
+                <source>mangopay.error.01123</source>
+                <target>La fréquence des transactions de débit dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01125" datatype="plaintext">
+                <source>mangopay.error.01125</source>
+                <target>carte inactive</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01126" datatype="plaintext">
+                <source>mangopay.error.01126</source>
+                <target>Format PIN invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01128" datatype="plaintext">
+                <source>mangopay.error.01128</source>
+                <target>Clé PIN Invalid ctrl</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01129" datatype="plaintext">
+                <source>mangopay.error.01129</source>
+                <target>carte contrefaite</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01130" datatype="plaintext">
+                <source>mangopay.error.01130</source>
+                <target>cvv2 invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01180" datatype="plaintext">
+                <source>mangopay.error.01180</source>
+                <target>banque invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01181" datatype="plaintext">
+                <source>mangopay.error.01181</source>
+                <target>monnaie invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01182" datatype="plaintext">
+                <source>mangopay.error.01182</source>
+                <target>Conversion de devise incorrecte</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01183" datatype="plaintext">
+                <source>mangopay.error.01183</source>
+                <target>Montant maximum dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01184" datatype="plaintext">
+                <source>mangopay.error.01184</source>
+                <target>Seuil de tentatives dépassé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01185" datatype="plaintext">
+                <source>mangopay.error.01185</source>
+                <target>afin d'occasion</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01197" datatype="plaintext">
+                <source>mangopay.error.01197</source>
+                <target>Erreur de communication entre MDA et ASA</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01198" datatype="plaintext">
+                <source>mangopay.error.01198</source>
+                <target>SAA erreur de configuration</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01199" datatype="plaintext">
+                <source>mangopay.error.01199</source>
+                <target>Erreur GTM interne</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01200" datatype="plaintext">
+                <source>mangopay.error.01200</source>
+                <target>Ne pas honorer</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01201" datatype="plaintext">
+                <source>mangopay.error.01201</source>
+                <target>Carte expirée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01202" datatype="plaintext">
+                <source>mangopay.error.01202</source>
+                <target>Suspicion de fraude</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01206" datatype="plaintext">
+                <source>mangopay.error.01206</source>
+                <target>Nombre maximal de tentatives atteint</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01207" datatype="plaintext">
+                <source>mangopay.error.01207</source>
+                <target>conditions spéciales</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01208" datatype="plaintext">
+                <source>mangopay.error.01208</source>
+                <target>carte perdue</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01209" datatype="plaintext">
+                <source>mangopay.error.01209</source>
+                <target>carte volée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01280" datatype="plaintext">
+                <source>mangopay.error.01280</source>
+                <target>Carte Bin  non autorisée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01401" datatype="plaintext">
+                <source>mangopay.error.01401</source>
+                <target>Opposition sur le compte ( temporaire )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01402" datatype="plaintext">
+                <source>mangopay.error.01402</source>
+                <target>chèque irrégulier</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01403" datatype="plaintext">
+                <source>mangopay.error.01403</source>
+                <target>Chèque non référencé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01404" datatype="plaintext">
+                <source>mangopay.error.01404</source>
+                <target>Numéro d'abonné mal ( IDCF )</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01405" datatype="plaintext">
+                <source>mangopay.error.01405</source>
+                <target>Serveur d'erreur FNCI</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01406" datatype="plaintext">
+                <source>mangopay.error.01406</source>
+                <target>CMC7 Mauvaise</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01407" datatype="plaintext">
+                <source>mangopay.error.01407</source>
+                <target>IDC nombre incorrect</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01430" datatype="plaintext">
+                <source>mangopay.error.01430</source>
+                <target>Numéro d'enregistrement incorrect</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01902" datatype="plaintext">
+                <source>mangopay.error.01902</source>
+                <target>Ttransaction invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01904" datatype="plaintext">
+                <source>mangopay.error.01904</source>
+                <target>Mauvaise demande de format</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01907" datatype="plaintext">
+                <source>mangopay.error.01907</source>
+                <target>Erreur serveur au niveau du fournisseur de cartes</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01909" datatype="plaintext">
+                <source>mangopay.error.01909</source>
+                <target>Erreur interne au niveau du serveur de la Banque </target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01912" datatype="plaintext">
+                <source>mangopay.error.01912</source>
+                <target>Erreur de serveur de fournisseur de cartes</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01913" datatype="plaintext">
+                <source>mangopay.error.01913</source>
+                <target>La transaction existe déjà</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01914" datatype="plaintext">
+                <source>mangopay.error.01914</source>
+                <target>Transaction ne peut pas être trouvée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01915" datatype="plaintext">
+                <source>mangopay.error.01915</source>
+                <target>Transaction est refusée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01917" datatype="plaintext">
+                <source>mangopay.error.01917</source>
+                <target>Cette opération n'est pas remise à zéro</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01917" datatype="plaintext">
+                <source>mangopay.error.01917</source>
+                <target>Cette opération n'est pas remise à zéro</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01940" datatype="plaintext">
+                <source>mangopay.error.01940</source>
+                <target>Serveur de la Banque indisponible</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01941" datatype="plaintext">
+                <source>mangopay.error.01941</source>
+                <target>Erreur de communication avec le serveur de la Banque</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01942" datatype="plaintext">
+                <source>mangopay.error.01942</source>
+                <target>Serveur de la Banque erreur interne</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.01943" datatype="plaintext">
+                <source>mangopay.error.01943</source>
+                <target>Serveur de la Banque erreur interne</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02001" datatype="plaintext">
+                <source>mangopay.error.02001</source>
+                <target>dupliquer transaction</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02002" datatype="plaintext">
+                <source>mangopay.error.02002</source>
+                <target>Dupliquer transaction en attente</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02101" datatype="plaintext">
+                <source>mangopay.error.02101</source>
+                <target>Erreur interne</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02102" datatype="plaintext">
+                <source>mangopay.error.02102</source>
+                <target>Erreur externe de communication de serveur</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02103" datatype="plaintext">
+                <source>mangopay.error.02103</source>
+                <target>Délai de connexion , s'il vous plaît essayer plus tard</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02104" datatype="plaintext">
+                <source>mangopay.error.02104</source>
+                <target>Tokenizer erreur interne</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02110" datatype="plaintext">
+                <source>mangopay.error.02110</source>
+                <target>Le montant n'est pas valide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02201" datatype="plaintext">
+                <source>mangopay.error.02201</source>
+                <target>la clé de cryptage seeked n'existe pas</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02202" datatype="plaintext">
+                <source>mangopay.error.02202</source>
+                <target>la clé de chiffrement utilisée est obsolète</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02301" datatype="plaintext">
+                <source>mangopay.error.02301</source>
+                <target>Transaction ID n'est pas valide.</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02302" datatype="plaintext">
+                <source>mangopay.error.02302</source>
+                <target>Transaction n'est pas valide.</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02303" datatype="plaintext">
+                <source>mangopay.error.02303</source>
+                <target>Erreur de numéro de contrat .</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02304" datatype="plaintext">
+                <source>mangopay.error.02304</source>
+                <target>Aucune transaction trouvée pour ce jeton</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02305" datatype="plaintext">
+                <source>mangopay.error.02305</source>
+                <target>Le format du champ invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02306" datatype="plaintext">
+                <source>mangopay.error.02306</source>
+                <target>Le consumer obole REMPLIR les informations de paiement</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02307" datatype="plaintext">
+                <source>mangopay.error.02307</source>
+                <target>Invalide Code de page personnalisé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02308" datatype="plaintext">
+                <source>mangopay.error.02308</source>
+                <target>Valeur incorrecte pour</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02309" datatype="plaintext">
+                <source>mangopay.error.02309</source>
+                <target>CustomPaymentPageCode est inactif</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02310" datatype="plaintext">
+                <source>mangopay.error.02310</source>
+                <target>Aucune transaction correspondant aux critères de recherche</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02311" datatype="plaintext">
+                <source>mangopay.error.02311</source>
+                <target>Trop de transactions correspondent aux critères de recherche</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02312" datatype="plaintext">
+                <source>mangopay.error.02312</source>
+                <target>Les critères de recherche sont incorrects</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02313" datatype="plaintext">
+                <source>mangopay.error.02313</source>
+                <target>Transaction drapeau capturable est désactivé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02314" datatype="plaintext">
+                <source>mangopay.error.02314</source>
+                <target>Transaction drapeau remboursable est désactivé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02315" datatype="plaintext">
+                <source>mangopay.error.02315</source>
+                <target>Un commerçant est déjà connecté avec ce nom de la société . Si il ya un problème , contactez le support</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02316" datatype="plaintext">
+                <source>mangopay.error.02316</source>
+                <target>L'offre commerciale n'existe pas pour ce distributeur . Si il ya un problème , contactez le support</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02317" datatype="plaintext">
+                <source>mangopay.error.02317</source>
+                <target>N'existe pas ce jeton</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02318" datatype="plaintext">
+                <source>mangopay.error.02318</source>
+                <target>N'existe pas cette marque , s'il vous plaît vérifier vos paramètres primaires / secondaires</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02319" datatype="plaintext">
+                <source>mangopay.error.02319</source>
+                <target>Paiement annulé par l'acheteur</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02320" datatype="plaintext">
+                <source>mangopay.error.02320</source>
+                <target>L'intervalle de temps recherché est trop long</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02321" datatype="plaintext">
+                <source>mangopay.error.02321</source>
+                <target>Valeur non valide pour l'action de paiement</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02322" datatype="plaintext">
+                <source>mangopay.error.02322</source>
+                <target>Invalide le nom du titulaire</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02323" datatype="plaintext">
+                <source>mangopay.error.02323</source>
+                <target>Date de naissance ne doit pas être fournie en utilisant 3DS</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02401" datatype="plaintext">
+                <source>mangopay.error.02401</source>
+                <target>Certaines transactions ont échoué</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02402" datatype="plaintext">
+                <source>mangopay.error.02402</source>
+                <target>En attente de traitement</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02403" datatype="plaintext">
+                <source>mangopay.error.02403</source>
+                <target>Pas de traitement de masse trouvé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02502" datatype="plaintext">
+                <source>mangopay.error.02502</source>
+                <target>Porte-monnaie avec le même identifiant exister</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02503" datatype="plaintext">
+                <source>mangopay.error.02503</source>
+                <target>N'existe pas Wallet</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02504" datatype="plaintext">
+                <source>mangopay.error.02504</source>
+                <target>Vous ne pouvez pas mettre à jour Nom et Prénom</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02505" datatype="plaintext">
+                <source>mangopay.error.02505</source>
+                <target>Votre wallet est désactivé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02506" datatype="plaintext">
+                <source>mangopay.error.02506</source>
+                <target>Le porte-monnaie ne peut pas fonctionner à la date prévue</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02507" datatype="plaintext">
+                <source>mangopay.error.02507</source>
+                <target>Vous ne pouvez pas trouver le dossier de paiement</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02508" datatype="plaintext">
+                <source>mangopay.error.02508</source>
+                <target>Dossier de paiement est désactivé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02509" datatype="plaintext">
+                <source>mangopay.error.02509</source>
+                <target>Montant invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02510" datatype="plaintext">
+                <source>mangopay.error.02510</source>
+                <target>Vous ne pouvez pas trouver le dossier de paiement</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02511" datatype="plaintext">
+                <source>mangopay.error.02511</source>
+                <target>Porte-monnaie n'est pas pris en charge pour cette carte</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02512" datatype="plaintext">
+                <source>mangopay.error.02512</source>
+                <target>Nom et Prénom requis pour le portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02513" datatype="plaintext">
+                <source>mangopay.error.02513</source>
+                <target>Porte-monnaie Id requis pour le portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02514" datatype="plaintext">
+                <source>mangopay.error.02514</source>
+                <target>Nombre de données privées est limitée à 99</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02515" datatype="plaintext">
+                <source>mangopay.error.02515</source>
+                <target>Doit choisir les données à mettre à jour</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02516" datatype="plaintext">
+                <source>mangopay.error.02516</source>
+                <target>Vous ne pouvez pas désactiver le(s) portefeuille(s)</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02517" datatype="plaintext">
+                <source>mangopay.error.02517</source>
+                <target>Vous ne pouvez pas désactiver certain(s)  porte-monnaie(s) </target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02518" datatype="plaintext">
+                <source>mangopay.error.02518</source>
+                <target>Indice de carte invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02519" datatype="plaintext">
+                <source>mangopay.error.02519</source>
+                <target>Impossible d'activer le(s)  porte-monnaie(s) </target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02520" datatype="plaintext">
+                <source>mangopay.error.02520</source>
+                <target>Vous ne pouvez pas permettre à certain(s)  porte-monnaie (s)</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02521" datatype="plaintext">
+                <source>mangopay.error.02521</source>
+                <target>Carte existent déjà dans ce portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02522" datatype="plaintext">
+                <source>mangopay.error.02522</source>
+                <target>Amex récurrents champ invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02523" datatype="plaintext">
+                <source>mangopay.error.02523</source>
+                <target>Amex récurrent pas autorisé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02524" datatype="plaintext">
+                <source>mangopay.error.02524</source>
+                <target>Amex champ non valide d'un clic</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02525" datatype="plaintext">
+                <source>mangopay.error.02525</source>
+                <target>Amex seul clic pas autorisé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02526" datatype="plaintext">
+                <source>mangopay.error.02526</source>
+                <target>Amex un clic montant invalide de capture</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02527" datatype="plaintext">
+                <source>mangopay.error.02527</source>
+                <target>Option de contrôle invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02528" datatype="plaintext">
+                <source>mangopay.error.02528</source>
+                <target>SelectedContractList doivent être remplis avec un seul contrat</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02529" datatype="plaintext">
+                <source>mangopay.error.02529</source>
+                <target>Informations doivent référencer le même marché</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02530" datatype="plaintext">
+                <source>mangopay.error.02530</source>
+                <target>eMoneo pas acceptés</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02531" datatype="plaintext">
+                <source>mangopay.error.02531</source>
+                <target>Leetchi pas permis</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02532" datatype="plaintext">
+                <source>mangopay.error.02532</source>
+                <target>Gestion de portefeuille n'est pas autorisé à votre compte</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02533" datatype="plaintext">
+                <source>mangopay.error.02533</source>
+                <target>Consommateur non redirigésSur les pages de paiement</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02534" datatype="plaintext">
+                <source>mangopay.error.02534</source>
+                <target>Consommateur non redirigé sur les pages de paiement et la session expirée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02535" datatype="plaintext">
+                <source>mangopay.error.02535</source>
+                <target>La session a expiré avant opération sur le portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02536" datatype="plaintext">
+                <source>mangopay.error.02536</source>
+                <target>Le consommateur a annulé l’opération</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02538" datatype="plaintext">
+                <source>mangopay.error.02538</source>
+                <target>Fullfill soit card.number ou card.token ( pas les deux)</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02539" datatype="plaintext">
+                <source>mangopay.error.02539</source>
+                <target>Date d'expiration est obligatoire pour ce format de jeton.</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02540" datatype="plaintext">
+                <source>mangopay.error.02540</source>
+                <target>Aucune carte trouvée pour ce jeton .</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02541" datatype="plaintext">
+                <source>mangopay.error.02541</source>
+                <target>La carte n'est pas admissible</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02600" datatype="plaintext">
+                <source>mangopay.error.02600</source>
+                <target>Reset est pas pris en charge pour le type de transaction</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02601" datatype="plaintext">
+                <source>mangopay.error.02601</source>
+                <target>Réinitialiser déjà fait</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02602" datatype="plaintext">
+                <source>mangopay.error.02602</source>
+                <target>L'autorisation est déjà expiré</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02603" datatype="plaintext">
+                <source>mangopay.error.02603</source>
+                <target>Autorisation n'est pas remise à zéro</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02604" datatype="plaintext">
+                <source>mangopay.error.02604</source>
+                <target>Cette opération n'existe pas</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02605" datatype="plaintext">
+                <source>mangopay.error.02605</source>
+                <target>Profil fonctionnel ID Invalid</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02606" datatype="plaintext">
+                <source>mangopay.error.02606</source>
+                <target>Code de séquence incorrect</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02607" datatype="plaintext">
+                <source>mangopay.error.02607</source>
+                <target>Profil  Monetic ID invalide </target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02608" datatype="plaintext">
+                <source>mangopay.error.02608</source>
+                <target>Param ID Monetic invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02609" datatype="plaintext">
+                <source>mangopay.error.02609</source>
+                <target>Les paramètres monétiques ne sont pas initialisés</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02610" datatype="plaintext">
+                <source>mangopay.error.02610</source>
+                <target>La quantité maximale est dépassée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02611" datatype="plaintext">
+                <source>mangopay.error.02611</source>
+                <target>Le montant minimal n'est pas atteint</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02612" datatype="plaintext">
+                <source>mangopay.error.02612</source>
+                <target>Le montant prévu est différent de la transaction initiale</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02613" datatype="plaintext">
+                <source>mangopay.error.02613</source>
+                <target>La somme maximale du remboursement est dépassée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02614" datatype="plaintext">
+                <source>mangopay.error.02614</source>
+                <target>Cclé Luhn invalide </target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02615" datatype="plaintext">
+                <source>mangopay.error.02615</source>
+                <target>Carte Virtuelle refusée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02616" datatype="plaintext">
+                <source>mangopay.error.02616</source>
+                <target>Erreur lors de la création du portefeuille</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02617" datatype="plaintext">
+                <source>mangopay.error.02617</source>
+                <target>La transaction est déjà capturée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02618" datatype="plaintext">
+                <source>mangopay.error.02618</source>
+                <target>La transaction n'est pas encore capturé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02619" datatype="plaintext">
+                <source>mangopay.error.02619</source>
+                <target>Vous n'avez pas la possibilité de reconduction</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02620" datatype="plaintext">
+                <source>mangopay.error.02620</source>
+                <target>Devise doit être le même que l'autorisation initiale</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02621" datatype="plaintext">
+                <source>mangopay.error.02621</source>
+                <target>Opération non autorisée sur ce site</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02622" datatype="plaintext">
+                <source>mangopay.error.02622</source>
+                <target>Réautorisation pas permis sur la carte virtuelle</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02622" datatype="plaintext">
+                <source>mangopay.error.02622</source>
+                <target>Réautorisation pas permis sur la carte virtuelle</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02623" datatype="plaintext">
+                <source>mangopay.error.02623</source>
+                <target>Le nombre maximum de tentatives est atteint</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.02624" datatype="plaintext">
+                <source>mangopay.error.02624</source>
+                <target>Carte expirée</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03001" datatype="plaintext">
+                <source>mangopay.error.03001</source>
+                <target>Non inscrit</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03002" datatype="plaintext">
+                <source>mangopay.error.03002</source>
+                <target>Ne participent pas</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03003" datatype="plaintext">
+                <source>mangopay.error.03003</source>
+                <target>L'authentification a échoué</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03004" datatype="plaintext">
+                <source>mangopay.error.03004</source>
+                <target>Vous ne trouvez pas l'appel verifyEnrollment </target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03005" datatype="plaintext">
+                <source>mangopay.error.03005</source>
+                <target>La transaction existe déjà</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03006" datatype="plaintext">
+                <source>mangopay.error.03006</source>
+                <target>PARES Invalide</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03021" datatype="plaintext">
+                <source>mangopay.error.03021</source>
+                <target>La vérification d'inscription a échoué</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.03022" datatype="plaintext">
+                <source>mangopay.error.03022</source>
+                <target>L'authentification a échoué</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.09101" datatype="plaintext">
+                <source>mangopay.error.09101</source>
+                <target>Nom d'utilisateur / mot de passe est incorrect</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.09102" datatype="plaintext">
+                <source>mangopay.error.09102</source>
+                <target>Le compte est verrouillé ou inactif</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.09104" datatype="plaintext">
+                <source>mangopay.error.09104</source>
+                <target>Certificat client est désactivé</target>
+            </trans-unit>
+
+            <trans-unit resname="mangopay.error.09201" datatype="plaintext">
+                <source>mangopay.error.09201</source>
+                <target>Vous n'avez pas les permissions pour faire cet appel API</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -81,8 +81,7 @@ class PaymentController extends Controller
         // Handle error
         if ((property_exists($updatedCardRegister, 'ResultCode') && $updatedCardRegister->ResultCode !== "000000") || $updatedCardRegister->Status == 'ERROR') {
 
-            $errorMessage = $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $updatedCardRegister->ResultCode));
-            $errorMessage .= "<br>" . $this->get('translator')->trans('error.' . $updatedCardRegister->ResultCode, array(), 'mangopay');
+            $errorMessage = $this->get('translator')->trans('mangopay.error.' . $updatedCardRegister->ResultCode);
 
             return new JsonResponse(array(
                 'success' => false,
@@ -96,8 +95,7 @@ class PaymentController extends Controller
         // Handle error
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status == 'FAILED') {
 
-            $errorMessage = $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $preAuth->ResultCode));
-            $errorMessage .= "<br>" . $this->get('translator')->trans('error.' . $preAuth->ResultCode, array(), 'mangopay');
+            $errorMessage = $this->get('translator')->trans('mangopay.error.' . $preAuth->ResultCode);
 
             return new JsonResponse(array(
                 'success' => false,
@@ -153,7 +151,7 @@ class PaymentController extends Controller
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status != 'SUCCEEDED') {
 
             if (property_exists($preAuth, 'Code')) {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $preAuth->Code)));
+                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('mangopay.error.' . $preAuth->Code));
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $preAuth->ResultMessage);
             }
