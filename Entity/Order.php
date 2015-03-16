@@ -13,11 +13,25 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Order
 {
     use TimestampableEntity;
-
+    /**
+     * The offer was rejected
+     */
     const STATUS_CANCELED            = 'canceled';
+    /**
+     * The buyer has not paied yet
+     */
     const STATUS_WAITING_FOR_PAYMENT = 'waiting';
+    /**
+     * The seller has not accepted or rejected the offer
+     */
     const STATUS_PENDING             = 'pending';
+    /**
+     * The seller has accepted the order
+     */
     const STATUS_VALIDATED           = 'validated';
+    /**
+     * The seller has paied the order
+     */
     const STATUS_PAID                = 'paid';
 
     /**
