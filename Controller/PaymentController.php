@@ -81,7 +81,7 @@ class PaymentController extends Controller
         // Handle error
         if ((property_exists($updatedCardRegister, 'ResultCode') && $updatedCardRegister->ResultCode !== "000000") || $updatedCardRegister->Status == 'ERROR') {
 
-            $errorMessage = $this->get('translator')->trans('nooster_front.alert.new_order.error.%code%', array('%code%' => $updatedCardRegister->ResultCode));
+            $errorMessage = $this->get('translator')->trans('appventus_mangopay.alert.error.%code%', array('%code%' => $updatedCardRegister->ResultCode));
             $errorMessage .= "<br>" . $this->get('translator')->trans('error.' . $updatedCardRegister->ResultCode, array(), 'mangopay');
 
             return new JsonResponse(array(
