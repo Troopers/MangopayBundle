@@ -50,6 +50,11 @@ class WalletHelper
 
         $event = new WalletEvent($mangoWallet, $user);
         $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_WALLET, $event);
+        
+        $user->setMangoWalletId($mangoWallet->Id);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         return $mangoWallet;
     }
