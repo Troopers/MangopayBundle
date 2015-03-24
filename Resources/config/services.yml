@@ -25,6 +25,7 @@ services:
         class: %appventus_mangopay.wallet_helper.class%
         arguments:
             - @appventus_mangopay.mango_api
+            - @doctrine.orm.entity_manager
             - "@event_dispatcher"
     appventus_mangopay.payment_helper:
         class: %appventus_mangopay.payment_helper.class%
