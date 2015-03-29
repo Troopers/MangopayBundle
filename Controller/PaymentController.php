@@ -7,6 +7,8 @@ use AppVentus\MangopayBundle\Entity\Order;
 use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
+use Nooster\Front\AppBundle\Events\OrderEvent;
+use Nooster\Front\AppBundle\OrderEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -114,6 +116,9 @@ class PaymentController extends Controller
         $event = new PreAuthorisationEvent($order, $preAuth);
         $this->get('event_dispatcher')->dispatch(AppVentusMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
 
+        $event = new OrderEvent($order);
+        $this->get('event_dispatcher')->dispatch(OrderEvents::ORDER_CREATED, $event);
+
         $order->setStatus(Order::STATUS_PENDING);
 
         //Persist pending order
@@ -161,6 +166,9 @@ class PaymentController extends Controller
 
         $event = new PreAuthorisationEvent($order, $preAuth);
         $this->get('event_dispatcher')->dispatch(AppVentusMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
+
+        $event = new OrderEvent($order);
+        $this->get('event_dispatcher')->dispatch(OrderEvents::ORDER_CREATED, $event);
 
         $order->setStatus(Order::STATUS_PENDING);
 
