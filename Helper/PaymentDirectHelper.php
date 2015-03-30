@@ -28,7 +28,7 @@ class PaymentDirectHelper
         $this->dispatcher = $dispatcher;
     }
     
-    public function createDirectTransaction(TransactionInterface $transaction)
+    public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null)
     {
         
         $debitedFunds = new Money();
@@ -39,8 +39,6 @@ class PaymentDirectHelper
         $fees->Currency = "EUR";
         $fees->Amount = $transaction->getFees();
 
-        $payment = 
-        
         $payIn = new PayIn();
         $payIn->PaymentType = 'DIRECT_DEBIT';
         $payIn->AuthorId = $transaction->getAuthorMangoId();
@@ -54,19 +52,24 @@ class PaymentDirectHelper
         $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
         $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
 
-        $payIn->ExecutionDetails = new \MangoPay\PayInExecutionDetailsWeb();
-        $payIn->ExecutionDetails->ReturnURL = 'https://www.giveeat.com/bankOK';
-        $payIn->ExecutionDetails->TemplateURL = 'https://TemplateURL.com';
-        $payIn->ExecutionDetails->SecureMode = 'DEFAULT';
-        $payIn->ExecutionDetails->Culture = 'fr';
+        //@TODO : Find a better way to send default to this function to set default
+        if(!$executionDetails instanceof \MangoPay\PayInExecutionDetails) {
+            $payIn->ExecutionDetails = new \MangoPay\PayInExecutionDetailsWeb();
+//            $payIn->ExecutionDetails->ReturnURL = 'https://www.example.com/bank';
+//            $payIn->ExecutionDetails->TemplateURL = 'https://TemplateURL.com';
+            $payIn->ExecutionDetails->SecureMode = 'DEFAULT';
+            $payIn->ExecutionDetails->Culture = 'fr';
+        } else {
+            $payIn->ExecutionDetails = $executionDetails;
+        }
 
         $mangoPayTransaction = $this->mangopayHelper->PayIns->create($payIn);
 
          //TODO
 //        $event = new CardRegistrationEvent($cardRegistration);
 //        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_REGISTRATION, $event);
-
         
         return $mangoPayTransaction;
     }
+    
 }
