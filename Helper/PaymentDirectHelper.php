@@ -2,20 +2,11 @@
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\CardPreAuthorisation;
-use AppVentus\MangopayBundle\Entity\Order;
+use AppVentus\MangopayBundle\Entity\TransactionInterface;
 use AppVentus\MangopayBundle\Entity\UserInterface;
 use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
-use AppVentus\MangopayBundle\Event\PayInEvent;
-use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
-use MangoPay\CardPreAuthorization;
-use MangoPay\CardRegistration;
 use MangoPay\Money;
 use MangoPay\PayIn;
-use MangoPay\PayInExecutionDetailsDirect;
-use MangoPay\PayInPaymentDetailsPreAuthorized;
-use MangoPay\User;
-use MangoPay\Wallet;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -37,10 +28,45 @@ class PaymentDirectHelper
         $this->dispatcher = $dispatcher;
     }
     
-    protected function createDirectTransaction(UserInterface $user)
+    public function createDirectTransaction(TransactionInterface $transaction)
     {
         
-        return 
-    }
+        $debitedFunds = new Money();
+        $debitedFunds->Currency = "EUR";
+        $debitedFunds->Amount = $transaction->getDebitedFunds();
 
+        $fees = new Money();
+        $fees->Currency = "EUR";
+        $fees->Amount = $transaction->getFees();
+
+        $payment = 
+        
+        $payIn = new PayIn();
+        $payIn->PaymentType = 'DIRECT_DEBIT';
+        $payIn->AuthorId = $transaction->getAuthorMangoId();
+        $payIn->CreditedWalletId = $transaction->getCreditedWalletId();
+        $payIn->DebitedFunds = $debitedFunds;
+        $payIn->Fees = $fees;
+        
+        $payIn->Nature = 'REGULAR';
+        $payIn->Type = 'PAYIN';
+        
+        $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
+        $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
+
+        $payIn->ExecutionDetails = new \MangoPay\PayInExecutionDetailsWeb();
+        $payIn->ExecutionDetails->ReturnURL = 'https://www.giveeat.com/bankOK';
+        $payIn->ExecutionDetails->TemplateURL = 'https://TemplateURL.com';
+        $payIn->ExecutionDetails->SecureMode = 'DEFAULT';
+        $payIn->ExecutionDetails->Culture = 'fr';
+
+        $mangoPayTransaction = $this->mangopayHelper->PayIns->create($payIn);
+
+         //TODO
+//        $event = new CardRegistrationEvent($cardRegistration);
+//        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_REGISTRATION, $event);
+
+        
+        return $mangoPayTransaction;
+    }
 }
