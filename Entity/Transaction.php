@@ -26,7 +26,7 @@ class Transaction
     /**
      * Author Id
      * @var int
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="authorId", type="integer")
      */
     protected $authorId;
 

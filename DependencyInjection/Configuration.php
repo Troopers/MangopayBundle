@@ -18,11 +18,15 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('appventus_mangopay');
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode = $treeBuilder->root('app_ventus_mangopay');
+        
+        $rootNode
+            ->children()
+                ->booleanNode('debug_mode')->defaultValue(false)->end()
+                ->scalarNode('client_id')->isRequired()->end()
+                ->scalarNode('client_password')->isRequired()->end()
+                ->scalarNode('base_url')->isRequired()->end()
+            ->end();
 
         return $treeBuilder;
     }
