@@ -46,7 +46,7 @@ class Order
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=15)
+     * @ORM\Column(name="status", type="string", length=255)
      */
     protected $status;
 
