@@ -53,7 +53,7 @@ class Order
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="AppVentus\MangopayBundle\Entity\Transaction", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Transaction", cascade={"remove"})
      * @ORM\JoinColumn(name="payin_transaction_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $payinTransaction;
