@@ -70,7 +70,6 @@ class Order
      */
     public function __construct()
     {
-        $this->message = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_WAITING_FOR_PAYMENT;
     }
 
