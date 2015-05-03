@@ -25,13 +25,13 @@ function payAjaxOrRedirect(ajaxUrl,
     });
 
     // Collect sensitive card data from the form
-    var month = $("#appventus_mangopaybundle_card_type_cardExpiryMonth").val();
-    var year = $("#appventus_mangopaybundle_card_type_cardExpiryYear").val();
+    var month = $("[data-id='appventus_mangopay_card_expiry_month']").val();
+    var year = $("[data-id='appventus_mangopay_card_expiry_year']").val();
 
     var cardData = {
-        cardNumber : $("#appventus_mangopaybundle_card_type_cardNumber").val(),
+        cardNumber : $("[data-id='appventus_mangopay_card_number']").val(),
         cardExpirationDate : pad(month, 2) + "" + pad(year, 2),
-        cardCvx : pad($("#appventus_mangopaybundle_card_type_ccv").val(), 3)
+        cardCvx : pad($("[data-id='appventus_mangopay_ccv']").val(), 3)
     };
 
     // Process data

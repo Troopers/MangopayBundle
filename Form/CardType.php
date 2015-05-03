@@ -18,7 +18,7 @@ class CardType extends AbstractType
             ->add('cardNumber', 'text', array(
                 'label' => 'appventus_mangopay.card_number.label',
                 'attr' => array(
-                    'id' => 'appventus_mangopay_card_number',
+                    'data-id' => 'appventus_mangopay_card_number',
                     'placeholder' => 'appventus_mangopay.card_number.placeholder',
                 ),
                 'mapped' => false
@@ -26,7 +26,7 @@ class CardType extends AbstractType
             ->add('cardHolder', 'text', array(
                 'label' => 'appventus_mangopay.card_holder.label',
                 'attr' => array(
-                    'id' => 'appventus_mangopay_card_holder',
+                    'data-id' => 'appventus_mangopay_card_holder',
                     'placeholder' => 'appventus_mangopay.card_holder.placeholder',
                 ),
                 'mapped' => false
@@ -34,7 +34,7 @@ class CardType extends AbstractType
             ->add('ccv', 'integer', array(
                 'label' => 'appventus_mangopay.card_ccv.label',
                 'attr' => array(
-                    'id' => 'appventus_mangopay_ccv',
+                    'data-id' => 'appventus_mangopay_ccv',
                     'placeholder' => 'appventus_mangopay.ccv.placeholder',
                 ),
                 'mapped' => false
@@ -56,7 +56,7 @@ class CardType extends AbstractType
                     "12" => "12",
                 ),
                 'attr' => array(
-                    'id' => 'appventus_mangopay_card_expiry_month',
+                    'data-id' => 'appventus_mangopay_card_expiry_month',
                     'placeholder' => 'appventus_mangopay.card_expiry_month.placeholder',
                 ),
                 'mapped' => false
@@ -73,7 +73,7 @@ class CardType extends AbstractType
             $builder->add('cardExpiryYear', 'choice', array(
                 'choices' => $years,
                 'attr' => array(
-                    'id' => 'appventus_mangopay_card_expiry_year',
+                    'data-id' => 'appventus_mangopay_card_expiry_year',
                     'placeholder' => 'appventus_mangopay.card_expiry_year.placeholder',
                 ),
                 'mapped' => false
