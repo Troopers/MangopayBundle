@@ -177,7 +177,7 @@ class PaymentController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success'));
 
-        return $this->redirect($this->generateUrl('appventus_mangopaybundle_payment_success'));
+        return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl());
     }
 
     /**

@@ -26,9 +26,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  **/
 class PaymentHelper
 {
-    private $mangopayHelper;
-    private $router;
-    private $dispatcher;
+    protected $mangopayHelper;
+    protected $router;
+    protected $dispatcher;
 
     public function __construct(MangopayHelper $mangopayHelper, Router $router, EventDispatcherInterface $dispatcher)
     {
@@ -195,7 +195,7 @@ class PaymentHelper
         }
     }
 
-    protected function generateSuccessUrl()
+    public function generateSuccessUrl()
     {
         return $this->router->generate('appventus_mangopaybundle_payment_success');
     }
