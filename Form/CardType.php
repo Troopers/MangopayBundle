@@ -4,6 +4,7 @@ namespace AppVentus\MangopayBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CardType extends AbstractType
 {
@@ -16,6 +17,7 @@ class CardType extends AbstractType
     {
         $builder
             ->add('cardNumber', 'text', array(
+                'constraints' => array(new NotBlank()),
                 'label' => 'appventus_mangopay.card_number.label',
                 'attr' => array(
                     'data-id' => 'appventus_mangopay_card_number',
@@ -24,6 +26,7 @@ class CardType extends AbstractType
                 'mapped' => false
             ))
             ->add('cardHolder', 'text', array(
+                'constraints' => array(new NotBlank()),
                 'label' => 'appventus_mangopay.card_holder.label',
                 'attr' => array(
                     'data-id' => 'appventus_mangopay_card_holder',
@@ -32,6 +35,7 @@ class CardType extends AbstractType
                 'mapped' => false
             ))
             ->add('ccv', 'integer', array(
+                'constraints' => array(new NotBlank()),
                 'label' => 'appventus_mangopay.card_ccv.label',
                 'attr' => array(
                     'data-id' => 'appventus_mangopay_ccv',
@@ -40,6 +44,7 @@ class CardType extends AbstractType
                 'mapped' => false
             ))
             ->add('cardExpiryMonth', 'choice', array(
+                'constraints' => array(new NotBlank()),
                 'label' => 'appventus_mangopay.card_expiry_month.label',
                 'choices' => array(
                     "01" => "01",
@@ -71,6 +76,7 @@ class CardType extends AbstractType
             }
 
             $builder->add('cardExpiryYear', 'choice', array(
+                'constraints' => array(new NotBlank()),
                 'choices' => $years,
                 'attr' => array(
                     'data-id' => 'appventus_mangopay_card_expiry_year',
