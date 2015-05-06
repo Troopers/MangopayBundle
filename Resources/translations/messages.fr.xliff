@@ -48,7 +48,7 @@
 
             <trans-unit id="mangopay.error.105299" resname="mangopay.error.105299" datatype="plaintext">
                 <source>mangopay.error.105299</source>
-                <target>Jeton d'entrée erreur</target>
+                <target>Le formulaire de carte contient une erreur, veuillez vérifier vos informations</target>
             </trans-unit>
 
             <trans-unit id="mangopay.error.101001" resname="mangopay.error.101001" datatype="plaintext">
