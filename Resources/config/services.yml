@@ -17,7 +17,7 @@ services:
             - "@event_dispatcher"
             - "@doctrine.orm.entity_manager"
             - %appventus_mangopay.debug_mode%
-            
+
     appventus_mangopay.user_helper:
         class: %appventus_mangopay.user_helper.class%
         arguments:
@@ -28,6 +28,7 @@ services:
         class: %appventus_mangopay.wallet_helper.class%
         arguments:
             - @appventus_mangopay.mango_api
+            - @appventus_mangopay.user_helper
             - @doctrine.orm.entity_manager
             - "@event_dispatcher"
     appventus_mangopay.payment_helper:
@@ -36,7 +37,7 @@ services:
             - @appventus_mangopay.mango_api
             - @router
             - "@event_dispatcher"
-            
+
     appventus_mangopay.payment_direct_helper:
         class: %appventus_mangopay.payment_direct_helper.class%
         arguments:

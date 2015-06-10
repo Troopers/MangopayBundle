@@ -4,9 +4,9 @@ namespace AppVentus\MangopayBundle\Helper;
 use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\UserInterface;
 use AppVentus\MangopayBundle\Event\WalletEvent;
+use Doctrine\ORM\EntityManager;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Doctrine\ORM\EntityManager;
 
 /**
  *
@@ -16,12 +16,14 @@ use Doctrine\ORM\EntityManager;
 class WalletHelper
 {
     private $mangopayHelper;
+    private $userHelper;
     private $dispatcher;
     private $entityManager;
 
-    public function __construct(MangopayHelper $mangopayHelper, EntityManager $entityManager, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, UserHelper $userHelper, EntityManager $entityManager, EventDispatcherInterface $dispatcher)
     {
         $this->mangopayHelper = $mangopayHelper;
+        $this->userHelper = $userHelper;
         $this->dispatcher = $dispatcher;
         $this->entityManager = $entityManager;
     }
@@ -41,8 +43,9 @@ class WalletHelper
 
     public function createWalletForUser(UserInterface $user, $description = 'current wallet')
     {
+        $mangoUser = $this->userHelper->findOrCreateMangoUser($user);
         $mangoWallet = new Wallet();
-        $mangoWallet->Owners = array($user->getMangoUserId());
+        $mangoWallet->Owners = array($mangoUser->Id);
         $mangoWallet->Currency = "EUR";
         $mangoWallet->Description = $description;
 
