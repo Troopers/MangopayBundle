@@ -133,7 +133,7 @@ class PaymentHelper
      * @param integer              $feesAmount
      * @param integer              $amount           0 to 100
      *
-     * @return void
+     * @return PayIn
      */
     public function executePreAuthorisation(
         CardPreAuthorisation $preAuthorisation,

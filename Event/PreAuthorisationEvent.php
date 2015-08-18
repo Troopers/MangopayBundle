@@ -20,7 +20,7 @@ class PreAuthorisationEvent extends Event
     /**
      * Get order
      *
-     * @return string
+     * @return Order
      */
     public function getOrder()
     {

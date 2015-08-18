@@ -28,6 +28,11 @@ class WalletHelper
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param UserInterface $user
+     * @param string $description
+     * @return Wallet
+     */
     public function findOrCreateWallet(UserInterface $user, $description = 'current wallet')
     {
 
