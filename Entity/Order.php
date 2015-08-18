@@ -33,6 +33,10 @@ class Order
      * The seller has paied the order
      */
     const STATUS_PAID                = 'paid';
+    /**
+     * The seller has paied the order
+     */
+    const STATUS_WAITING_MANGOPAY_VALIDATION = 'waiting_mangopay_validation';
 
     /**
      * @var integer
@@ -53,8 +57,7 @@ class Order
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="Transaction", cascade={"remove"})
-     * @ORM\JoinColumn(name="payin_transaction_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="AppVentus\MangopayBundle\Entity\Transaction", cascade={"remove"})
      */
     protected $payinTransaction;
 
@@ -154,4 +157,5 @@ class Order
 
         return $this;
     }
+
 }
