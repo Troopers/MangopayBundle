@@ -6,7 +6,7 @@ parameters:
     appventus_mangopay.bank_information_helper.class: "AppVentus\\MangopayBundle\\Helper\\BankInformationHelper"
     appventus_mangopay.wallet_helper.class: "AppVentus\\MangopayBundle\\Helper\\WalletHelper"
     appventus_mangopay.order.class: "AppVentus\\MangopayBundle\\Entity\\Order"
-
+    appventus_mangopay.form.card: "AppVentus\\MangopayBundle\\Form\\CardType"
 
 services:
     appventus_mangopay.mango_api:
@@ -53,6 +53,6 @@ services:
             - "@event_dispatcher"
 
     appventus_mangopay.form.card:
-        class: AppVentus\MangopayBundle\Form\CardType
+        class: %appventus_mangopay.form.card%
         tags:
             - { name: form.type, alias: appventus_mangopaybundle_card_type }

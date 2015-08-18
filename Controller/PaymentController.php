@@ -4,11 +4,11 @@ namespace AppVentus\MangopayBundle\Controller;
 
 use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\Order;
+use AppVentus\MangopayBundle\Event\OrderEvent;
 use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
+use AppVentus\MangopayBundle\OrderEvents;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
-use Nooster\Front\AppBundle\Events\OrderEvent;
-use Nooster\Front\AppBundle\OrderEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,11 +69,15 @@ class PaymentController extends Controller
      * When the owner will accept the reservation, we will be able to fetch the PreAuthorisation and create the PayIn
      *
      * @Route("/finalize/{orderId}/{cardId}", name="appventus_mangopaybundle_payment_finalize")
-     * @ParamConverter("order", class="NoosterCoreBundle:Order\Order", options={"id" = "orderId"})
      * @return JsonResponse return json
      */
-    public function paymentFinalizeAction(Request $request, Order $order, $cardId)
+    public function paymentFinalizeAction(Request $request, $orderId, $cardId)
     {
+
+        $em = $this->getDoctrine()->getManager();
+        $orderRepository = $em->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
+        $order = $orderRepository->findOneById($orderId);
+
         $data = $request->get('data');
         $errorCode = $request->get('errorCode');
 
@@ -81,7 +85,10 @@ class PaymentController extends Controller
         $updatedCardRegister = $paymentHelper->updateCardRegistration($cardId, $data, $errorCode);
 
         // Handle error
-        if ((property_exists($updatedCardRegister, 'ResultCode') && $updatedCardRegister->ResultCode !== "000000") || $updatedCardRegister->Status == 'ERROR') {
+        if ((property_exists($updatedCardRegister, 'ResultCode')
+                && $updatedCardRegister->ResultCode !== "000000")
+                || $updatedCardRegister->Status == 'ERROR')
+        {
 
             $errorMessage = $this->get('translator')->trans('mangopay.error.' . $updatedCardRegister->ResultCode);
 
@@ -122,11 +129,13 @@ class PaymentController extends Controller
         $order->setStatus(Order::STATUS_PENDING);
 
         //Persist pending order
-        $em = $this->getDoctrine()->getManager();
         $em->persist($order);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success'));
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
+        );
 
         return new JsonResponse(array(
             'success' => true
@@ -141,12 +150,14 @@ class PaymentController extends Controller
      * This method is called by paymentFinalizeActionif 3dsecure is required. 3DSecure is needed when 250€ are reached
      *
      * @Route("/finalize-secure/{orderId}", name="appventus_mangopaybundle_payment_finalize_secure")
-     * @ParamConverter("order", class="NoosterCoreBundle:Order\Order", options={"id" = "orderId"})
      * @return RedirectResponse
      */
-    public function paymentFinalizeSecureAction(Request $request, Order $order)
+    public function paymentFinalizeSecureAction(Request $request, $orderId)
     {
+
         $em = $this->getDoctrine()->getManager();
+        $orderRepository = $em->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
+        $order = $orderRepository->findOneById($orderId);
         $mangopayApi = $this->container->get('appventus_mangopay.mango_api');
 
         $preAuthId = $request->get('preAuthorizationId');
@@ -156,7 +167,10 @@ class PaymentController extends Controller
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status != 'SUCCEEDED') {
 
             if (property_exists($preAuth, 'Code')) {
-                $this->get('session')->getFlashBag()->add('danger', $this->get('translator')->trans('mangopay.error.' . $preAuth->Code));
+                $this->get('session')->getFlashBag()->add(
+                    'danger',
+                    $this->get('translator')->trans('mangopay.error.' . $preAuth->Code)
+                );
             } else {
                 $this->get('session')->getFlashBag()->add('danger', $preAuth->ResultMessage);
             }
@@ -175,7 +189,10 @@ class PaymentController extends Controller
         $em->persist($order);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success'));
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
+        );
 
         return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl());
     }
