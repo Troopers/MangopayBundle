@@ -1,6 +1,8 @@
 MangopayBundle
 ===
 
+[![Join the chat at https://gitter.im/AppVentus/MangopayBundle](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/AppVentus/MangopayBundle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This bundle is an implementation of the official mangopay php api for Symfony.
 
 
