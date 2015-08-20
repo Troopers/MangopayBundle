@@ -11,7 +11,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @ORM\MappedSuperclass
  * @ORM\Entity
  */
-class Transaction
+class Transaction implements TransactionInterface
 {
     use TimestampableEntity;
 
@@ -37,6 +37,13 @@ class Transaction
      * @ORM\Column(name="creditedUserId", type="integer")
      */
     protected $creditedUserId;
+
+    /**
+     * Credited wallet Id
+     * @var int
+     * @ORM\Column(name="creditedWalletId", type="integer")
+     */
+    protected $creditedWalletId;
 
     /**
      * Debited funds
@@ -82,7 +89,7 @@ class Transaction
 
     /**
      * Execution date;
-     * @var date
+     * @var \DateTime
      * @ORM\Column(name="executionDate", type="datetime")
      */
     protected $executionDate;
@@ -100,6 +107,13 @@ class Transaction
      * @ORM\Column(name="nature", type="string", length=255)
      */
     protected $nature;
+
+    /**
+     * CardType { CB_VISA_MASTERCARD, MAESTRO, DINERS, P24″, MASTERPASS }
+     * @var string
+     * @ORM\Column(name="cardType", type="string", length=255)
+     */
+    protected $cardType;
 
     /**
      * Get id
@@ -134,6 +148,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get creditedUserId
      *
@@ -157,6 +172,31 @@ class Transaction
 
         return $this;
     }
+
+    /**
+     * Get creditedWalletId
+     *
+     * @return string
+     */
+    public function getCreditedWalletId()
+    {
+        return $this->creditedWalletId;
+    }
+
+    /**
+     * Set creditedUserId
+     *
+     * @param string $creditedWalletId
+     *
+     * @return $this
+     */
+    public function setCreditedWalletId($creditedWalletId)
+    {
+        $this->creditedWalletId = $creditedWalletId;
+
+        return $this;
+    }
+
     /**
      * Get debitedFunds
      *
@@ -180,6 +220,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get creditedFunds
      *
@@ -203,6 +244,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get fees
      *
@@ -226,6 +268,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get status
      *
@@ -249,6 +292,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get resultCode
      *
@@ -272,6 +316,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get resultMessage
      *
@@ -295,6 +340,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get executionDate
      *
@@ -318,6 +364,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get type
      *
@@ -341,6 +388,7 @@ class Transaction
 
         return $this;
     }
+
     /**
      * Get nature
      *
@@ -365,4 +413,27 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Get card type
+     *
+     * @return string
+     */
+    public function getCardType()
+    {
+        return $this->cardType;
+    }
+
+    /**
+     * Set card type
+     *
+     * @param string $cardType
+     *
+     * @return $this
+     */
+    public function setCardType($cardType)
+    {
+        $this->cardType = $cardType;
+
+        return $this;
+    }
 }

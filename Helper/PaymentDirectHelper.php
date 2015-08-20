@@ -1,10 +1,7 @@
 <?php
 namespace AppVentus\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\TransactionInterface;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -27,10 +24,10 @@ class PaymentDirectHelper
         $this->router = $router;
         $this->dispatcher = $dispatcher;
     }
-    
+
     public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null)
     {
-        
+
         $debitedFunds = new Money();
         $debitedFunds->Currency = "EUR";
         $debitedFunds->Amount = $transaction->getDebitedFunds();
@@ -41,19 +38,19 @@ class PaymentDirectHelper
 
         $payIn = new PayIn();
         $payIn->PaymentType = 'DIRECT_DEBIT';
-        $payIn->AuthorId = $transaction->getAuthorMangoId();
+        $payIn->AuthorId = $transaction->getAuthorId();
         $payIn->CreditedWalletId = $transaction->getCreditedWalletId();
         $payIn->DebitedFunds = $debitedFunds;
         $payIn->Fees = $fees;
-        
+
         $payIn->Nature = 'REGULAR';
         $payIn->Type = 'PAYIN';
-        
+
         $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
         $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
 
         //@TODO : Find a better way to send default to this function to set default
-        if(!$executionDetails instanceof \MangoPay\PayInExecutionDetails) {
+        if (!$executionDetails instanceof \MangoPay\PayInExecutionDetails) {
             $payIn->ExecutionDetails = new \MangoPay\PayInExecutionDetailsWeb();
 //            $payIn->ExecutionDetails->ReturnURL = 'https://www.example.com/bank';
 //            $payIn->ExecutionDetails->TemplateURL = 'https://TemplateURL.com';
@@ -65,11 +62,11 @@ class PaymentDirectHelper
 
         $mangoPayTransaction = $this->mangopayHelper->PayIns->create($payIn);
 
-         //TODO
+        //TODO
 //        $event = new CardRegistrationEvent($cardRegistration);
 //        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_REGISTRATION, $event);
-        
+
         return $mangoPayTransaction;
     }
-    
+
 }
