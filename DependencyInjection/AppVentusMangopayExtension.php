@@ -25,14 +25,9 @@ class AppVentusMangopayExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         
-        if($config['debug_mode'])
-        {
-            $container->setParameter('appventus_mangopay.debug_mode',   $config['debug_mode']);
-        }
-        
+        $container->setParameter('appventus_mangopay.debug_mode',       $config['debug_mode'] === true);
         $container->setParameter('appventus_mangopay.client_id',        $config['client_id']);
         $container->setParameter('appventus_mangopay.client_password',  $config['client_password']);
         $container->setParameter('appventus_mangopay.base_url',         $config['base_url']);
-
     }
 }
