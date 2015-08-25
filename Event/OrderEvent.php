@@ -4,7 +4,6 @@ namespace AppVentus\MangopayBundle\Event;
 
 use AppVentus\MangopayBundle\Entity\Order;
 use Symfony\Component\EventDispatcher\Event;
-;
 
 class OrderEvent extends Event
 {
