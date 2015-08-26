@@ -172,7 +172,11 @@ class PaymentController extends Controller
                     $this->get('translator')->trans('mangopay.error.' . $preAuth->Code)
                 );
             } else {
-                $this->get('session')->getFlashBag()->add('danger', $preAuth->ResultMessage);
+                $this->get('session')->getFlashBag()->add('error', $preAuth->ResultMessage);
+            }
+
+            if (!$request->headers->get('referer')) {
+                return $this->redirect('/');
             }
 
             return $this->redirect($request->headers->get('referer'));
