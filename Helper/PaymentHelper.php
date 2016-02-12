@@ -8,6 +8,7 @@ use AppVentus\MangopayBundle\Entity\UserInterface;
 use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
 use AppVentus\MangopayBundle\Event\PayInEvent;
 use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
+use AppVentus\MangopayBundle\Exception\MongopayPayInCreationException;
 use MangoPay\CardPreAuthorization;
 use MangoPay\CardRegistration;
 use MangoPay\Money;
@@ -178,7 +179,10 @@ class PaymentHelper
         $event = new PayInEvent($payIn);
         $this->dispatcher->dispatch(AppVentusMangopayEvents::ERROR_PAY_IN, $event);
 
-        throw new \Exception('PayIn creation failed');
+        throw new MongopayPayInCreationException($this->translator->trans(
+            'mangopay.error.'. $payIn->ResultCode,
+            [], 'messages'
+        ));
 
     }
 
