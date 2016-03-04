@@ -6,6 +6,7 @@ use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\Order;
 use AppVentus\MangopayBundle\Event\OrderEvent;
 use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
+use AppVentus\MangopayBundle\Form\CardType;
 use AppVentus\MangopayBundle\OrderEvents;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
@@ -36,7 +37,7 @@ class PaymentController extends Controller
             throw $this->createNotFoundException('Order not found');
         }
         //create card form
-        $form = $this->createForm('appventus_mangopaybundle_card_type');
+        $form = $this->createForm(CardType::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

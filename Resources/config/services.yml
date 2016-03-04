@@ -55,4 +55,4 @@ services:
     appventus_mangopay.form.card:
         class: %appventus_mangopay.form.card%
         tags:
-            - { name: form.type, alias: appventus_mangopaybundle_card_type }
+            - { name: form.type }

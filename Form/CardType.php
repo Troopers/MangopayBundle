@@ -3,6 +3,9 @@
 namespace AppVentus\MangopayBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -16,7 +19,7 @@ class CardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cardNumber', 'text', array(
+            ->add('cardNumber', TextType::class, array(
                     'constraints' => array(new NotBlank(['groups' => ['card']])),
                 'label' => 'appventus_mangopay.card_number.label',
                 'attr' => array(
@@ -25,7 +28,7 @@ class CardType extends AbstractType
                 ),
                 'mapped' => false
             ))
-            ->add('cardHolder', 'text', array(
+            ->add('cardHolder', TextType::class, array(
                     'constraints' => array(new NotBlank(['groups' => ['card']])),
                 'label' => 'appventus_mangopay.card_holder.label',
                 'attr' => array(
@@ -34,7 +37,7 @@ class CardType extends AbstractType
                 ),
                 'mapped' => false
             ))
-            ->add('ccv', 'integer', array(
+            ->add('ccv', IntegerType::class, array(
                     'constraints' => array(new NotBlank(['groups' => ['card']])),
                 'label' => 'appventus_mangopay.card_ccv.label',
                 'attr' => array(
@@ -43,23 +46,11 @@ class CardType extends AbstractType
                 ),
                 'mapped' => false
             ))
-            ->add('cardExpiryMonth', 'choice', array(
+            ->add('cardExpiryMonth', ChoiceType::class, array(
                     'constraints' => array(new NotBlank(['groups' => ['card']])),
                 'label' => 'appventus_mangopay.card_expiry_month.label',
-                'choices' => array(
-                    "01" => "01",
-                    "02" => "02",
-                    "03" => "03",
-                    "04" => "04",
-                    "05" => "05",
-                    "06" => "06",
-                    "07" => "07",
-                    "08" => "08",
-                    "09" => "09",
-                    "10" => "10",
-                    "11" => "11",
-                    "12" => "12",
-                ),
+                'choices' => ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+                'choices_as_values' => true,
                 'attr' => array(
                     'data-id' => 'appventus_mangopay_card_expiry_month',
                     'placeholder' => 'appventus_mangopay.card_expiry_month.placeholder',
@@ -75,9 +66,10 @@ class CardType extends AbstractType
                 $year = (int) $year + 1;
             }
 
-            $builder->add('cardExpiryYear', 'choice', array(
-                    'constraints' => array(new NotBlank(['groups' => ['card']])),
+            $builder->add('cardExpiryYear', ChoiceType::class, array(
+                'constraints' => array(new NotBlank(['groups' => ['card']])),
                 'choices' => $years,
+                'choices_as_values' => true,
                 'attr' => array(
                     'data-id' => 'appventus_mangopay_card_expiry_year',
                     'placeholder' => 'appventus_mangopay.card_expiry_year.placeholder',
@@ -92,7 +84,7 @@ class CardType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'appventus_mangopaybundle_card_type';
     }
