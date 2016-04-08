@@ -88,4 +88,12 @@ class CardType extends AbstractType
     {
         return 'appventus_mangopaybundle_card_type';
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'appventus_mangopaybundle_card_type_form';
+    }
 }
