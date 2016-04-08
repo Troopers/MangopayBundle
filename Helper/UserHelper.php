@@ -37,6 +37,7 @@ class UserHelper
 
         return $mangoUser;
     }
+
     public function createMangoUser(UserInterface $user)
     {
 
@@ -62,4 +63,24 @@ class UserHelper
         return $mangoUser;
     }
 
+    public function updateMangoUser(UserInterface $user)
+    {
+        $mangoUserId = $user->getMangoUserId();
+        $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
+
+        $mangoUser->Email = $user->getEmail();
+        $mangoUser->FirstName = $user->getFirstname();
+        $mangoUser->LastName = $user->getLastname();
+        $mangoUser->Birthday = $user->getBirthDate();
+        $mangoUser->Nationality = $user->getNationality();
+        $mangoUser->CountryOfResidence = $user->getCountry();
+        $mangoUser->Tag = $user->getId();
+
+        $mangoUser = $this->mangopayHelper->Users->Update($mangoUser);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $mangoUser;
+    }
 }
