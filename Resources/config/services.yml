@@ -43,7 +43,6 @@ services:
         class: %appventus_mangopay.card_registration_helper.class%
         arguments:
             - @appventus_mangopay.mango_api
-            - @appventus_mangopay.card_registration_helper
             - @doctrine.orm.entity_manager
             - "@event_dispatcher"
     appventus_mangopay.payment_helper:
