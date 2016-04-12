@@ -32,6 +32,7 @@ class CardRegistrationHelper
         $cardRegistration = new CardRegistration();
         $cardRegistration->userId = $user->getMangoUserId();
         $cardRegistration->Tag = 'user id : '.$user->getId();
+        $cardRegistration->Currency = 'EUR';
 
         $cardRegistration = $this->mangopayHelper->CardRegistrations->Create($cardRegistration);
 
