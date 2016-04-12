@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49b1b4342dca12571d11d2cd2984cc97",
-    "content-hash": "10a4b32836e8e2437ec30846d7c64bd6",
+    "hash": "b9526927888ec2f722ec5094d25298b2",
+    "content-hash": "898c236aac66ea51e15a7956a2143f45",
     "packages": [
         {
             "name": "appventus/ajax-bundle",
@@ -247,23 +247,17 @@
         },
         {
             "name": "mangopay/php-sdk-v2",
-            "version": "v2.3",
+            "version": "v2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Mangopay/mangopay2-php-sdk.git",
-                "reference": "fd995fdae3c0ea9e5d253f89bb19018aa24a03fe"
+                "url": "https://github.com/MangoPay/mangopay2-php-sdk.git",
+                "reference": "4c1514fe8ee4f03d3225d76c8c85ccceb0576829"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mangopay/mangopay2-php-sdk/zipball/fd995fdae3c0ea9e5d253f89bb19018aa24a03fe",
-                "reference": "fd995fdae3c0ea9e5d253f89bb19018aa24a03fe",
+                "url": "https://api.github.com/repos/MangoPay/mangopay2-php-sdk/zipball/4c1514fe8ee4f03d3225d76c8c85ccceb0576829",
+                "reference": "4c1514fe8ee4f03d3225d76c8c85ccceb0576829",
                 "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-openssl": "*",
-                "php": ">=5.5.0",
-                "psr/log": "^1.0"
             },
             "type": "library",
             "autoload": {
@@ -279,7 +273,7 @@
                 "MIT"
             ],
             "description": "SDK PHP for Mangopay api V2",
-            "time": "2016-02-10 19:04:04"
+            "time": "2015-04-17 12:55:36"
         },
         {
             "name": "paragonie/random_compat",
