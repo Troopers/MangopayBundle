@@ -1,7 +1,9 @@
 <?php
 namespace AppVentus\MangopayBundle\Helper;
 
+use AppVentus\MangopayBundle\Entity\Transaction;
 use AppVentus\MangopayBundle\Entity\TransactionInterface;
+use AppVentus\MangopayBundle\Entity\UserInterface;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -23,6 +25,45 @@ class PaymentDirectHelper
         $this->mangopayHelper = $mangopayHelper;
         $this->router = $router;
         $this->dispatcher = $dispatcher;
+    }
+
+    public function buildPayInPaymentDetailsCard(UserInterface $user)
+    {
+        $paymentDetails = new \MangoPay\PayInPaymentDetailsCard();
+        $paymentDetails->CardType = 'CB_VISA_MASTERCARD';
+        $paymentDetails->CardId = $user->getMangoPayInfo()->getCardId();
+
+        return $paymentDetails;
+    }
+
+    public function buildPayInExecutionDetailsDirect($secureModeReturnURL = 'http://vago.local/app_dev.php/server-time')
+    {
+        $executionDetails = new \MangoPay\PayInExecutionDetailsDirect();
+        $executionDetails->SecureModeReturnURL = $secureModeReturnURL;
+
+        return $executionDetails;
+    }
+
+    public function buildTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees)
+    {
+        $transaction = new Transaction();
+        $transaction->setAuthorId($userDebited->getMangoPayInfo()->getUserNaturalId());
+        $transaction->setCreditedUserId($userCredited->getMangoPayInfo()->getUserNaturalId());
+        $transaction->setDebitedFunds($amount);
+        $transaction->setFees($fees);
+        $transaction->setCreditedWalletId($userCredited->getMangoPayInfo()->getWalletId());
+
+        return $transaction;
+    }
+
+    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = null)
+    {
+        $paymentDetails = $this->buildPayInPaymentDetailsCard($userDebited);
+        $executionDetails = $this->buildPayInExecutionDetailsDirect();
+        $transaction = $this->buildTransaction($userDebited, $userCredited, $amount, $fees);
+        $mangoTransaction = $this->createDirectTransaction($transaction, $executionDetails, $paymentDetails);
+
+        return $mangoTransaction;
     }
 
     public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null, $paymentDetails = null)
