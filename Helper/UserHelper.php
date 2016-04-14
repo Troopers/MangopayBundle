@@ -29,7 +29,7 @@ class UserHelper
 
     public function findOrCreateMangoUser(UserInterface $user)
     {
-        if ($mangoUserId = $user->getMangoUserId()) {
+        if ($mangoUserId = $user->getMangoPayInfo()->getUserNaturalId()) {
             $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
         } else {
             $mangoUser = $this->createMangoUser($user);
@@ -54,8 +54,6 @@ class UserHelper
 
         $event = new UserEvent($user, $mangoUser);
         $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_USER, $event);
-
-        $user->setMangoUserId($mangoUser->Id);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

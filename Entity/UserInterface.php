@@ -11,12 +11,7 @@ interface UserInterface
     /**
      * @var integer
      */
-    public function getMangoUserId();
-
-    /**
-     * @var integer
-     */
-    public function getMangoWalletId();
+    public function getMangoPayInfo();
 
     /**
      * @var string

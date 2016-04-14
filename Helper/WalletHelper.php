@@ -36,8 +36,8 @@ class WalletHelper
     public function findOrCreateWallet(UserInterface $user, $description = 'current wallet')
     {
 
-        if ($user->getMangoWalletId()) {
-            $wallet = $this->mangopayHelper->Wallets->get($user->getMangoWalletId());
+        if ($walletId = $user->getMangoPayInfo()->getWalletId()) {
+            $wallet = $this->mangopayHelper->Wallets->get($walletId);
         // else, create a new mango user
         } else {
             $wallet = $this->createWalletForUser($user, $description);
@@ -59,12 +59,9 @@ class WalletHelper
         $event = new WalletEvent($mangoWallet, $user);
         $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_WALLET, $event);
 
-        $user->setMangoWalletId($mangoWallet->Id);
-
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
         return $mangoWallet;
     }
-
 }
