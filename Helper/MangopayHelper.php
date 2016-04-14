@@ -33,7 +33,9 @@ class MangopayHelper extends MangoPayApi
         $this->Config->DebugMode = $debug;
         $this->dispatcher = $dispatcher;
         $this->entityManager = $entityManager;
-    }
-    
 
+        if (!is_dir($this->Config->TemporaryFolder)) {
+            mkdir($this->Config->TemporaryFolder);
+        }
+    }
 }
