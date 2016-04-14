@@ -25,7 +25,7 @@ class PaymentDirectHelper
         $this->dispatcher = $dispatcher;
     }
 
-    public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null)
+    public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null, $paymentDetails = null)
     {
 
         $debitedFunds = new Money();
@@ -46,8 +46,14 @@ class PaymentDirectHelper
         $payIn->Nature = 'REGULAR';
         $payIn->Type = 'PAYIN';
 
-        $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
-        $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
+        if (null === $paymentDetails) {
+            $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
+            $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
+        } elseif (!$paymentDetails instanceof \MangoPay\PayInPaymentDetailsCard) {
+            throw new \Exception("unable to process PaymentDetails");
+        } else {
+            $payIn->PaymentDetails = $paymentDetails;
+        }
 
         //@TODO : Find a better way to send default to this function to set default
         if (!$executionDetails instanceof \MangoPay\PayInExecutionDetails) {
@@ -68,5 +74,4 @@ class PaymentDirectHelper
 
         return $mangoPayTransaction;
     }
-
 }
