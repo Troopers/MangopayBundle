@@ -35,7 +35,7 @@ interface UserInterface
      * @var date
      * User’s birthdate. A Timestamp is expected
      */
-    public function getBirthDate();
+    public function getTimestampBirthDate();
 
     /**
      * @var string
@@ -48,5 +48,4 @@ interface UserInterface
      * User’s country of residence. ISO 3166-1 alpha-2 format is expected
      */
     public function getCountry();
-
 }
