@@ -45,7 +45,7 @@ class UserHelper
         $mangoUser->Email = $user->getEmail();
         $mangoUser->FirstName = $user->getFirstname();
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $user->getBirthDate();
+        $mangoUser->Birthday = $user->getTimestampBirthDate();
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();
@@ -69,7 +69,7 @@ class UserHelper
         $mangoUser->Email = $user->getEmail();
         $mangoUser->FirstName = $user->getFirstname();
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $user->getBirthDate();
+        $mangoUser->Birthday = $user->getTimestampBirthDate();
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();
