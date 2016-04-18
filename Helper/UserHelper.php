@@ -45,7 +45,7 @@ class UserHelper
         $mangoUser->Email = $user->getEmail();
         $mangoUser->FirstName = $user->getFirstname();
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $user->getTimestampBirthDate();
+        $mangoUser->Birthday = $user->getBirthDate();
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();
@@ -63,13 +63,13 @@ class UserHelper
 
     public function updateMangoUser(UserInterface $user)
     {
-        $mangoUserId = $user->getMangoUserId();
+        $mangoUserId = $user->getMangoPayInfo()->getUserNaturalId();
         $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
 
         $mangoUser->Email = $user->getEmail();
         $mangoUser->FirstName = $user->getFirstname();
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $user->getTimestampBirthDate();
+        $mangoUser->Birthday = $user->getBirthDate();
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();
