@@ -26,7 +26,7 @@ class PaymentOutHelper
     {
         $meanOfPaymentDetails = new PayOutPaymentDetailsBankWire();
         if (null == $bankAccountId = $user->getMangoPayInfo()->getBankAccountId()) {
-            throw new NotFoundHttpException(sprintf("User not found for id : %s", $id));
+            throw new NotFoundHttpException(sprintf("bankAccount not found for id : %s", $user->getId()));
         }
         $meanOfPaymentDetails->BankAccountId = $bankAccountId;
 
