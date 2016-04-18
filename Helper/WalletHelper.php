@@ -64,4 +64,9 @@ class WalletHelper
 
         return $mangoWallet;
     }
+
+    public function getTransactions($walletId)
+    {
+        return $this->mangopayHelper->Wallets->GetTransactions($walletId);
+    }
 }
