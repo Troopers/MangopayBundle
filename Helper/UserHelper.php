@@ -81,4 +81,9 @@ class UserHelper
 
         return $mangoUser;
     }
+
+    public function getTransactions($userId)
+    {
+        return $this->mangopayHelper->Users->GetTransactions($userId);
+    }
 }
