@@ -8,6 +8,7 @@ use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
@@ -31,7 +32,10 @@ class PaymentDirectHelper
     {
         $paymentDetails = new \MangoPay\PayInPaymentDetailsCard();
         $paymentDetails->CardType = 'CB_VISA_MASTERCARD';
-        $paymentDetails->CardId = $user->getMangoPayInfo()->getCardId();
+        if (null === $cardId = $user->getMangoPayInfo()->getCardId()) {
+            throw new NotFoundHttpException(sprintf("CardId not found for user id : %s", $user->getId()));
+        }
+        $paymentDetails->CardId = $cardId;
 
         return $paymentDetails;
     }
