@@ -71,6 +71,17 @@ class UserHelper
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();
 
+        $userAddress = $user->getAddress();
+        $city = $user->getCity();
+        $postalCode = $user->getPostalCode();
+        $address = new \MangoPay\Address();
+        $address->AddressLine1 = $userAddress;
+        $address->City = $city;
+        $address->Country = $user->getCountry();
+        $address->PostalCode = $postalCode;
+
+        $mangoUser->Address = $address;
+
         $mangoUser = $this->mangopayHelper->Users->Update($mangoUser);
 
         $this->entityManager->persist($user);
