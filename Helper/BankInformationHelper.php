@@ -66,4 +66,48 @@ class BankInformationHelper
         return $bankAccount;
     }
 
+    public function createBankAccountForUser(UserInterface $user, $iban)
+    {
+        $bankAccount = new \MangoPay\BankAccount();
+        $bankAccount->OwnerName = $this->getUserFullName($user);
+        if (null == $mangoPayInfo = $user->getMangoPayInfo()) {
+            throw new NotFoundHttpException(sprintf('MangoPayInfo not found for User id : %s', $user->getId()));
+        }
+        $bankAccount->UserId = $mangoPayInfo->getUserNaturalId();
+        $bankAccount->Type = 'IBAN';
+
+        $address = new \MangoPay\Address();
+        $userAddress = $user->getAddress();
+        $city = $user->getCity();
+        $postalCode = $user->getPostalCode();
+        if (null == $userAddress || null ==  $city || null == $postalCode) {
+            throw new NotFoundHttpException(sprintf('address, city or postalCode missing for User id : %s', $user->getId()));
+        }
+        $address->AddressLine1 = $userAddress;
+        $address->City = $city;
+        $address->Country = $user->getCountry();
+        $address->PostalCode = $postalCode;
+        $bankAccount->OwnerAddress = $address;
+
+        $bankAccountDetailsIban = new \MangoPay\BankAccountDetailsIBAN();
+        $bankAccountDetailsIban->IBAN = $iban;
+
+        $bankAccount->Details = $bankAccountDetailsIban;
+
+        return $this->mangopayHelper->Users->CreateBankAccount($user->getMangoPayInfo()->getUserNaturalId(), $bankAccount);
+    }
+
+    /**
+     * Implode Users's full name with firstName and lastName.
+     *
+     * @param  User   $user
+     * @return string
+     */
+    public function getUserFullName(UserInterface $user)
+    {
+        $firstName = $user->getFirstName();
+        $lastName = $user->getLastName();
+
+        return $firstName.' '.$lastName;
+    }
 }
