@@ -4,5 +4,4 @@ namespace AppVentus\MangopayBundle\Exception;
 
 class MongopayPayInCreationException extends \Exception implements MongopayExceptionInterfaceInterface
 {
-
 }

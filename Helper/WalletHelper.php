@@ -1,4 +1,5 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\AppVentusMangopayEvents;
@@ -9,9 +10,7 @@ use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- *
- * ref: appventus_mangopay.wallet_helper
- *
+ * ref: appventus_mangopay.wallet_helper.
  **/
 class WalletHelper
 {
@@ -30,12 +29,12 @@ class WalletHelper
 
     /**
      * @param UserInterface $user
-     * @param string $description
+     * @param string        $description
+     *
      * @return Wallet
      */
     public function findOrCreateWallet(UserInterface $user, $description = 'current wallet')
     {
-
         if ($walletId = $user->getMangoWalletId()) {
             $wallet = $this->mangopayHelper->Wallets->get($walletId);
         // else, create a new mango user
@@ -51,7 +50,7 @@ class WalletHelper
         $mangoUser = $this->userHelper->findOrCreateMangoUser($user);
         $mangoWallet = new Wallet();
         $mangoWallet->Owners = array($mangoUser->Id);
-        $mangoWallet->Currency = "EUR";
+        $mangoWallet->Currency = 'EUR';
         $mangoWallet->Description = $description;
 
         $mangoWallet = $this->mangopayHelper->Wallets->create($mangoWallet);

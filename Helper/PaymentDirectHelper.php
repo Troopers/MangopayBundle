@@ -1,4 +1,5 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\Entity\Transaction;
@@ -11,9 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- *
- * ref: appventus_mangopay.payment_direct_helper
- *
+ * ref: appventus_mangopay.payment_direct_helper.
  **/
 class PaymentDirectHelper
 {
@@ -33,7 +32,7 @@ class PaymentDirectHelper
         $paymentDetails = new \MangoPay\PayInPaymentDetailsCard();
         $paymentDetails->CardType = 'CB_VISA_MASTERCARD';
         if (null === $cardId = $user->getCardId()) {
-            throw new NotFoundHttpException(sprintf("CardId not found for user id : %s", $user->getId()));
+            throw new NotFoundHttpException(sprintf('CardId not found for user id : %s', $user->getId()));
         }
         $paymentDetails->CardId = $cardId;
 
@@ -72,13 +71,12 @@ class PaymentDirectHelper
 
     public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null, $paymentDetails = null)
     {
-
         $debitedFunds = new Money();
-        $debitedFunds->Currency = "EUR";
+        $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $transaction->getDebitedFunds();
 
         $fees = new Money();
-        $fees->Currency = "EUR";
+        $fees->Currency = 'EUR';
         $fees->Amount = $transaction->getFees();
 
         $payIn = new PayIn();
@@ -93,9 +91,9 @@ class PaymentDirectHelper
 
         if (null === $paymentDetails) {
             $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
-            $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
+            $payIn->PaymentDetails->CardType = 'CB_VISA_MASTERCARD';
         } elseif (!$paymentDetails instanceof \MangoPay\PayInPaymentDetailsCard) {
-            throw new \Exception("unable to process PaymentDetails");
+            throw new \Exception('unable to process PaymentDetails');
         } else {
             $payIn->PaymentDetails = $paymentDetails;
         }

@@ -1,17 +1,14 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\CardRegistration;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- *
- * ref: appventus_mangopay.card_registration_helper
- *
+ * ref: appventus_mangopay.card_registration_helper.
  **/
 class CardRegistrationHelper
 {
@@ -28,7 +25,6 @@ class CardRegistrationHelper
 
     public function createCardRegistrationForUser(UserInterface $user)
     {
-
         $cardRegistration = new CardRegistration();
         $cardRegistration->userId = $user->getMangoUserId();
         $cardRegistration->Tag = 'user id : '.$user->getId();

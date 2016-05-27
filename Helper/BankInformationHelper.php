@@ -1,22 +1,17 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\BankInformationInterface;
 use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
 use MangoPay\User;
-use MangoPay\UserNatural;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- *
- * ref: appventus_mangopay.bank_information_helper
- *
+ * ref: appventus_mangopay.bank_information_helper.
  **/
 class BankInformationHelper
 {
@@ -47,9 +42,9 @@ class BankInformationHelper
         $mangoUser = $this->userHelper->findOrCreateMangoUser($bankInformation->getUser());
         //Create mango bank account
         $bankAccount = new BankAccount();
-        $bankAccount->OwnerName    = $bankInformation->getUser()->getFullName();
-        $bankAccount->UserId       = $mangoUser->Id;
-        $bankAccount->Type         = "IBAN";
+        $bankAccount->OwnerName = $bankInformation->getUser()->getFullName();
+        $bankAccount->UserId = $mangoUser->Id;
+        $bankAccount->Type = 'IBAN';
         $bankAccount->OwnerAddress = $bankInformation->getAddress();
 
         $bankAccountDetailsIban = new BankAccountDetailsIBAN();
@@ -98,7 +93,8 @@ class BankInformationHelper
     /**
      * Implode Users's full name with firstName and lastName.
      *
-     * @param  User   $user
+     * @param User $user
+     *
      * @return string
      */
     public function getUserFullName(UserInterface $user)

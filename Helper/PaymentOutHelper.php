@@ -1,17 +1,15 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Helper\MangopayHelper;
 use MangoPay\Money;
 use MangoPay\PayOut;
 use MangoPay\PayOutPaymentDetailsBankWire;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- *
- * ref: appventus_mangopay.payment_out_helper
- *
+ * ref: appventus_mangopay.payment_out_helper.
  **/
 class PaymentOutHelper
 {
@@ -26,7 +24,7 @@ class PaymentOutHelper
     {
         $meanOfPaymentDetails = new PayOutPaymentDetailsBankWire();
         if (null == $bankAccountId = $user->getBankAccountId()) {
-            throw new NotFoundHttpException(sprintf("bankAccount not found for id : %s", $user->getId()));
+            throw new NotFoundHttpException(sprintf('bankAccount not found for id : %s', $user->getId()));
         }
         $meanOfPaymentDetails->BankAccountId = $bankAccountId;
 

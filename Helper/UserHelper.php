@@ -1,18 +1,16 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\UserInterface;
 use AppVentus\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
-use MangoPay\User;
 use MangoPay\UserNatural;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- *
- * ref: appventus_mangopay.user_helper
- *
+ * ref: appventus_mangopay.user_helper.
  **/
 class UserHelper
 {

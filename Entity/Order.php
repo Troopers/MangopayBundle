@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * Order
+ * Order.
  *
  * @ORM\MappedSuperclass
  */
@@ -14,32 +14,32 @@ class Order
 {
     use TimestampableEntity;
     /**
-     * The offer was rejected
+     * The offer was rejected.
      */
-    const STATUS_CANCELED            = 'canceled';
+    const STATUS_CANCELED = 'canceled';
     /**
-     * The buyer has not paied yet
+     * The buyer has not paied yet.
      */
     const STATUS_WAITING_FOR_PAYMENT = 'waiting';
     /**
-     * The seller has not accepted or rejected the offer
+     * The seller has not accepted or rejected the offer.
      */
-    const STATUS_PENDING             = 'pending';
+    const STATUS_PENDING = 'pending';
     /**
-     * The seller has accepted the order
+     * The seller has accepted the order.
      */
-    const STATUS_VALIDATED           = 'validated';
+    const STATUS_VALIDATED = 'validated';
     /**
-     * The seller has paied the order
+     * The seller has paied the order.
      */
-    const STATUS_PAID                = 'paid';
+    const STATUS_PAID = 'paid';
     /**
-     * The seller has paied the order
+     * The seller has paied the order.
      */
     const STATUS_WAITING_MANGOPAY_VALIDATION = 'waiting_mangopay_validation';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -69,7 +69,7 @@ class Order
     protected $mangoPrice;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -77,9 +77,9 @@ class Order
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -87,7 +87,7 @@ class Order
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -101,7 +101,7 @@ class Order
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -111,9 +111,9 @@ class Order
     }
 
     /**
-     * Set payinTransaction
+     * Set payinTransaction.
      *
-     * @param integer $payinTransaction
+     * @param int $payinTransaction
      *
      * @return Order
      */
@@ -125,9 +125,9 @@ class Order
     }
 
     /**
-     * Get payinTransaction
+     * Get payinTransaction.
      *
-     * @return integer
+     * @return int
      */
     public function getPayinTransaction()
     {
@@ -135,7 +135,7 @@ class Order
     }
 
     /**
-     * Get mangoPrice
+     * Get mangoPrice.
      *
      * @return string
      */
@@ -145,7 +145,7 @@ class Order
     }
 
     /**
-     * Set mangoPrice
+     * Set mangoPrice.
      *
      * @param string $mangoPrice
      *
@@ -157,5 +157,4 @@ class Order
 
         return $this;
     }
-
 }
