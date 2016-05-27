@@ -11,6 +11,7 @@ use MangoPay\BankAccountDetailsIBAN;
 use MangoPay\User;
 use MangoPay\UserNatural;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
@@ -70,10 +71,7 @@ class BankInformationHelper
     {
         $bankAccount = new \MangoPay\BankAccount();
         $bankAccount->OwnerName = $this->getUserFullName($user);
-        if (null == $mangoPayInfo = $user->getMangoPayInfo()) {
-            throw new NotFoundHttpException(sprintf('MangoPayInfo not found for User id : %s', $user->getId()));
-        }
-        $bankAccount->UserId = $mangoPayInfo->getUserNaturalId();
+        $bankAccount->UserId = $user->getMangoUserId();
         $bankAccount->Type = 'IBAN';
 
         $address = new \MangoPay\Address();
@@ -94,7 +92,7 @@ class BankInformationHelper
 
         $bankAccount->Details = $bankAccountDetailsIban;
 
-        return $this->mangopayHelper->Users->CreateBankAccount($user->getMangoPayInfo()->getUserNaturalId(), $bankAccount);
+        return $this->mangopayHelper->Users->CreateBankAccount($user->getMangoUserId(), $bankAccount);
     }
 
     /**

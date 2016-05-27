@@ -30,7 +30,7 @@ class CardRegistrationHelper
     {
 
         $cardRegistration = new CardRegistration();
-        $cardRegistration->userId = $user->getMangoPayInfo()->getUserNaturalId();
+        $cardRegistration->userId = $user->getMangoUserId();
         $cardRegistration->Tag = 'user id : '.$user->getId();
         $cardRegistration->Currency = 'EUR';
 

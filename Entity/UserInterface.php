@@ -11,7 +11,22 @@ interface UserInterface
     /**
      * @var integer
      */
-    public function getMangoPayInfo();
+    public function getMangoUserId();
+
+    /**
+     * @var integer
+     */
+    public function getMangoWalletId();
+
+    /**
+     * @var integer
+     */
+    public function getCardId();
+
+    /**
+     * @var integer
+     */
+    public function getBankAccountId();
 
     /**
      * @var string
@@ -33,9 +48,9 @@ interface UserInterface
 
     /**
      * @var date
-     * User’s birthdate. A Timestamp is expected
+     * User’s birthdate.
      */
-    public function getTimestampBirthDate();
+    public function getBirthDate();
 
     /**
      * @var string

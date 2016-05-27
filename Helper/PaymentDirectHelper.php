@@ -32,7 +32,7 @@ class PaymentDirectHelper
     {
         $paymentDetails = new \MangoPay\PayInPaymentDetailsCard();
         $paymentDetails->CardType = 'CB_VISA_MASTERCARD';
-        if (null === $cardId = $user->getMangoPayInfo()->getCardId()) {
+        if (null === $cardId = $user->getCardId()) {
             throw new NotFoundHttpException(sprintf("CardId not found for user id : %s", $user->getId()));
         }
         $paymentDetails->CardId = $cardId;
@@ -51,11 +51,11 @@ class PaymentDirectHelper
     public function buildTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees)
     {
         $transaction = new Transaction();
-        $transaction->setAuthorId($userDebited->getMangoPayInfo()->getUserNaturalId());
-        $transaction->setCreditedUserId($userCredited->getMangoPayInfo()->getUserNaturalId());
+        $transaction->setAuthorId($userDebited->getMangoUserId());
+        $transaction->setCreditedUserId($userCredited->getMangoUserId());
         $transaction->setDebitedFunds($amount);
         $transaction->setFees($fees);
-        $transaction->setCreditedWalletId($userCredited->getMangoPayInfo()->getWalletId());
+        $transaction->setCreditedWalletId($userCredited->getMangoWalletId());
 
         return $transaction;
     }

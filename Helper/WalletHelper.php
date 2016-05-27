@@ -36,7 +36,7 @@ class WalletHelper
     public function findOrCreateWallet(UserInterface $user, $description = 'current wallet')
     {
 
-        if ($walletId = $user->getMangoPayInfo()->getWalletId()) {
+        if ($walletId = $user->getMangoWalletId()) {
             $wallet = $this->mangopayHelper->Wallets->get($walletId);
         // else, create a new mango user
         } else {
