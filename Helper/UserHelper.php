@@ -1,18 +1,16 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
 use AppVentus\MangopayBundle\AppVentusMangopayEvents;
 use AppVentus\MangopayBundle\Entity\UserInterface;
 use AppVentus\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
-use MangoPay\User;
 use MangoPay\UserNatural;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- *
- * ref: appventus_mangopay.user_helper
- *
+ * ref: appventus_mangopay.user_helper.
  **/
 class UserHelper
 {
@@ -37,14 +35,17 @@ class UserHelper
 
         return $mangoUser;
     }
+
     public function createMangoUser(UserInterface $user)
     {
-
+        if ($user->getBirthDate() instanceof \Datetime) {
+            $birthdate = $user->getBirthDate()->getTimestamp();
+        }
         $mangoUser = new UserNatural();
         $mangoUser->Email = $user->getEmail();
         $mangoUser->FirstName = $user->getFirstname();
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $user->getBirthDate();
+        $mangoUser->Birthday = $birthdate;
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();
@@ -54,7 +55,37 @@ class UserHelper
         $event = new UserEvent($user, $mangoUser);
         $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_USER, $event);
 
-        $user->setMangoUserId($mangoUser->Id);
+        return $mangoUser;
+    }
+
+    public function updateMangoUser(UserInterface $user)
+    {
+        if ($user->getBirthDate() instanceof \Datetime) {
+            $birthdate = $user->getBirthDate()->getTimestamp();
+        }
+        $mangoUserId = $user->getMangoUserId();
+        $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
+
+        $mangoUser->Email = $user->getEmail();
+        $mangoUser->FirstName = $user->getFirstname();
+        $mangoUser->LastName = $user->getLastname();
+        $mangoUser->Birthday = $birthdate;
+        $mangoUser->Nationality = $user->getNationality();
+        $mangoUser->CountryOfResidence = $user->getCountry();
+        $mangoUser->Tag = $user->getId();
+
+        $userAddress = $user->getAddress();
+        $city = $user->getCity();
+        $postalCode = $user->getPostalCode();
+        $address = new \MangoPay\Address();
+        $address->AddressLine1 = $userAddress;
+        $address->City = $city;
+        $address->Country = $user->getCountry();
+        $address->PostalCode = $postalCode;
+
+        $mangoUser->Address = $address;
+
+        $mangoUser = $this->mangopayHelper->Users->Update($mangoUser);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -62,4 +93,8 @@ class UserHelper
         return $mangoUser;
     }
 
+    public function getTransactions($userId)
+    {
+        return $this->mangopayHelper->Users->GetTransactions($userId);
+    }
 }

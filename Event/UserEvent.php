@@ -18,7 +18,7 @@ class UserEvent extends Event
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return string
      */
@@ -28,7 +28,7 @@ class UserEvent extends Event
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param string $user
      *
@@ -42,7 +42,7 @@ class UserEvent extends Event
     }
 
     /**
-     * Get mangoUser
+     * Get mangoUser.
      *
      * @return string
      */
@@ -52,7 +52,7 @@ class UserEvent extends Event
     }
 
     /**
-     * Set mangoUser
+     * Set mangoUser.
      *
      * @param string $mangoUser
      *

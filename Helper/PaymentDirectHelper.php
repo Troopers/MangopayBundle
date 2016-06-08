@@ -1,16 +1,18 @@
 <?php
+
 namespace AppVentus\MangopayBundle\Helper;
 
+use AppVentus\MangopayBundle\Entity\Transaction;
 use AppVentus\MangopayBundle\Entity\TransactionInterface;
+use AppVentus\MangopayBundle\Entity\UserInterface;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- *
- * ref: appventus_mangopay.payment_direct_helper
- *
+ * ref: appventus_mangopay.payment_direct_helper.
  **/
 class PaymentDirectHelper
 {
@@ -25,15 +27,56 @@ class PaymentDirectHelper
         $this->dispatcher = $dispatcher;
     }
 
-    public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null)
+    public function buildPayInPaymentDetailsCard(UserInterface $user)
     {
+        $paymentDetails = new \MangoPay\PayInPaymentDetailsCard();
+        $paymentDetails->CardType = 'CB_VISA_MASTERCARD';
+        if (null === $cardId = $user->getCardId()) {
+            throw new NotFoundHttpException(sprintf('CardId not found for user id : %s', $user->getId()));
+        }
+        $paymentDetails->CardId = $cardId;
 
+        return $paymentDetails;
+    }
+
+    public function buildPayInExecutionDetailsDirect($secureModeReturnURL = 'http://vago.local/app_dev.php/server-time')
+    {
+        $executionDetails = new \MangoPay\PayInExecutionDetailsDirect();
+        $executionDetails->SecureModeReturnURL = $secureModeReturnURL;
+
+        return $executionDetails;
+    }
+
+    public function buildTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees)
+    {
+        $transaction = new Transaction();
+        $transaction->setAuthorId($userDebited->getMangoUserId());
+        $transaction->setCreditedUserId($userCredited->getMangoUserId());
+        $transaction->setDebitedFunds($amount);
+        $transaction->setFees($fees);
+        $transaction->setCreditedWalletId($userCredited->getMangoWalletId());
+
+        return $transaction;
+    }
+
+    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = null)
+    {
+        $paymentDetails = $this->buildPayInPaymentDetailsCard($userDebited);
+        $executionDetails = $this->buildPayInExecutionDetailsDirect();
+        $transaction = $this->buildTransaction($userDebited, $userCredited, $amount, $fees);
+        $mangoTransaction = $this->createDirectTransaction($transaction, $executionDetails, $paymentDetails);
+
+        return $mangoTransaction;
+    }
+
+    public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null, $paymentDetails = null)
+    {
         $debitedFunds = new Money();
-        $debitedFunds->Currency = "EUR";
+        $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $transaction->getDebitedFunds();
 
         $fees = new Money();
-        $fees->Currency = "EUR";
+        $fees->Currency = 'EUR';
         $fees->Amount = $transaction->getFees();
 
         $payIn = new PayIn();
@@ -46,8 +89,14 @@ class PaymentDirectHelper
         $payIn->Nature = 'REGULAR';
         $payIn->Type = 'PAYIN';
 
-        $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
-        $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
+        if (null === $paymentDetails) {
+            $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
+            $payIn->PaymentDetails->CardType = 'CB_VISA_MASTERCARD';
+        } elseif (!$paymentDetails instanceof \MangoPay\PayInPaymentDetailsCard) {
+            throw new \Exception('unable to process PaymentDetails');
+        } else {
+            $payIn->PaymentDetails = $paymentDetails;
+        }
 
         //@TODO : Find a better way to send default to this function to set default
         if (!$executionDetails instanceof \MangoPay\PayInExecutionDetails) {
@@ -68,5 +117,4 @@ class PaymentDirectHelper
 
         return $mangoPayTransaction;
     }
-
 }

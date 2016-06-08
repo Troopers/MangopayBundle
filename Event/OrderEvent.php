@@ -22,6 +22,7 @@ class OrderEvent extends Event
     public function setOrder(Order $order)
     {
         $this->order = $order;
+
         return $this;
     }
 }
