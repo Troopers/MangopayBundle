@@ -4,6 +4,7 @@ parameters:
     appventus_mangopay.card_registration_helper.class: "AppVentus\\MangopayBundle\\Helper\\CardRegistrationHelper"
     appventus_mangopay.payment_direct_helper.class: "AppVentus\\MangopayBundle\\Helper\\PaymentDirectHelper"
     appventus_mangopay.payment_out_helper.class: "AppVentus\\MangopayBundle\\Helper\\PaymentOutHelper"
+    appventus_mangopay.bankwire_helper.class: "AppVentus\\MangopayBundle\\Helper\\BankwireHelper"
     appventus_mangopay.user_helper.class: "AppVentus\\MangopayBundle\\Helper\\UserHelper"
     appventus_mangopay.bank_information_helper.class: "AppVentus\\MangopayBundle\\Helper\\BankInformationHelper"
     appventus_mangopay.wallet_helper.class: "AppVentus\\MangopayBundle\\Helper\\WalletHelper"
@@ -59,6 +60,10 @@ services:
             - @appventus_mangopay.mango_api
             - @router
             - "@event_dispatcher"
+    appventus_mangopay.bankwire_helper:
+        class: %appventus_mangopay.bankwire_helper.class%
+        arguments:
+            - @appventus_mangopay.mango_api
 
     appventus_mangopay.payment_out_helper:
         class: %appventus_mangopay.payment_out_helper.class%
