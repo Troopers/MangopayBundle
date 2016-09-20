@@ -61,7 +61,7 @@ class PaymentHelper
             )
         );
 
-        $successRedirect = $this->generateSuccessUrl();
+        $successRedirect = $this->generateSuccessUrl($order->getId());
 
         return array(
             'callback' => 'payAjaxOrRedirect("'
@@ -199,9 +199,9 @@ class PaymentHelper
         }
     }
 
-    public function generateSuccessUrl()
+    public function generateSuccessUrl($orderId)
     {
-        return $this->router->generate('appventus_mangopaybundle_payment_success');
+        return $this->router->generate('appventus_mangopaybundle_payment_success', ['orderId' => $orderId]);
     }
 
 }

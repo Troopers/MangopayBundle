@@ -199,21 +199,23 @@ class PaymentController extends Controller
             $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
         );
 
-        return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl());
+        return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl($orderId));
     }
 
     /**
      * @param Request $request The request
+     * @param int $orderId
      *
      * This method shows the congratulations
      *
-     * @Route("/success", name="appventus_mangopaybundle_payment_success")
+     * @Route("/success/{orderId}", name="appventus_mangopaybundle_payment_success")
      * @return Response
      */
-    public function successAction(Request $request)
+    public function successAction(Request $request, $orderId)
     {
         return $this->render(
-            'AppVentusMangopayBundle::success.html.twig'
+            'AppVentusMangopayBundle::success.html.twig',
+            [ 'orderId' => $orderId ]
         );
     }
 }
