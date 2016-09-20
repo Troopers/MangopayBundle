@@ -53,15 +53,15 @@ class PaymentHelper
 
         $redirect = $this->router->generate(
             'appventus_mangopaybundle_payment_finalize',
-            array(
+            [
                 'orderId' => $order->getId(),
-                'cardId' => $mangoCardRegistration->Id,
-            )
+                'cardId'  => $mangoCardRegistration->Id,
+            ]
         );
 
         $successRedirect = $this->generateSuccessUrl($order->getId());
 
-        return array(
+        return [
             'callback' => 'payAjaxOrRedirect("'
                 .$redirect.'", "'
                 .$redirect.'", "'
@@ -69,7 +69,7 @@ class PaymentHelper
                 .$preregistrationData.'", "'
                 .$accessKey.'", "'
                 .$successRedirect.'")',
-        );
+        ];
     }
 
     /**
@@ -110,9 +110,9 @@ class PaymentHelper
         $cardPreAuthorisation->SecureMode = 'DEFAULT';
         $cardPreAuthorisation->SecureModeReturnURL = $this->router->generate(
             'appventus_mangopaybundle_payment_finalize_secure',
-            array(
+            [
                 'orderId' => $order->getId(),
-            ),
+            ],
             true
         );
 
@@ -125,6 +125,7 @@ class PaymentHelper
 
         return $preAuth;
     }
+
     /**
      * execute a pre authorisation.
      *
@@ -199,5 +200,4 @@ class PaymentHelper
     {
         return $this->router->generate('appventus_mangopaybundle_payment_success', ['orderId' => $orderId]);
     }
-
 }
