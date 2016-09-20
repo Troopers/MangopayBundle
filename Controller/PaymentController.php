@@ -10,21 +10,20 @@ use AppVentus\MangopayBundle\Form\CardType;
 use AppVentus\MangopayBundle\OrderEvents;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Manage payment
+ * Manage payment.
+ *
  * @Route("/payment")
  */
 class PaymentController extends Controller
 {
-
     /**
-     * Create a payment
+     * Create a payment.
      *
      * @Route("/new/{order}", name="appventus_mangopaybundle_payment_new", defaults={"order" = null, "type" = "card"})
      **/
@@ -53,28 +52,28 @@ class PaymentController extends Controller
 
         return $this->render(
             'AppVentusMangopayBundle::cardPayment.html.twig',
-            array(
-                'form' => $form->createView(),
+            [
+                'form'  => $form->createView(),
                 'order' => $order,
-            )
+            ]
         );
     }
 
     /**
      * @param Request     $request     The request
      * @param Reservation $reservation The reservation
-     * @param integer     $cardId      The cardId
+     * @param int         $cardId      The cardId
      *
      * This method is called by paymentAction callback, with the authorized cardId as argument.
      * It creates a PreAuthorisation with reservation price, and store its id in the Reservation.
      * When the owner will accept the reservation, we will be able to fetch the PreAuthorisation and create the PayIn
      *
      * @Route("/finalize/{orderId}/{cardId}", name="appventus_mangopaybundle_payment_finalize")
+     *
      * @return JsonResponse return json
      */
     public function paymentFinalizeAction(Request $request, $orderId, $cardId)
     {
-
         $em = $this->getDoctrine()->getManager();
         $orderRepository = $em->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
         $order = $orderRepository->findOneById($orderId);
@@ -87,16 +86,14 @@ class PaymentController extends Controller
 
         // Handle error
         if ((property_exists($updatedCardRegister, 'ResultCode')
-                && $updatedCardRegister->ResultCode !== "000000")
-                || $updatedCardRegister->Status == 'ERROR')
-        {
+                && $updatedCardRegister->ResultCode !== '000000')
+                || $updatedCardRegister->Status == 'ERROR') {
+            $errorMessage = $this->get('translator')->trans('mangopay.error.'.$updatedCardRegister->ResultCode);
 
-            $errorMessage = $this->get('translator')->trans('mangopay.error.' . $updatedCardRegister->ResultCode);
-
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'success' => false,
-                'message' => $errorMessage
-            ));
+                'message' => $errorMessage,
+            ]);
         }
 
         // Create a PayIn
@@ -104,20 +101,19 @@ class PaymentController extends Controller
 
         // Handle error
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status == 'FAILED') {
+            $errorMessage = $this->get('translator')->trans('mangopay.error.'.$preAuth->ResultCode);
 
-            $errorMessage = $this->get('translator')->trans('mangopay.error.' . $preAuth->ResultCode);
-
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'success' => false,
-                'message' => $errorMessage
-            ));
+                'message' => $errorMessage,
+            ]);
         }
         // Handle secure mode
         if (property_exists($preAuth, 'SecureModeNeeded') && $preAuth->SecureModeNeeded == 1) {
-            return new JsonResponse(array(
-                'success' => true,
-                'redirect' => $preAuth->SecureModeRedirectURL
-            ));
+            return new JsonResponse([
+                'success'  => true,
+                'redirect' => $preAuth->SecureModeRedirectURL,
+            ]);
         }
 
         // store payin transaction
@@ -138,10 +134,9 @@ class PaymentController extends Controller
             $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
         );
 
-        return new JsonResponse(array(
-            'success' => true
-        ));
-
+        return new JsonResponse([
+            'success' => true,
+        ]);
     }
 
     /**
@@ -151,11 +146,11 @@ class PaymentController extends Controller
      * This method is called by paymentFinalizeActionif 3dsecure is required. 3DSecure is needed when 250€ are reached
      *
      * @Route("/finalize-secure/{orderId}", name="appventus_mangopaybundle_payment_finalize_secure")
+     *
      * @return RedirectResponse
      */
     public function paymentFinalizeSecureAction(Request $request, $orderId)
     {
-
         $em = $this->getDoctrine()->getManager();
         $orderRepository = $em->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
         $order = $orderRepository->findOneById($orderId);
@@ -166,11 +161,10 @@ class PaymentController extends Controller
         $preAuth = $mangopayApi->CardPreAuthorizations->Get($preAuthId);
 
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status != 'SUCCEEDED') {
-
             if (property_exists($preAuth, 'Code')) {
                 $this->get('session')->getFlashBag()->add(
                     'danger',
-                    $this->get('translator')->trans('mangopay.error.' . $preAuth->Code)
+                    $this->get('translator')->trans('mangopay.error.'.$preAuth->Code)
                 );
             } else {
                 $this->get('session')->getFlashBag()->add('error', $preAuth->ResultMessage);
@@ -204,18 +198,19 @@ class PaymentController extends Controller
 
     /**
      * @param Request $request The request
-     * @param int $orderId
+     * @param int     $orderId
      *
      * This method shows the congratulations
      *
      * @Route("/success/{orderId}", name="appventus_mangopaybundle_payment_success")
+     *
      * @return Response
      */
     public function successAction(Request $request, $orderId)
     {
         return $this->render(
             'AppVentusMangopayBundle::success.html.twig',
-            [ 'orderId' => $orderId ]
+            ['orderId' => $orderId]
         );
     }
 }
