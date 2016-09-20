@@ -52,10 +52,10 @@ class PaymentController extends Controller
 
         return $this->render(
             'AppVentusMangopayBundle::cardPayment.html.twig',
-            array(
-                'form' => $form->createView(),
+            [
+                'form'  => $form->createView(),
                 'order' => $order,
-            )
+            ]
         );
     }
 
@@ -87,13 +87,13 @@ class PaymentController extends Controller
         // Handle error
         if ((property_exists($updatedCardRegister, 'ResultCode')
                 && $updatedCardRegister->ResultCode !== '000000')
-                || $updatedCardRegister->Status == 'ERROR') {
+            || $updatedCardRegister->Status == 'ERROR') {
             $errorMessage = $this->get('translator')->trans('mangopay.error.'.$updatedCardRegister->ResultCode);
 
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'success' => false,
                 'message' => $errorMessage,
-            ));
+            ]);
         }
 
         // Create a PayIn
@@ -103,17 +103,17 @@ class PaymentController extends Controller
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status == 'FAILED') {
             $errorMessage = $this->get('translator')->trans('mangopay.error.'.$preAuth->ResultCode);
 
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'success' => false,
                 'message' => $errorMessage,
-            ));
+            ]);
         }
         // Handle secure mode
         if (property_exists($preAuth, 'SecureModeNeeded') && $preAuth->SecureModeNeeded == 1) {
-            return new JsonResponse(array(
-                'success' => true,
+            return new JsonResponse([
+                'success'  => true,
                 'redirect' => $preAuth->SecureModeRedirectURL,
-            ));
+            ]);
         }
 
         // store payin transaction
@@ -134,9 +134,9 @@ class PaymentController extends Controller
             $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
         );
 
-        return new JsonResponse(array(
+        return new JsonResponse([
             'success' => true,
-        ));
+        ]);
     }
 
     /**
@@ -193,22 +193,24 @@ class PaymentController extends Controller
             $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
         );
 
-        return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl());
+        return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl($orderId));
     }
 
     /**
      * @param Request $request The request
+     * @param int     $orderId
      *
      * This method shows the congratulations
      *
-     * @Route("/success", name="appventus_mangopaybundle_payment_success")
+     * @Route("/success/{orderId}", name="appventus_mangopaybundle_payment_success")
      *
      * @return Response
      */
-    public function successAction(Request $request)
+    public function successAction(Request $request, $orderId)
     {
         return $this->render(
-            'AppVentusMangopayBundle::success.html.twig'
+            'AppVentusMangopayBundle::success.html.twig',
+            ['orderId' => $orderId]
         );
     }
 }
