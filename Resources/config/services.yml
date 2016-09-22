@@ -25,21 +25,27 @@ services:
     appventus_mangopay.user_helper:
         class: %appventus_mangopay.user_helper.class%
         arguments:
-            - @appventus_mangopay.mango_api
-            - @doctrine.orm.entity_manager
+            - "@appventus_mangopay.mango_api"
+            - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
     appventus_mangopay.bank_information_helper:
         class: %appventus_mangopay.bank_information_helper.class%
         arguments:
-            - @appventus_mangopay.mango_api
-            - @doctrine.orm.entity_manager
-            - @appventus_mangopay.user_helper
+            - "@appventus_mangopay.mango_api"
+            - "@doctrine.orm.entity_manager"
+            - "@appventus_mangopay.user_helper"
     appventus_mangopay.wallet_helper:
         class: %appventus_mangopay.wallet_helper.class%
         arguments:
-            - @appventus_mangopay.mango_api
-            - @appventus_mangopay.user_helper
-            - @doctrine.orm.entity_manager
+            - "@appventus_mangopay.mango_api"
+            - "@appventus_mangopay.user_helper"
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+    appventus_mangopay.card_registration_helper:
+        class: %appventus_mangopay.card_registration_helper.class%
+        arguments:
+            - "@appventus_mangopay.mango_api"
+            - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
     appventus_mangopay.card_registration_helper:
         class: %appventus_mangopay.card_registration_helper.class%
@@ -50,20 +56,25 @@ services:
     appventus_mangopay.payment_helper:
         class: %appventus_mangopay.payment_helper.class%
         arguments:
-            - @appventus_mangopay.mango_api
-            - @router
+            - "@appventus_mangopay.mango_api"
+            - "@router"
             - "@event_dispatcher"
 
     appventus_mangopay.payment_direct_helper:
         class: %appventus_mangopay.payment_direct_helper.class%
         arguments:
-            - @appventus_mangopay.mango_api
-            - @router
+            - "@appventus_mangopay.mango_api"
+            - "@router"
             - "@event_dispatcher"
     appventus_mangopay.bankwire_helper:
         class: %appventus_mangopay.bankwire_helper.class%
         arguments:
-            - @appventus_mangopay.mango_api
+            - "@appventus_mangopay.mango_api"
+
+    appventus_mangopay.payment_out_helper:
+        class: %appventus_mangopay.payment_out_helper.class%
+        arguments:
+            - "@appventus_mangopay.mango_api"
 
     appventus_mangopay.payment_out_helper:
         class: %appventus_mangopay.payment_out_helper.class%
