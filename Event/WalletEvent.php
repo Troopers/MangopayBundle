@@ -1,8 +1,8 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
-use AppVentus\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -18,7 +18,7 @@ class WalletEvent extends Event
     }
 
     /**
-     * Get wallet
+     * Get wallet.
      *
      * @return string
      */
@@ -28,7 +28,7 @@ class WalletEvent extends Event
     }
 
     /**
-     * Set wallet
+     * Set wallet.
      *
      * @param string $wallet
      *
@@ -42,7 +42,7 @@ class WalletEvent extends Event
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return string
      */
@@ -52,7 +52,7 @@ class WalletEvent extends Event
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param string $user
      *

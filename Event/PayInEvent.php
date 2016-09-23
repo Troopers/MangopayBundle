@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
 use MangoPay\PayIn;
 use Symfony\Component\EventDispatcher\Event;
@@ -16,7 +16,7 @@ class PayInEvent extends Event
     }
 
     /**
-     * Get payin
+     * Get payin.
      *
      * @return string
      */
@@ -26,7 +26,7 @@ class PayInEvent extends Event
     }
 
     /**
-     * Set payin
+     * Set payin.
      *
      * @param string $payin
      *

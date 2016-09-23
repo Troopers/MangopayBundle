@@ -1,12 +1,12 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Entity;
+namespace Troopers\MangopayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * CardPreAuthorisation
+ * CardPreAuthorisation.
  *
  * @ORM\MappedSuperclass
  */
@@ -15,7 +15,7 @@ class CardPreAuthorisation
     use TimestampableEntity;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -24,28 +24,29 @@ class CardPreAuthorisation
     protected $id;
 
     /**
-     * @var Int Unique identifier
-     * (At this moment type is Integer - in the feature will be GUID)
+     * @var int Unique identifier
+     *          (At this moment type is Integer - in the feature will be GUID)
      * @ORM\Column(name="mango_id", type="integer")
      */
     protected $mangoId;
 
     /**
-     * @var Int Unique identifier
-     * (At this moment type is Integer - in the feature will be GUID)
+     * @var int Unique identifier
+     *          (At this moment type is Integer - in the feature will be GUID)
      * @ORM\Column(name="tag", type="string", length=255, nullable=true)
      */
     protected $tag;
 
     /**
-     * @var Int Unique identifier
-     * (At this moment type is Integer - in the feature will be GUID)
+     * @var int Unique identifier
+     *          (At this moment type is Integer - in the feature will be GUID)
      * @ORM\Column(name="creation_date", type="datetime", nullable=true)
      */
     protected $creationDate;
 
     /**
-     * The user Id of the author of the pre-authorization
+     * The user Id of the author of the pre-authorization.
+     *
      * @var string
      * @ORM\Column(name="author_id", type="integer", nullable=true)
      */
@@ -54,14 +55,16 @@ class CardPreAuthorisation
     /**
      * It represents the amount debited on the bank account
      * of the Author.DebitedFunds = Fees + CreditedFunds
-     * (amount received on wallet)
+     * (amount received on wallet).
+     *
      *  @var \MangoPay\Money
      * @ORM\Column(name="debited_funds", type="integer", nullable=true)
      */
     protected $debitedFunds;
 
     /**
-     * Status of the PreAuthorization: CREATED, SUCCEEDED, FAILED
+     * Status of the PreAuthorization: CREATED, SUCCEEDED, FAILED.
+     *
      * @var string
      * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
@@ -69,21 +72,24 @@ class CardPreAuthorisation
 
     /**
      * The status of the payment after the PreAuthorization:
-     * WAITING, CANCELED, EXPIRED, VALIDATED
+     * WAITING, CANCELED, EXPIRED, VALIDATED.
+     *
      * @var string
      * @ORM\Column(name="payment_status", type="string", length=255, nullable=true)
      */
     protected $paymentStatus;
 
     /**
-     * The PreAuthorization result code
+     * The PreAuthorization result code.
+     *
      * @var string
      * @ORM\Column(name="result_code", type="integer", nullable=true)
      */
     protected $resultCode;
 
     /**
-     * The PreAuthorization result Message explaining the result code
+     * The PreAuthorization result Message explaining the result code.
+     *
      * @var string
      * @ORM\Column(name="result_message", type="string", length=255, nullable=true)
      */
@@ -91,7 +97,8 @@ class CardPreAuthorisation
 
     /**
      * How the PreAuthorization has been executed.
-     * Only on value for now: CARD
+     * Only on value for now: CARD.
+     *
      * @var string
      * @ORM\Column(name="execution_type", type="string", length=255, nullable=true)
      */
@@ -101,20 +108,23 @@ class CardPreAuthorisation
      * The SecureMode correspond to '3D secure' for CB Visa and MasterCard
      * or 'Amex Safe Key' for American Express.
      * This field lets you activate it manually.
+     *
      * @var string
      * @ORM\Column(name="secure_mode", type="string", length=255, nullable=true)
      */
     protected $secureMode;
 
     /**
-     * The ID of the registered card (Got through CardRegistration object)
+     * The ID of the registered card (Got through CardRegistration object).
+     *
      * @var string
      * @ORM\Column(name="card_id", type="integer", nullable=true)
      */
     protected $cardId;
 
     /**
-     * Boolean. The value is 'true' if the SecureMode was used
+     * Boolean. The value is 'true' if the SecureMode was used.
+     *
      * @var string
      * @ORM\Column(name="secure_mode_needed", type="string", length=255, nullable=true)
      */
@@ -122,7 +132,8 @@ class CardPreAuthorisation
 
     /**
      * This is the URL where to redirect users to proceed
-     * to 3D secure validation
+     * to 3D secure validation.
+     *
      * @var string
      * @ORM\Column(name="secure_mode_redirect_url", type="string", length=255, nullable=true)
      */
@@ -130,42 +141,47 @@ class CardPreAuthorisation
 
     /**
      * This is the URL where users are automatically redirected
-     * after 3D secure validation (if activated)
+     * after 3D secure validation (if activated).
+     *
      * @var string
      * @ORM\Column(name="secure_mode_return_url", type="string", length=255, nullable=true)
      */
     protected $secureModeReturnURL;
 
     /**
-     * The date when the payment is processed
+     * The date when the payment is processed.
+     *
      * @var Timestamp
      * @ORM\Column(name="expiration_date", type="datetime", nullable=true)
      */
     protected $expirationDate;
 
-     /**
-     * The date when the payment was authorized
+    /**
+     * The date when the payment was authorized.
+     *
      * @var Timestamp
      * @ORM\Column(name="authorization_date", type="datetime", nullable=true)
      */
     protected $authorizationDate;
 
     /**
-     * The type of pre-authorization ("CARD" is the only acceptable value at present
+     * The type of pre-authorization ("CARD" is the only acceptable value at present.
+     *
      * @var string
      * @ORM\Column(name="payment_type", type="string", length=255, nullable=true)
      */
     protected $paymentType;
 
     /**
-     * The Id of the associated PayIn
+     * The Id of the associated PayIn.
+     *
      * @var string
      * @ORM\Column(name="pay_in_id", type="integer", nullable=true)
      */
     protected $payInId;
 
     /**
-     * Get authorId
+     * Get authorId.
      *
      * @return string
      */
@@ -175,7 +191,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set authorId
+     * Set authorId.
      *
      * @param string $authorId
      *
@@ -188,7 +204,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get debitedFunds
+     * Get debitedFunds.
      *
      * @return string
      */
@@ -198,7 +214,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set debitedFunds
+     * Set debitedFunds.
      *
      * @param string $debitedFunds
      *
@@ -211,7 +227,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -221,7 +237,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -234,7 +250,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get paymentStatus
+     * Get paymentStatus.
      *
      * @return string
      */
@@ -244,7 +260,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set paymentStatus
+     * Set paymentStatus.
      *
      * @param string $paymentStatus
      *
@@ -257,7 +273,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get resultCode
+     * Get resultCode.
      *
      * @return string
      */
@@ -267,7 +283,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set resultCode
+     * Set resultCode.
      *
      * @param string $resultCode
      *
@@ -280,7 +296,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get resultMessage
+     * Get resultMessage.
      *
      * @return string
      */
@@ -290,7 +306,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set resultMessage
+     * Set resultMessage.
      *
      * @param string $resultMessage
      *
@@ -303,7 +319,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get executionType
+     * Get executionType.
      *
      * @return string
      */
@@ -313,7 +329,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set executionType
+     * Set executionType.
      *
      * @param string $executionType
      *
@@ -326,7 +342,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get secureMode
+     * Get secureMode.
      *
      * @return string
      */
@@ -336,7 +352,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set secureMode
+     * Set secureMode.
      *
      * @param string $secureMode
      *
@@ -349,7 +365,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get cardId
+     * Get cardId.
      *
      * @return string
      */
@@ -359,7 +375,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set cardId
+     * Set cardId.
      *
      * @param string $cardId
      *
@@ -372,7 +388,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get secureModeNeeded
+     * Get secureModeNeeded.
      *
      * @return string
      */
@@ -382,7 +398,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set secureModeNeeded
+     * Set secureModeNeeded.
      *
      * @param string $secureModeNeeded
      *
@@ -395,7 +411,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get secureModeRedirectURL
+     * Get secureModeRedirectURL.
      *
      * @return string
      */
@@ -405,7 +421,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set secureModeRedirectURL
+     * Set secureModeRedirectURL.
      *
      * @param string $secureModeRedirectURL
      *
@@ -418,7 +434,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get secureModeReturnURL
+     * Get secureModeReturnURL.
      *
      * @return string
      */
@@ -428,7 +444,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set secureModeReturnURL
+     * Set secureModeReturnURL.
      *
      * @param string $secureModeReturnURL
      *
@@ -441,7 +457,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get expirationDate
+     * Get expirationDate.
      *
      * @return string
      */
@@ -451,7 +467,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set expirationDate
+     * Set expirationDate.
      *
      * @param string $expirationDate
      *
@@ -464,7 +480,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get authorizationDate
+     * Get authorizationDate.
      *
      * @return string
      */
@@ -474,7 +490,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set authorizationDate
+     * Set authorizationDate.
      *
      * @param string $authorizationDate
      *
@@ -487,7 +503,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get paymentType
+     * Get paymentType.
      *
      * @return string
      */
@@ -497,7 +513,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set paymentType
+     * Set paymentType.
      *
      * @param string $paymentType
      *
@@ -510,7 +526,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get payInId
+     * Get payInId.
      *
      * @return string
      */
@@ -520,7 +536,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set payInId
+     * Set payInId.
      *
      * @param string $payInId
      *
@@ -534,7 +550,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Get mangoId
+     * Get mangoId.
      *
      * @return string
      */
@@ -544,7 +560,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set mangoId
+     * Set mangoId.
      *
      * @param string $mangoId
      *
@@ -557,7 +573,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get tag
+     * Get tag.
      *
      * @return string
      */
@@ -567,7 +583,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set tag
+     * Set tag.
      *
      * @param string $tag
      *
@@ -580,7 +596,7 @@ class CardPreAuthorisation
         return $this;
     }
     /**
-     * Get creationDate
+     * Get creationDate.
      *
      * @return string
      */
@@ -590,7 +606,7 @@ class CardPreAuthorisation
     }
 
     /**
-     * Set creationDate
+     * Set creationDate.
      *
      * @param string $creationDate
      *
@@ -602,5 +618,4 @@ class CardPreAuthorisation
 
         return $this;
     }
-
 }
