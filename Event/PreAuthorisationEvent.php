@@ -1,10 +1,10 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
-use AppVentus\MangopayBundle\Entity\Order;
 use MangoPay\CardPreAuthorization;
 use Symfony\Component\EventDispatcher\Event;
+use Troopers\MangopayBundle\Entity\Order;
 
 class PreAuthorisationEvent extends Event
 {
@@ -40,6 +40,7 @@ class PreAuthorisationEvent extends Event
 
         return $this;
     }
+
     /**
      * Get preAuth.
      *

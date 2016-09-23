@@ -1,16 +1,16 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\UserNatural;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\UserEvent;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
- * ref: appventus_mangopay.user_helper.
+ * ref: troopers_mangopay.user_helper.
  **/
 class UserHelper
 {
@@ -53,7 +53,7 @@ class UserHelper
         $mangoUser = $this->mangopayHelper->Users->Create($mangoUser);
 
         $event = new UserEvent($user, $mangoUser);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_USER, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_USER, $event);
 
         return $mangoUser;
     }

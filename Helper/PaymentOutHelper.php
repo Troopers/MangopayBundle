@@ -1,15 +1,15 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 use MangoPay\Money;
 use MangoPay\PayOut;
 use MangoPay\PayOutPaymentDetailsBankWire;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * ref: appventus_mangopay.payment_out_helper.
+ * ref: troopers_mangopay.payment_out_helper.
  **/
 class PaymentOutHelper
 {

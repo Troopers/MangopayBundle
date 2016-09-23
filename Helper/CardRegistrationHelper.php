@@ -1,14 +1,14 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 use Doctrine\ORM\EntityManager;
 use MangoPay\CardRegistration;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * ref: appventus_mangopay.card_registration_helper.
+ * ref: troopers_mangopay.card_registration_helper.
  **/
 class CardRegistrationHelper
 {

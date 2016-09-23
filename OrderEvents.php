@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle;
+namespace Troopers\MangopayBundle;
 
 final class OrderEvents
 {

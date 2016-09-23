@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Entity;
+namespace Troopers\MangopayBundle\Entity;
 
 /**
  * Defines mandatory methods a Transaction need to be used in Mango
