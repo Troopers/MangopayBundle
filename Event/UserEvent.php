@@ -1,10 +1,10 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
-use AppVentus\MangopayBundle\Entity\UserInterface;
 use MangoPay\User;
 use Symfony\Component\EventDispatcher\Event;
+use Troopers\MangopayBundle\Entity\UserInterface;
 
 class UserEvent extends Event
 {

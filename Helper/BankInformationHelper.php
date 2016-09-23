@@ -1,9 +1,9 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\Entity\BankInformationInterface;
-use AppVentus\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Entity\BankInformationInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
@@ -11,7 +11,7 @@ use MangoPay\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * ref: appventus_mangopay.bank_information_helper.
+ * ref: troopers_mangopay.bank_information_helper.
  **/
 class BankInformationHelper
 {

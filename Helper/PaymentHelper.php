@@ -1,15 +1,7 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\CardPreAuthorisation;
-use AppVentus\MangopayBundle\Entity\Order;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
-use AppVentus\MangopayBundle\Event\PayInEvent;
-use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
-use AppVentus\MangopayBundle\Exception\MongopayPayInCreationException;
 use MangoPay\CardPreAuthorization;
 use MangoPay\CardRegistration;
 use MangoPay\Money;
@@ -20,9 +12,17 @@ use MangoPay\User;
 use MangoPay\Wallet;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\CardRegistrationEvent;
+use Troopers\MangopayBundle\Event\PayInEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
- * ref: appventus_mangopay.payment_helper.
+ * ref: troopers_mangopay.payment_helper.
  **/
 class PaymentHelper
 {
@@ -45,17 +45,17 @@ class PaymentHelper
         $mangoCardRegistration = $this->mangopayHelper->CardRegistrations->create($cardRegistration);
 
         $event = new CardRegistrationEvent($cardRegistration);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_REGISTRATION, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_REGISTRATION, $event);
 
         $cardRegistrationURL = $mangoCardRegistration->CardRegistrationURL;
         $preregistrationData = $mangoCardRegistration->PreregistrationData;
         $accessKey = $mangoCardRegistration->AccessKey;
 
         $redirect = $this->router->generate(
-            'appventus_mangopaybundle_payment_finalize',
+            'troopers_mangopaybundle_payment_finalize',
             [
                 'orderId' => $order->getId(),
-                'cardId'  => $mangoCardRegistration->Id,
+                'cardId' => $mangoCardRegistration->Id,
             ]
         );
 
@@ -89,7 +89,7 @@ class PaymentHelper
         $updatedCardRegister = $this->mangopayHelper->CardRegistrations->Update($cardRegister);
 
         $event = new CardRegistrationEvent($updatedCardRegister);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::UPDATE_CARD_REGISTRATION, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::UPDATE_CARD_REGISTRATION, $event);
 
         return $updatedCardRegister;
     }
@@ -109,7 +109,7 @@ class PaymentHelper
 
         $cardPreAuthorisation->SecureMode = 'DEFAULT';
         $cardPreAuthorisation->SecureModeReturnURL = $this->router->generate(
-            'appventus_mangopaybundle_payment_finalize_secure',
+            'troopers_mangopaybundle_payment_finalize_secure',
             [
                 'orderId' => $order->getId(),
             ],
@@ -121,7 +121,7 @@ class PaymentHelper
         $preAuth = $this->mangopayHelper->CardPreAuthorizations->Create($cardPreAuthorisation);
 
         $event = new PreAuthorisationEvent($order, $preAuth);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_PREAUTHORISATION, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_PREAUTHORISATION, $event);
 
         return $preAuth;
     }
@@ -170,13 +170,13 @@ class PaymentHelper
 
         if (property_exists($payIn, 'Status') && $payIn->Status != 'FAILED') {
             $event = new PayInEvent($payIn);
-            $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_PAY_IN, $event);
+            $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_PAY_IN, $event);
 
             return $payIn;
         }
 
         $event = new PayInEvent($payIn);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::ERROR_PAY_IN, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::ERROR_PAY_IN, $event);
 
         throw new MongopayPayInCreationException($this->translator->trans(
             'mangopay.error.'.$payIn->ResultCode,
@@ -192,12 +192,12 @@ class PaymentHelper
             $this->mangopayHelper->CardPreAuthorizations->Update($mangoCardPreAuthorisation);
 
             $event = new PreAuthorisationEvent($order, $mangoCardPreAuthorisation);
-            $this->dispatcher->dispatch(AppVentusMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
+            $this->dispatcher->dispatch(TroopersMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
         }
     }
 
     public function generateSuccessUrl($orderId)
     {
-        return $this->router->generate('appventus_mangopaybundle_payment_success', ['orderId' => $orderId]);
+        return $this->router->generate('troopers_mangopaybundle_payment_success', ['orderId' => $orderId]);
     }
 }

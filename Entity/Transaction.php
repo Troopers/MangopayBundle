@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Entity;
+namespace Troopers\MangopayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;

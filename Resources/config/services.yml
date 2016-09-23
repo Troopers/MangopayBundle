@@ -1,87 +1,87 @@
 parameters:
-    appventus_mangopay.mango_api.class: "AppVentus\\MangopayBundle\\Helper\\MangopayHelper"
-    appventus_mangopay.payment_helper.class: "AppVentus\\MangopayBundle\\Helper\\PaymentHelper"
-    appventus_mangopay.card_registration_helper.class: "AppVentus\\MangopayBundle\\Helper\\CardRegistrationHelper"
-    appventus_mangopay.payment_direct_helper.class: "AppVentus\\MangopayBundle\\Helper\\PaymentDirectHelper"
-    appventus_mangopay.payment_out_helper.class: "AppVentus\\MangopayBundle\\Helper\\PaymentOutHelper"
-    appventus_mangopay.bankwire_helper.class: "AppVentus\\MangopayBundle\\Helper\\BankwireHelper"
-    appventus_mangopay.user_helper.class: "AppVentus\\MangopayBundle\\Helper\\UserHelper"
-    appventus_mangopay.bank_information_helper.class: "AppVentus\\MangopayBundle\\Helper\\BankInformationHelper"
-    appventus_mangopay.wallet_helper.class: "AppVentus\\MangopayBundle\\Helper\\WalletHelper"
-    appventus_mangopay.order.class: "AppVentus\\MangopayBundle\\Entity\\Order"
-    appventus_mangopay.form.card: "AppVentus\\MangopayBundle\\Form\\CardType"
+    troopers_mangopay.mango_api.class: "Troopers\\MangopayBundle\\Helper\\MangopayHelper"
+    troopers_mangopay.payment_helper.class: "Troopers\\MangopayBundle\\Helper\\PaymentHelper"
+    troopers_mangopay.card_registration_helper.class: "Troopers\\MangopayBundle\\Helper\\CardRegistrationHelper"
+    troopers_mangopay.payment_direct_helper.class: "Troopers\\MangopayBundle\\Helper\\PaymentDirectHelper"
+    troopers_mangopay.payment_out_helper.class: "Troopers\\MangopayBundle\\Helper\\PaymentOutHelper"
+    troopers_mangopay.bankwire_helper.class: "Troopers\\MangopayBundle\\Helper\\BankwireHelper"
+    troopers_mangopay.user_helper.class: "Troopers\\MangopayBundle\\Helper\\UserHelper"
+    troopers_mangopay.bank_information_helper.class: "Troopers\\MangopayBundle\\Helper\\BankInformationHelper"
+    troopers_mangopay.wallet_helper.class: "Troopers\\MangopayBundle\\Helper\\WalletHelper"
+    troopers_mangopay.order.class: "Troopers\\MangopayBundle\\Entity\\Order"
+    troopers_mangopay.form.card: "Troopers\\MangopayBundle\\Form\\CardType"
 
 services:
-    appventus_mangopay.mango_api:
-        class: %appventus_mangopay.mango_api.class%
+    troopers_mangopay.mango_api:
+        class: %troopers_mangopay.mango_api.class%
         arguments:
-            - %appventus_mangopay.client_id%
-            - %appventus_mangopay.client_password%
-            - %appventus_mangopay.base_url%
+            - %troopers_mangopay.client_id%
+            - %troopers_mangopay.client_password%
+            - %troopers_mangopay.base_url%
             - "@event_dispatcher"
             - "@doctrine.orm.entity_manager"
-            - %appventus_mangopay.debug_mode%
+            - %troopers_mangopay.debug_mode%
 
-    appventus_mangopay.user_helper:
-        class: %appventus_mangopay.user_helper.class%
+    troopers_mangopay.user_helper:
+        class: %troopers_mangopay.user_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
-    appventus_mangopay.bank_information_helper:
-        class: %appventus_mangopay.bank_information_helper.class%
+    troopers_mangopay.bank_information_helper:
+        class: %troopers_mangopay.bank_information_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
-            - "@appventus_mangopay.user_helper"
-    appventus_mangopay.wallet_helper:
-        class: %appventus_mangopay.wallet_helper.class%
+            - "@troopers_mangopay.user_helper"
+    troopers_mangopay.wallet_helper:
+        class: %troopers_mangopay.wallet_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
-            - "@appventus_mangopay.user_helper"
-            - "@doctrine.orm.entity_manager"
-            - "@event_dispatcher"
-    appventus_mangopay.card_registration_helper:
-        class: %appventus_mangopay.card_registration_helper.class%
-        arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
+            - "@troopers_mangopay.user_helper"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
-    appventus_mangopay.card_registration_helper:
-        class: %appventus_mangopay.card_registration_helper.class%
+    troopers_mangopay.card_registration_helper:
+        class: %troopers_mangopay.card_registration_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
-    appventus_mangopay.payment_helper:
-        class: %appventus_mangopay.payment_helper.class%
+    troopers_mangopay.card_registration_helper:
+        class: %troopers_mangopay.card_registration_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+    troopers_mangopay.payment_helper:
+        class: %troopers_mangopay.payment_helper.class%
+        arguments:
+            - "@troopers_mangopay.mango_api"
             - "@router"
             - "@event_dispatcher"
 
-    appventus_mangopay.payment_direct_helper:
-        class: %appventus_mangopay.payment_direct_helper.class%
+    troopers_mangopay.payment_direct_helper:
+        class: %troopers_mangopay.payment_direct_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
             - "@router"
             - "@event_dispatcher"
-    appventus_mangopay.bankwire_helper:
-        class: %appventus_mangopay.bankwire_helper.class%
+    troopers_mangopay.bankwire_helper:
+        class: %troopers_mangopay.bankwire_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
 
-    appventus_mangopay.payment_out_helper:
-        class: %appventus_mangopay.payment_out_helper.class%
+    troopers_mangopay.payment_out_helper:
+        class: %troopers_mangopay.payment_out_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
 
-    appventus_mangopay.payment_out_helper:
-        class: %appventus_mangopay.payment_out_helper.class%
+    troopers_mangopay.payment_out_helper:
+        class: %troopers_mangopay.payment_out_helper.class%
         arguments:
-            - "@appventus_mangopay.mango_api"
+            - "@troopers_mangopay.mango_api"
 
-    appventus_mangopay.form.card:
-        class: %appventus_mangopay.form.card%
+    troopers_mangopay.form.card:
+        class: %troopers_mangopay.form.card%
         tags:
             - { name: form.type }
