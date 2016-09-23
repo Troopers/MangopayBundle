@@ -13,75 +13,75 @@ parameters:
 
 services:
     troopers_mangopay.mango_api:
-        class: %troopers_mangopay.mango_api.class%
+        class: "%troopers_mangopay.mango_api.class%"
         arguments:
-            - %troopers_mangopay.client_id%
-            - %troopers_mangopay.client_password%
-            - %troopers_mangopay.base_url%
+            - "%troopers_mangopay.client_id%"
+            - "%troopers_mangopay.client_password%"
+            - "%troopers_mangopay.base_url%"
             - "@event_dispatcher"
             - "@doctrine.orm.entity_manager"
-            - %troopers_mangopay.debug_mode%
+            - "%troopers_mangopay.debug_mode%"
 
     troopers_mangopay.user_helper:
-        class: %troopers_mangopay.user_helper.class%
+        class: "%troopers_mangopay.user_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
     troopers_mangopay.bank_information_helper:
-        class: %troopers_mangopay.bank_information_helper.class%
+        class: "%troopers_mangopay.bank_information_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@troopers_mangopay.user_helper"
     troopers_mangopay.wallet_helper:
-        class: %troopers_mangopay.wallet_helper.class%
+        class: "%troopers_mangopay.wallet_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@troopers_mangopay.user_helper"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
     troopers_mangopay.card_registration_helper:
-        class: %troopers_mangopay.card_registration_helper.class%
+        class: "%troopers_mangopay.card_registration_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
     troopers_mangopay.card_registration_helper:
-        class: %troopers_mangopay.card_registration_helper.class%
+        class: "%troopers_mangopay.card_registration_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
     troopers_mangopay.payment_helper:
-        class: %troopers_mangopay.payment_helper.class%
+        class: "%troopers_mangopay.payment_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@router"
             - "@event_dispatcher"
 
     troopers_mangopay.payment_direct_helper:
-        class: %troopers_mangopay.payment_direct_helper.class%
+        class: "%troopers_mangopay.payment_direct_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
             - "@router"
             - "@event_dispatcher"
     troopers_mangopay.bankwire_helper:
-        class: %troopers_mangopay.bankwire_helper.class%
+        class: "%troopers_mangopay.bankwire_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
 
     troopers_mangopay.payment_out_helper:
-        class: %troopers_mangopay.payment_out_helper.class%
+        class: "%troopers_mangopay.payment_out_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
 
     troopers_mangopay.payment_out_helper:
-        class: %troopers_mangopay.payment_out_helper.class%
+        class: "%troopers_mangopay.payment_out_helper.class%"
         arguments:
             - "@troopers_mangopay.mango_api"
 
     troopers_mangopay.form.card:
-        class: %troopers_mangopay.form.card%
+        class: "%troopers_mangopay.form.card%"
         tags:
             - { name: form.type }
