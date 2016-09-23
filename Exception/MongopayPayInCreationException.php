@@ -1,8 +1,7 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Exception;
+namespace Troopers\MangopayBundle\Exception;
 
 class MongopayPayInCreationException extends \Exception implements MongopayExceptionInterfaceInterface
 {
-
 }

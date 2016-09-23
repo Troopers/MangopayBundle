@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
 use MangoPay\CardRegistration;
 use Symfony\Component\EventDispatcher\Event;
@@ -15,7 +15,7 @@ class CardRegistrationEvent extends Event
     }
 
     /**
-     * Get cardRegistration
+     * Get cardRegistration.
      *
      * @return string
      */
@@ -25,7 +25,7 @@ class CardRegistrationEvent extends Event
     }
 
     /**
-     * Set cardRegistration
+     * Set cardRegistration.
      *
      * @param string $cardRegistration
      *

@@ -1,14 +1,7 @@
 <?php
-namespace AppVentus\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\CardPreAuthorisation;
-use AppVentus\MangopayBundle\Entity\Order;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
-use AppVentus\MangopayBundle\Event\PayInEvent;
-use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
-use AppVentus\MangopayBundle\Exception\MongopayPayInCreationException;
+namespace Troopers\MangopayBundle\Helper;
+
 use MangoPay\CardPreAuthorization;
 use MangoPay\CardRegistration;
 use MangoPay\Money;
@@ -19,11 +12,17 @@ use MangoPay\User;
 use MangoPay\Wallet;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\CardRegistrationEvent;
+use Troopers\MangopayBundle\Event\PayInEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
- *
- * ref: appventus_mangopay.payment_helper
- *
+ * ref: troopers_mangopay.payment_helper.
  **/
 class PaymentHelper
 {
@@ -40,57 +39,57 @@ class PaymentHelper
 
     public function prepareCardRegistrationCallback(User $user, Order $order)
     {
-
         $cardRegistration = new CardRegistration();
         $cardRegistration->UserId = $user->Id;
-        $cardRegistration->Currency = "EUR";
+        $cardRegistration->Currency = 'EUR';
         $mangoCardRegistration = $this->mangopayHelper->CardRegistrations->create($cardRegistration);
 
         $event = new CardRegistrationEvent($cardRegistration);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_REGISTRATION, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_REGISTRATION, $event);
 
         $cardRegistrationURL = $mangoCardRegistration->CardRegistrationURL;
         $preregistrationData = $mangoCardRegistration->PreregistrationData;
         $accessKey = $mangoCardRegistration->AccessKey;
 
         $redirect = $this->router->generate(
-            'appventus_mangopaybundle_payment_finalize',
-            array(
+            'troopers_mangopaybundle_payment_finalize',
+            [
                 'orderId' => $order->getId(),
-                'cardId'  => $mangoCardRegistration->Id
-            )
+                'cardId'  => $mangoCardRegistration->Id,
+            ]
         );
 
         $successRedirect = $this->generateSuccessUrl();
 
-        return array(
+        return [
             'callback' => 'payAjaxOrRedirect("'
-                . $redirect . '", "'
-                . $redirect . '", "'
-                . $cardRegistrationURL . '", "'
-                . $preregistrationData . '", "'
-                . $accessKey . '", "'
-                . $successRedirect . '")',
-        );
+                .$redirect.'", "'
+                .$redirect.'", "'
+                .$cardRegistrationURL.'", "'
+                .$preregistrationData.'", "'
+                .$accessKey.'", "'
+                .$successRedirect.'")',
+        ];
     }
 
     /**
-     * Update card registration with token
-     * @param  string           $cardId
-     * @param  string           $data
-     * @param  string           $errorCode
+     * Update card registration with token.
+     *
+     * @param string $cardId
+     * @param string $data
+     * @param string $errorCode
+     *
      * @return CardRegistration
      */
     public function updateCardRegistration($cardId, $data, $errorCode)
     {
-
         $cardRegister = $this->mangopayHelper->CardRegistrations->Get($cardId);
-        $cardRegister->RegistrationData = $data ? "data=" . $data : "errorCode=" . $errorCode;
+        $cardRegister->RegistrationData = $data ? 'data='.$data : 'errorCode='.$errorCode;
 
         $updatedCardRegister = $this->mangopayHelper->CardRegistrations->Update($cardRegister);
 
         $event = new CardRegistrationEvent($updatedCardRegister);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::UPDATE_CARD_REGISTRATION, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::UPDATE_CARD_REGISTRATION, $event);
 
         return $updatedCardRegister;
     }
@@ -104,16 +103,16 @@ class PaymentHelper
         $cardPreAuthorisation->AuthorId = $user->getMangoUserId();
 
         $debitedFunds = new Money();
-        $debitedFunds->Currency = "EUR";
+        $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $order->getMangoPrice();
         $cardPreAuthorisation->DebitedFunds = $debitedFunds;
 
-        $cardPreAuthorisation->SecureMode = "DEFAULT";
+        $cardPreAuthorisation->SecureMode = 'DEFAULT';
         $cardPreAuthorisation->SecureModeReturnURL = $this->router->generate(
-            'appventus_mangopaybundle_payment_finalize_secure',
-            array(
+            'troopers_mangopaybundle_payment_finalize_secure',
+            [
                 'orderId' => $order->getId(),
-            ),
+            ],
             true
         );
 
@@ -122,17 +121,19 @@ class PaymentHelper
         $preAuth = $this->mangopayHelper->CardPreAuthorizations->Create($cardPreAuthorisation);
 
         $event = new PreAuthorisationEvent($order, $preAuth);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_PREAUTHORISATION, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_PREAUTHORISATION, $event);
 
         return $preAuth;
     }
+
     /**
-     * execute a pre authorisation
+     * execute a pre authorisation.
+     *
      * @param CardPreAuthorisation $preAuthorisation
      * @param UserInterface        $buyer
      * @param Wallet               $wallet
-     * @param integer              $feesAmount
-     * @param integer              $amount           0 to 100
+     * @param int                  $feesAmount
+     * @param int                  $amount           0 to 100
      *
      * @return PayIn
      */
@@ -142,9 +143,7 @@ class PaymentHelper
         Wallet $wallet,
         $feesAmount,
         $amount = null
-    )
-    {
-
+    ) {
         if (!$amount) {
             $amount = $preAuthorisation->getDebitedFunds();
         }
@@ -169,39 +168,36 @@ class PaymentHelper
 
         $payIn = $this->mangopayHelper->PayIns->Create($payIn);
 
-        if (property_exists($payIn, 'Status') && $payIn->Status != "FAILED") {
+        if (property_exists($payIn, 'Status') && $payIn->Status != 'FAILED') {
             $event = new PayInEvent($payIn);
-            $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_PAY_IN, $event);
+            $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_PAY_IN, $event);
 
-           return $payIn;
+            return $payIn;
         }
 
         $event = new PayInEvent($payIn);
-        $this->dispatcher->dispatch(AppVentusMangopayEvents::ERROR_PAY_IN, $event);
+        $this->dispatcher->dispatch(TroopersMangopayEvents::ERROR_PAY_IN, $event);
 
         throw new MongopayPayInCreationException($this->translator->trans(
-            'mangopay.error.'. $payIn->ResultCode,
+            'mangopay.error.'.$payIn->ResultCode,
             [], 'messages'
         ));
-
     }
 
     public function cancelPreAuthForOrder(Order $order, CardPreAuthorisation $preAuth)
     {
-        if ($preAuth->getPaymentStatus() == "WAITING") {
-
+        if ($preAuth->getPaymentStatus() == 'WAITING') {
             $mangoCardPreAuthorisation = $this->mangopayHelper->CardPreAuthorizations->Get($preAuth->getMangoId());
             $mangoCardPreAuthorisation->PaymentStatus = 'CANCELED';
             $this->mangopayHelper->CardPreAuthorizations->Update($mangoCardPreAuthorisation);
 
             $event = new PreAuthorisationEvent($order, $mangoCardPreAuthorisation);
-            $this->dispatcher->dispatch(AppVentusMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
+            $this->dispatcher->dispatch(TroopersMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
         }
     }
 
     public function generateSuccessUrl()
     {
-        return $this->router->generate('appventus_mangopaybundle_payment_success');
+        return $this->router->generate('troopers_mangopaybundle_payment_success');
     }
-
 }

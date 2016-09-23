@@ -1,30 +1,15 @@
 <?php
-namespace AppVentus\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\CardPreAuthorisation;
-use AppVentus\MangopayBundle\Entity\Order;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
-use AppVentus\MangopayBundle\Event\PayInEvent;
-use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
-use AppVentus\MangopayBundle\Exception\MongopayPayInCreationException;
-use MangoPay\CardPreAuthorization;
-use MangoPay\CardRegistration;
+namespace Troopers\MangopayBundle\Helper;
+
 use MangoPay\Money;
 use MangoPay\PayIn;
 use MangoPay\PayInExecutionDetailsDirect;
 use MangoPay\PayInPaymentDetailsBankWire;
-use MangoPay\PayInPaymentDetailsPreAuthorized;
-use MangoPay\User;
 use MangoPay\Wallet;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- *
- * ref: appventus_mangopay.bankwire_helper
- *
+ * ref: troopers_mangopay.bankwire_helper.
  **/
 class BankwireHelper
 {
@@ -36,7 +21,8 @@ class BankwireHelper
     }
 
     /**
-     * Create a bankWire as discribed here: https://docs.mangopay.com/endpoints/v2/payins#e288_the-direct-debit-web-payin-object
+     * Create a bankWire as discribed here: https://docs.mangopay.com/endpoints/v2/payins#e288_the-direct-debit-web-payin-object.
+     *
      * @param Wallet $wallet
      * @param        $authorId
      * @param        $creditedUserId
@@ -69,5 +55,4 @@ class BankwireHelper
 
         return $bankWire;
     }
-
 }

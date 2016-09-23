@@ -1,12 +1,12 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Entity;
+namespace Troopers\MangopayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * Transaction
+ * Transaction.
  *
  * @ORM\MappedSuperclass
  * @ORM\Entity
@@ -16,7 +16,7 @@ class Transaction implements TransactionInterface
     use TimestampableEntity;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -25,100 +25,113 @@ class Transaction implements TransactionInterface
     protected $id;
 
     /**
-     * Author Id
+     * Author Id.
+     *
      * @var int
      * @ORM\Column(name="authorId", type="integer")
      */
     protected $authorId;
 
     /**
-     * Credited user Id
+     * Credited user Id.
+     *
      * @var int
      * @ORM\Column(name="creditedUserId", type="integer")
      */
     protected $creditedUserId;
 
     /**
-     * Credited wallet Id
+     * Credited wallet Id.
+     *
      * @var int
      * @ORM\Column(name="creditedWalletId", type="integer")
      */
     protected $creditedWalletId;
 
     /**
-     * Debited funds
+     * Debited funds.
+     *
      * @var \MangoPay\Money
      * @ORM\Column(name="debitedFunds", type="integer")
      */
     protected $debitedFunds;
 
     /**
-     * Credited funds
+     * Credited funds.
+     *
      * @var \MangoPay\Money
      * @ORM\Column(name="creditedFunds", type="integer")
      */
     protected $creditedFunds;
 
     /**
-     * Fees
+     * Fees.
+     *
      * @var \MangoPay\Money
      * @ORM\Column(name="fees", type="integer")
      */
     protected $fees;
 
     /**
-     * TransactionStatus {CREATED, SUCCEEDED, FAILED}
+     * TransactionStatus {CREATED, SUCCEEDED, FAILED}.
+     *
      * @var string
      * @ORM\Column(name="status", type="string", length=255)
      */
     protected $status;
 
     /**
-     * Result code
+     * Result code.
+     *
      * @var string
      * @ORM\Column(name="resultCode", type="integer")
      */
     protected $resultCode;
 
     /**
-     * The PreAuthorization result Message explaining the result code
+     * The PreAuthorization result Message explaining the result code.
+     *
      * @var string
      * @ORM\Column(name="resultMessage", type="string", length=255)
      */
     protected $resultMessage;
 
     /**
-     * Execution date;
+     * Execution date;.
+     *
      * @var \DateTime
      * @ORM\Column(name="executionDate", type="datetime")
      */
     protected $executionDate;
 
     /**
-     * TransactionType {PAYIN, PAYOUT, TRANSFER}
+     * TransactionType {PAYIN, PAYOUT, TRANSFER}.
+     *
      * @var string
      * @ORM\Column(name="type", type="string", length=255)
      */
     protected $type;
 
     /**
-     * TransactionNature { REGULAR, REFUND, REPUDIATION }
+     * TransactionNature { REGULAR, REFUND, REPUDIATION }.
+     *
      * @var string
      * @ORM\Column(name="nature", type="string", length=255)
      */
     protected $nature;
 
     /**
-     * CardType { CB_VISA_MASTERCARD, MAESTRO, DINERS, P24″, MASTERPASS }
+     * CardType { CB_VISA_MASTERCARD, MAESTRO, DINERS, P24″, MASTERPASS }.
+     *
      * @var string
      * @ORM\Column(name="cardType", type="string", length=255)
      */
     protected $cardType;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     protected function getId()
     {
@@ -126,7 +139,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get authorId
+     * Get authorId.
      *
      * @return string
      */
@@ -136,7 +149,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set authorId
+     * Set authorId.
      *
      * @param string $authorId
      *
@@ -150,7 +163,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get creditedUserId
+     * Get creditedUserId.
      *
      * @return string
      */
@@ -160,7 +173,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set creditedUserId
+     * Set creditedUserId.
      *
      * @param string $creditedUserId
      *
@@ -174,7 +187,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get creditedWalletId
+     * Get creditedWalletId.
      *
      * @return string
      */
@@ -184,7 +197,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set creditedUserId
+     * Set creditedUserId.
      *
      * @param string $creditedWalletId
      *
@@ -198,7 +211,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get debitedFunds
+     * Get debitedFunds.
      *
      * @return string
      */
@@ -208,7 +221,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set debitedFunds
+     * Set debitedFunds.
      *
      * @param string $debitedFunds
      *
@@ -222,7 +235,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get creditedFunds
+     * Get creditedFunds.
      *
      * @return string
      */
@@ -232,7 +245,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set creditedFunds
+     * Set creditedFunds.
      *
      * @param string $creditedFunds
      *
@@ -246,7 +259,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get fees
+     * Get fees.
      *
      * @return string
      */
@@ -256,7 +269,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set fees
+     * Set fees.
      *
      * @param string $fees
      *
@@ -270,7 +283,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -280,7 +293,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -294,7 +307,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get resultCode
+     * Get resultCode.
      *
      * @return string
      */
@@ -304,7 +317,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set resultCode
+     * Set resultCode.
      *
      * @param string $resultCode
      *
@@ -318,7 +331,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get resultMessage
+     * Get resultMessage.
      *
      * @return string
      */
@@ -328,7 +341,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set resultMessage
+     * Set resultMessage.
      *
      * @param string $resultMessage
      *
@@ -342,7 +355,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get executionDate
+     * Get executionDate.
      *
      * @return string
      */
@@ -352,7 +365,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set executionDate
+     * Set executionDate.
      *
      * @param string $executionDate
      *
@@ -366,7 +379,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -376,7 +389,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
      *
@@ -390,7 +403,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get nature
+     * Get nature.
      *
      * @return string
      */
@@ -400,7 +413,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set nature
+     * Set nature.
      *
      * @param string $nature
      *
@@ -414,7 +427,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Get card type
+     * Get card type.
      *
      * @return string
      */
@@ -424,7 +437,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set card type
+     * Set card type.
      *
      * @param string $cardType
      *

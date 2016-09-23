@@ -1,9 +1,9 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
-use AppVentus\MangopayBundle\Entity\Order;
 use Symfony\Component\EventDispatcher\Event;
+use Troopers\MangopayBundle\Entity\Order;
 
 class OrderEvent extends Event
 {
@@ -22,6 +22,7 @@ class OrderEvent extends Event
     public function setOrder(Order $order)
     {
         $this->order = $order;
+
         return $this;
     }
 }
