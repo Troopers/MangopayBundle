@@ -2,12 +2,12 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\UserNatural;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\UserEvent;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
  * ref: troopers_mangopay.user_helper.
@@ -35,6 +35,7 @@ class UserHelper
 
         return $mangoUser;
     }
+
     public function createMangoUser(UserInterface $user)
     {
         $mangoUser = new UserNatural();

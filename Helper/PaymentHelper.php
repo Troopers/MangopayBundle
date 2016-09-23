@@ -2,14 +2,6 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
-use Troopers\MangopayBundle\Entity\Order;
-use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Event\CardRegistrationEvent;
-use Troopers\MangopayBundle\Event\PayInEvent;
-use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
-use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
 use MangoPay\CardPreAuthorization;
 use MangoPay\CardRegistration;
 use MangoPay\Money;
@@ -20,6 +12,14 @@ use MangoPay\User;
 use MangoPay\Wallet;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\CardRegistrationEvent;
+use Troopers\MangopayBundle\Event\PayInEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
  * ref: troopers_mangopay.payment_helper.
@@ -53,15 +53,15 @@ class PaymentHelper
 
         $redirect = $this->router->generate(
             'troopers_mangopaybundle_payment_finalize',
-            array(
+            [
                 'orderId' => $order->getId(),
-                'cardId' => $mangoCardRegistration->Id,
-            )
+                'cardId'  => $mangoCardRegistration->Id,
+            ]
         );
 
         $successRedirect = $this->generateSuccessUrl();
 
-        return array(
+        return [
             'callback' => 'payAjaxOrRedirect("'
                 .$redirect.'", "'
                 .$redirect.'", "'
@@ -69,7 +69,7 @@ class PaymentHelper
                 .$preregistrationData.'", "'
                 .$accessKey.'", "'
                 .$successRedirect.'")',
-        );
+        ];
     }
 
     /**
@@ -110,9 +110,9 @@ class PaymentHelper
         $cardPreAuthorisation->SecureMode = 'DEFAULT';
         $cardPreAuthorisation->SecureModeReturnURL = $this->router->generate(
             'troopers_mangopaybundle_payment_finalize_secure',
-            array(
+            [
                 'orderId' => $order->getId(),
-            ),
+            ],
             true
         );
 
@@ -125,6 +125,7 @@ class PaymentHelper
 
         return $preAuth;
     }
+
     /**
      * execute a pre authorisation.
      *

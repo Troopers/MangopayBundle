@@ -2,10 +2,10 @@
 
 namespace Troopers\MangopayBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -25,9 +25,9 @@ class TroopersMangopayExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('troopers_mangopay.debug_mode',       $config['debug_mode'] === true);
-        $container->setParameter('troopers_mangopay.client_id',        $config['client_id']);
-        $container->setParameter('troopers_mangopay.client_password',  $config['client_password']);
-        $container->setParameter('troopers_mangopay.base_url',         $config['base_url']);
+        $container->setParameter('troopers_mangopay.debug_mode', $config['debug_mode'] === true);
+        $container->setParameter('troopers_mangopay.client_id', $config['client_id']);
+        $container->setParameter('troopers_mangopay.client_password', $config['client_password']);
+        $container->setParameter('troopers_mangopay.base_url', $config['base_url']);
     }
 }

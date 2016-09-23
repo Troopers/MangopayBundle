@@ -2,8 +2,8 @@
 
 namespace Troopers\MangopayBundle\Event;
 
-use Troopers\MangopayBundle\Entity\Order;
 use Symfony\Component\EventDispatcher\Event;
+use Troopers\MangopayBundle\Entity\Order;
 
 class OrderEvent extends Event
 {

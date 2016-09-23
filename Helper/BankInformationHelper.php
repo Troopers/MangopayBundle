@@ -2,10 +2,10 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\Entity\BankInformationInterface;
 use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
+use Troopers\MangopayBundle\Entity\BankInformationInterface;
 
 /**
  * ref: troopers_mangopay.bank_information_helper.

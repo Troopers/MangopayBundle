@@ -2,18 +2,18 @@
 
 namespace Troopers\MangopayBundle\Controller;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\Order;
-use Troopers\MangopayBundle\Event\OrderEvent;
-use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
-use Troopers\MangopayBundle\Form\CardType;
-use Troopers\MangopayBundle\OrderEvents;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Event\OrderEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Form\CardType;
+use Troopers\MangopayBundle\OrderEvents;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
  * Manage payment.
@@ -52,10 +52,10 @@ class PaymentController extends Controller
 
         return $this->render(
             'TroopersMangopayBundle::cardPayment.html.twig',
-            array(
-                'form' => $form->createView(),
+            [
+                'form'  => $form->createView(),
                 'order' => $order,
-            )
+            ]
         );
     }
 
@@ -90,10 +90,10 @@ class PaymentController extends Controller
                 || $updatedCardRegister->Status == 'ERROR') {
             $errorMessage = $this->get('translator')->trans('mangopay.error.'.$updatedCardRegister->ResultCode);
 
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'success' => false,
                 'message' => $errorMessage,
-            ));
+            ]);
         }
 
         // Create a PayIn
@@ -103,17 +103,17 @@ class PaymentController extends Controller
         if ((property_exists($preAuth, 'Code') && $preAuth->Code !== 200) || $preAuth->Status == 'FAILED') {
             $errorMessage = $this->get('translator')->trans('mangopay.error.'.$preAuth->ResultCode);
 
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'success' => false,
                 'message' => $errorMessage,
-            ));
+            ]);
         }
         // Handle secure mode
         if (property_exists($preAuth, 'SecureModeNeeded') && $preAuth->SecureModeNeeded == 1) {
-            return new JsonResponse(array(
-                'success' => true,
+            return new JsonResponse([
+                'success'  => true,
                 'redirect' => $preAuth->SecureModeRedirectURL,
-            ));
+            ]);
         }
 
         // store payin transaction
@@ -134,9 +134,9 @@ class PaymentController extends Controller
             $this->get('translator')->trans('troopers_mangopay.alert.pre_authorisation.success')
         );
 
-        return new JsonResponse(array(
+        return new JsonResponse([
             'success' => true,
-        ));
+        ]);
     }
 
     /**

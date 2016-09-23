@@ -2,11 +2,11 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\Entity\TransactionInterface;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\TransactionInterface;
 
 /**
  * ref: troopers_mangopay.payment_direct_helper.

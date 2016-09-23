@@ -203,6 +203,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get debitedFunds.
      *
@@ -226,6 +227,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get status.
      *
@@ -249,6 +251,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get paymentStatus.
      *
@@ -272,6 +275,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get resultCode.
      *
@@ -295,6 +299,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get resultMessage.
      *
@@ -318,6 +323,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get executionType.
      *
@@ -341,6 +347,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get secureMode.
      *
@@ -364,6 +371,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get cardId.
      *
@@ -387,6 +395,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get secureModeNeeded.
      *
@@ -410,6 +419,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get secureModeRedirectURL.
      *
@@ -433,6 +443,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get secureModeReturnURL.
      *
@@ -456,6 +467,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get expirationDate.
      *
@@ -479,6 +491,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get authorizationDate.
      *
@@ -502,6 +515,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get paymentType.
      *
@@ -525,6 +539,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get payInId.
      *
@@ -572,6 +587,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get tag.
      *
@@ -595,6 +611,7 @@ class CardPreAuthorisation
 
         return $this;
     }
+
     /**
      * Get creationDate.
      *

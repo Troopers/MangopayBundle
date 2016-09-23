@@ -2,9 +2,9 @@
 
 namespace Troopers\MangopayBundle\Event;
 
-use Troopers\MangopayBundle\Entity\UserInterface;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\Event;
+use Troopers\MangopayBundle\Entity\UserInterface;
 
 class WalletEvent extends Event
 {

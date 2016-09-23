@@ -2,12 +2,12 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Event\WalletEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\WalletEvent;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
  * ref: troopers_mangopay.wallet_helper.
@@ -49,7 +49,7 @@ class WalletHelper
     {
         $mangoUser = $this->userHelper->findOrCreateMangoUser($user);
         $mangoWallet = new Wallet();
-        $mangoWallet->Owners = array($mangoUser->Id);
+        $mangoWallet->Owners = [$mangoUser->Id];
         $mangoWallet->Currency = 'EUR';
         $mangoWallet->Description = $description;
 
