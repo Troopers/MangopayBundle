@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
 use MangoPay\PayIn;
 use Symfony\Component\EventDispatcher\Event;

@@ -1,27 +1,27 @@
 {
-    "name": "appventus/mangopay-bundle",
+    "name": "troopers/mangopay-bundle",
     "type": "symfony-bundle",
     "description": "This Bundle include Mangopay php sdk as a service",
     "keywords": ["mangopay"],
-    "homepage": "http://appventus.com",
+    "homepage": "http://troopers.agency",
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
         {
             "name": "Paul Andrieux",
-            "homepage": "https://appventus.com"
+            "homepage": "https://troopers.agency"
         }
     ],
     "require": {
         "php"                       : ">=5.0.0",
         "symfony/framework-bundle"  : ">=2.3",
         "mangopay/php-sdk-v2"       : "v2.0",
-        "appventus/ajax-bundle"     : "*"
+        "troopers/ajax-bundle"     : "*"
     },
 
     "autoload": {
-        "psr-0": { "AppVentus\\MangopayBundle": "" }
+        "psr-0": { "Troopers\\MangopayBundle": "" }
     },
 
-    "target-dir": "AppVentus/MangopayBundle"
+    "target-dir": "Troopers/MangopayBundle"
 }

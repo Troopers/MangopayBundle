@@ -1,7 +1,7 @@
 <?php
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\Entity\TransactionInterface;
+use Troopers\MangopayBundle\Entity\TransactionInterface;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  *
- * ref: appventus_mangopay.payment_direct_helper
+ * ref: troopers_mangopay.payment_direct_helper
  *
  **/
 class PaymentDirectHelper
@@ -64,7 +64,7 @@ class PaymentDirectHelper
 
         //TODO
 //        $event = new CardRegistrationEvent($cardRegistration);
-//        $this->dispatcher->dispatch(AppVentusMangopayEvents::NEW_CARD_REGISTRATION, $event);
+//        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_REGISTRATION, $event);
 
         return $mangoPayTransaction;
     }

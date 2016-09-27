@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Tests\Controller;
+namespace Troopers\MangopayBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

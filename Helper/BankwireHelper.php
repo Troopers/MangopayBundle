@@ -1,14 +1,14 @@
 <?php
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\CardPreAuthorisation;
-use AppVentus\MangopayBundle\Entity\Order;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\CardRegistrationEvent;
-use AppVentus\MangopayBundle\Event\PayInEvent;
-use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
-use AppVentus\MangopayBundle\Exception\MongopayPayInCreationException;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
+use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\CardRegistrationEvent;
+use Troopers\MangopayBundle\Event\PayInEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
 use MangoPay\CardPreAuthorization;
 use MangoPay\CardRegistration;
 use MangoPay\Money;
@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  *
- * ref: appventus_mangopay.bankwire_helper
+ * ref: troopers_mangopay.bankwire_helper
  *
  **/
 class BankwireHelper

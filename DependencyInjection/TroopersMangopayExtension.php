@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\DependencyInjection;
+namespace Troopers\MangopayBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class AppVentusMangopayExtension extends Extension
+class TroopersMangopayExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -25,9 +25,9 @@ class AppVentusMangopayExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         
-        $container->setParameter('appventus_mangopay.debug_mode',       $config['debug_mode'] === true);
-        $container->setParameter('appventus_mangopay.client_id',        $config['client_id']);
-        $container->setParameter('appventus_mangopay.client_password',  $config['client_password']);
-        $container->setParameter('appventus_mangopay.base_url',         $config['base_url']);
+        $container->setParameter('Troopers_mangopay.debug_mode',       $config['debug_mode'] === true);
+        $container->setParameter('Troopers_mangopay.client_id',        $config['client_id']);
+        $container->setParameter('Troopers_mangopay.client_password',  $config['client_password']);
+        $container->setParameter('Troopers_mangopay.base_url',         $config['base_url']);
     }
 }

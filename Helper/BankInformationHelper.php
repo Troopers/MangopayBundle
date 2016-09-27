@@ -1,10 +1,10 @@
 <?php
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\BankInformationInterface;
-use AppVentus\MangopayBundle\Entity\UserInterface;
-use AppVentus\MangopayBundle\Event\UserEvent;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
+use Troopers\MangopayBundle\Entity\BankInformationInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  *
- * ref: appventus_mangopay.bank_information_helper
+ * ref: troopers_mangopay.bank_information_helper
  *
  **/
 class BankInformationHelper

@@ -20,7 +20,7 @@
             <div class="panel panel-default" id="payment-info-panel">
                 <div class="panel-body">
                     <p>
-                        {{ 'appventus.mangopay.payment_page.info_block'|trans }}
+                        {{ 'troopers.mangopay.payment_page.info_block'|trans }}
                     </p>
                 </div>
             </div>
@@ -73,13 +73,13 @@
                                 </div>
 
                                 <p class="small">
-                                    {{ 'appventus.mangopay.payment_page.helper_block'|trans }}
+                                    {{ 'troopers.mangopay.payment_page.helper_block'|trans }}
                                 </p>
                             </div>
                         </div>
 
 
-                        <form action="{{ path('appventus_mangopaybundle_payment_new', {order: order.id}) }}" data-toggle="ajax" id="card-form" method="POST">
+                        <form action="{{ path('troopers_mangopaybundle_payment_new', {order: order.id}) }}" data-toggle="ajax" id="card-form" method="POST">
                             {{ form_rest(form) }}
                         </form>
                     </div>
@@ -88,32 +88,32 @@
             </div>
 
             <div class="panel panel-default text-center" id="payment-mangoCredit">
-                <img src="/bundles/appventusmangopay/img/mango-frise.png" alt="Powered by Mango Pay">
+                <img src="/bundles/troopersmangopay/img/mango-frise.png" alt="Powered by Mango Pay">
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        $("#appventus_mangopay_card_expiry_month, #appventus_mangopay_card_expiry_year").on('change', function(e) {
+        $("#troopers_mangopay_card_expiry_month, #troopers_mangopay_card_expiry_year").on('change', function(e) {
             if ($(this).val().length < 2) {
                 $(this).val("0" + $(this).val());
             }
         });
 
         $('input').keypress(function() {
-            if ($('#appventus_mangopaybundle_card_type_ccv').val()) {
+            if ($('#troopers_mangopaybundle_card_type_ccv').val()) {
                 $("#payment-process .vertical-breadcrumb > .item").eq(2).addClass('-active');
             }
 
             if (
-                $('#appventus_mangopaybundle_card_type_cardHolder').val() &&
-                $('#appventus_mangopaybundle_card_type_cardExpiryMonth').val() &&
-                $('#appventus_mangopaybundle_card_type_cardExpiryYear').val()
+                $('#troopers_mangopaybundle_card_type_cardHolder').val() &&
+                $('#troopers_mangopaybundle_card_type_cardExpiryMonth').val() &&
+                $('#troopers_mangopaybundle_card_type_cardExpiryYear').val()
             ) {
                 $("#payment-process .vertical-breadcrumb > .item").eq(1).addClass('-active');
             }
 
-            if ($('#appventus_mangopaybundle_card_type_cardNumber').val()) {
+            if ($('#troopers_mangopaybundle_card_type_cardNumber').val()) {
                 $("#payment-process .vertical-breadcrumb > .item").eq(0).addClass('-active');
             };
         });
@@ -121,7 +121,7 @@
 </div>
 
 {% javascripts
-    '@AppVentusMangopayBundle/Resources/js/mangopay.js'
+    '@TroopersMangopayBundle/Resources/js/mangopay.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
