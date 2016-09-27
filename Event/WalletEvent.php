@@ -1,8 +1,8 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Event;
+namespace Troopers\MangopayBundle\Event;
 
-use AppVentus\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\Event;
 

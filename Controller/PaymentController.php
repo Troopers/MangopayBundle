@@ -1,13 +1,13 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Controller;
+namespace Troopers\MangopayBundle\Controller;
 
-use AppVentus\MangopayBundle\AppVentusMangopayEvents;
-use AppVentus\MangopayBundle\Entity\Order;
-use AppVentus\MangopayBundle\Event\OrderEvent;
-use AppVentus\MangopayBundle\Event\PreAuthorisationEvent;
-use AppVentus\MangopayBundle\Form\CardType;
-use AppVentus\MangopayBundle\OrderEvents;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Event\OrderEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Form\CardType;
+use Troopers\MangopayBundle\OrderEvents;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,12 +25,12 @@ class PaymentController extends Controller
     /**
      * Create a payment.
      *
-     * @Route("/new/{order}", name="appventus_mangopaybundle_payment_new", defaults={"order" = null, "type" = "card"})
+     * @Route("/new/{order}", name="troopers_mangopaybundle_payment_new", defaults={"order" = null, "type" = "card"})
      **/
     public function newAction(Request $request, $order)
     {
         $orderRepository = $this->getDoctrine()->getManager()
-            ->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
+            ->getRepository($this->container->getParameter('troopers_mangopay.order.class'));
         $order = $orderRepository->findOneById($order);
         if (!$order instanceof Order) {
             throw $this->createNotFoundException('Order not found');
@@ -41,17 +41,17 @@ class PaymentController extends Controller
 
         if ($form->isValid()) {
             //find or create a mango user
-            $mangoUser = $this->container->get('appventus_mangopay.user_helper')
+            $mangoUser = $this->container->get('troopers_mangopay.user_helper')
                 ->findOrCreateMangoUser($this->getUser());
             //create a cardRegistration
-            $callback = $this->container->get('appventus_mangopay.payment_helper')
+            $callback = $this->container->get('troopers_mangopay.payment_helper')
                 ->prepareCardRegistrationCallback($mangoUser, $order);
             //return js callback
             return new JsonResponse($callback);
         }
 
         return $this->render(
-            'AppVentusMangopayBundle::cardPayment.html.twig',
+            'TroopersMangopayBundle::cardPayment.html.twig',
             [
                 'form'  => $form->createView(),
                 'order' => $order,
@@ -68,20 +68,20 @@ class PaymentController extends Controller
      * It creates a PreAuthorisation with reservation price, and store its id in the Reservation.
      * When the owner will accept the reservation, we will be able to fetch the PreAuthorisation and create the PayIn
      *
-     * @Route("/finalize/{orderId}/{cardId}", name="appventus_mangopaybundle_payment_finalize")
+     * @Route("/finalize/{orderId}/{cardId}", name="troopers_mangopaybundle_payment_finalize")
      *
      * @return JsonResponse return json
      */
     public function paymentFinalizeAction(Request $request, $orderId, $cardId)
     {
         $em = $this->getDoctrine()->getManager();
-        $orderRepository = $em->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
+        $orderRepository = $em->getRepository($this->container->getParameter('troopers_mangopay.order.class'));
         $order = $orderRepository->findOneById($orderId);
 
         $data = $request->get('data');
         $errorCode = $request->get('errorCode');
 
-        $paymentHelper = $this->container->get('appventus_mangopay.payment_helper');
+        $paymentHelper = $this->container->get('troopers_mangopay.payment_helper');
         $updatedCardRegister = $paymentHelper->updateCardRegistration($cardId, $data, $errorCode);
 
         // Handle error
@@ -118,7 +118,7 @@ class PaymentController extends Controller
 
         // store payin transaction
         $event = new PreAuthorisationEvent($order, $preAuth);
-        $this->get('event_dispatcher')->dispatch(AppVentusMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
+        $this->get('event_dispatcher')->dispatch(TroopersMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
 
         $event = new OrderEvent($order);
         $this->get('event_dispatcher')->dispatch(OrderEvents::ORDER_CREATED, $event);
@@ -131,7 +131,7 @@ class PaymentController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
+            $this->get('translator')->trans('troopers_mangopay.alert.pre_authorisation.success')
         );
 
         return new JsonResponse([
@@ -145,16 +145,16 @@ class PaymentController extends Controller
      *
      * This method is called by paymentFinalizeActionif 3dsecure is required. 3DSecure is needed when 250€ are reached
      *
-     * @Route("/finalize-secure/{orderId}", name="appventus_mangopaybundle_payment_finalize_secure")
+     * @Route("/finalize-secure/{orderId}", name="troopers_mangopaybundle_payment_finalize_secure")
      *
      * @return RedirectResponse
      */
     public function paymentFinalizeSecureAction(Request $request, $orderId)
     {
         $em = $this->getDoctrine()->getManager();
-        $orderRepository = $em->getRepository($this->container->getParameter('appventus_mangopay.order.class'));
+        $orderRepository = $em->getRepository($this->container->getParameter('troopers_mangopay.order.class'));
         $order = $orderRepository->findOneById($orderId);
-        $mangopayApi = $this->container->get('appventus_mangopay.mango_api');
+        $mangopayApi = $this->container->get('troopers_mangopay.mango_api');
 
         $preAuthId = $request->get('preAuthorizationId');
 
@@ -178,7 +178,7 @@ class PaymentController extends Controller
         }
 
         $event = new PreAuthorisationEvent($order, $preAuth);
-        $this->get('event_dispatcher')->dispatch(AppVentusMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
+        $this->get('event_dispatcher')->dispatch(TroopersMangopayEvents::UPDATE_CARD_PREAUTHORISATION, $event);
 
         $event = new OrderEvent($order);
         $this->get('event_dispatcher')->dispatch(OrderEvents::ORDER_CREATED, $event);
@@ -190,10 +190,10 @@ class PaymentController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            $this->get('translator')->trans('appventus_mangopay.alert.pre_authorisation.success')
+            $this->get('translator')->trans('troopers_mangopay.alert.pre_authorisation.success')
         );
 
-        return $this->redirect($this->get('appventus_mangopay.payment_helper')->generateSuccessUrl($orderId));
+        return $this->redirect($this->get('troopers_mangopay.payment_helper')->generateSuccessUrl($orderId));
     }
 
     /**
@@ -202,14 +202,14 @@ class PaymentController extends Controller
      *
      * This method shows the congratulations
      *
-     * @Route("/success/{orderId}", name="appventus_mangopaybundle_payment_success")
+     * @Route("/success/{orderId}", name="troopers_mangopaybundle_payment_success")
      *
      * @return Response
      */
     public function successAction(Request $request, $orderId)
     {
         return $this->render(
-            'AppVentusMangopayBundle::success.html.twig',
+            'TroopersMangopayBundle::success.html.twig',
             ['orderId' => $orderId]
         );
     }

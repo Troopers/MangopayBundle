@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Helper;
+namespace Troopers\MangopayBundle\Helper;
 
 use Doctrine\ORM\EntityManager;
 use MangoPay\MangoPayApi;
@@ -11,7 +11,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * It is declared as a service with application wide "clientId", "clientPassword" and "baseUrl" parameters
  * This service provides some shortcuts to interact with the api
  *
- * ref: appventus_mangopay.mango_api
+ * ref: troopers_mangopay.mango_api
  *
  **/
 class MangopayHelper extends MangoPayApi

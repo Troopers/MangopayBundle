@@ -1,6 +1,6 @@
 <?php
 
-namespace AppVentus\MangopayBundle\Entity;
+namespace Troopers\MangopayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -57,7 +57,7 @@ class Order
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="AppVentus\MangopayBundle\Entity\Transaction", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Troopers\MangopayBundle\Entity\Transaction", cascade={"remove"})
      */
     protected $payinTransaction;
 
