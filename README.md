@@ -9,8 +9,8 @@ MangopayBundle
 
 This bundle provides integration of the official [SDK PHP for Mangopay api V2](https://github.com/Mangopay/mangopay2-php-sdk) into Symfony.
 
-- This branch does support the [v2.01 API version](https://docs.mangopay.com/endpoints/v2.01).
-- The v1 branch does support the [v2 API version](https://docs.mangopay.com/endpoints/v2).
+- This branch does support the [v2 API version](https://docs.mangopay.com/endpoints/v2).
+- The v1 branch does support the [v2.01 API version](https://docs.mangopay.com/endpoints/v2.01).
 
 Configuration
 ---
