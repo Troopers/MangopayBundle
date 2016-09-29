@@ -23,6 +23,10 @@
     "autoload": {
         "psr-0": { "Troopers\\MangopayBundle": "" }
     },
-
+    "extra": {
+        "branch-alias": {
+            "dev-master": "v2.x-dev"
+        }
+    },
     "target-dir": "Troopers/MangopayBundle"
 }
