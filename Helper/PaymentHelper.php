@@ -55,7 +55,7 @@ class PaymentHelper
             'troopers_mangopaybundle_payment_finalize',
             [
                 'orderId' => $order->getId(),
-                'cardId' => $mangoCardRegistration->Id,
+                'cardId'  => $mangoCardRegistration->Id,
             ]
         );
 
