@@ -2,14 +2,14 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\Entity\Transaction;
-use Troopers\MangopayBundle\Entity\TransactionInterface;
-use Troopers\MangopayBundle\Entity\UserInterface;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Troopers\MangopayBundle\Entity\Transaction;
+use Troopers\MangopayBundle\Entity\TransactionInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 
 /**
  * ref: troopers_mangopay.payment_direct_helper.

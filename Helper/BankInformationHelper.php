@@ -2,13 +2,13 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\Entity\BankInformationInterface;
-use Troopers\MangopayBundle\Entity\UserInterface;
 use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
 use MangoPay\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Troopers\MangopayBundle\Entity\BankInformationInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 
 /**
  * ref: troopers_mangopay.bank_information_helper.
@@ -73,7 +73,7 @@ class BankInformationHelper
         $userAddress = $user->getAddress();
         $city = $user->getCity();
         $postalCode = $user->getPostalCode();
-        if (null == $userAddress || null ==  $city || null == $postalCode) {
+        if (null == $userAddress || null == $city || null == $postalCode) {
             throw new NotFoundHttpException(sprintf('address, city or postalCode missing for User id : %s', $user->getId()));
         }
         $address->AddressLine1 = $userAddress;

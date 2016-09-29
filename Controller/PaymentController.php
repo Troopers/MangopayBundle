@@ -53,7 +53,7 @@ class PaymentController extends Controller
         return $this->render(
             'TroopersMangopayBundle::cardPayment.html.twig',
             [
-                'form' => $form->createView(),
+                'form'  => $form->createView(),
                 'order' => $order,
             ]
         );
@@ -111,7 +111,7 @@ class PaymentController extends Controller
         // Handle secure mode
         if (property_exists($preAuth, 'SecureModeNeeded') && $preAuth->SecureModeNeeded == 1) {
             return new JsonResponse([
-                'success' => true,
+                'success'  => true,
                 'redirect' => $preAuth->SecureModeRedirectURL,
             ]);
         }

@@ -2,10 +2,10 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\Entity\UserInterface;
 use Doctrine\ORM\EntityManager;
 use MangoPay\CardRegistration;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
 
 /**
  * ref: troopers_mangopay.card_registration_helper.
