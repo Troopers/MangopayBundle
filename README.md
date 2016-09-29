@@ -1,7 +1,5 @@
 [![Troopers](https://cloud.githubusercontent.com/assets/618536/18787530/83cf424e-81a3-11e6-8f66-cde3ec5fa82a.png)](http://troopers.agency)
 
-
-[![License](https://img.shields.io/packagist/l/troopers/mangopay-bundle.svg)](https://packagist.org/packages/troopers/mangopay-bundle)
 [![Version](https://img.shields.io/packagist/v/troopers/mangopay-bundle.svg)](https://packagist.org/packages/troopers/mangopay-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/4896b24c-74ee-4506-8c4c-842a9c660b66/mini.png)](https://insight.sensiolabs.com/projects/4896b24c-74ee-4506-8c4c-842a9c660b66)
 =============
@@ -11,6 +9,8 @@ MangopayBundle
 
 This bundle provides integration of the official [SDK PHP for Mangopay api V2](https://github.com/Mangopay/mangopay2-php-sdk) into Symfony.
 
+- This branch does support the [v2.01 API version](https://docs.mangopay.com/endpoints/v2.01).
+- The v1 branch does support the [v2 API version](https://docs.mangopay.com/endpoints/v2).
 
 Configuration
 ---
