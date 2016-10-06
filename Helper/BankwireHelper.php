@@ -1,4 +1,5 @@
 <?php
+
 namespace Troopers\MangopayBundle\Helper;
 
 use MangoPay\Money;
@@ -8,9 +9,7 @@ use MangoPay\PayInPaymentDetailsBankWire;
 use MangoPay\Wallet;
 
 /**
- *
- * ref: troopers_mangopay.bankwire_helper
- *
+ * ref: troopers_mangopay.bankwire_helper.
  **/
 class BankwireHelper
 {
@@ -22,7 +21,8 @@ class BankwireHelper
     }
 
     /**
-     * Create a bankWire as discribed here: https://docs.mangopay.com/endpoints/v2/payins#e288_the-direct-debit-web-payin-object
+     * Create a bankWire as discribed here: https://docs.mangopay.com/endpoints/v2/payins#e288_the-direct-debit-web-payin-object.
+     *
      * @param Wallet $wallet
      * @param        $authorId
      * @param        $creditedUserId
@@ -55,5 +55,4 @@ class BankwireHelper
 
         return $bankWire;
     }
-
 }

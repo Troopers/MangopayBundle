@@ -1,17 +1,16 @@
 <?php
+
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Event\WalletEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Event\WalletEvent;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
- *
- * ref: troopers_mangopay.wallet_helper
- *
+ * ref: troopers_mangopay.wallet_helper.
  **/
 class WalletHelper
 {
@@ -30,12 +29,12 @@ class WalletHelper
 
     /**
      * @param UserInterface $user
-     * @param string $description
+     * @param string        $description
+     *
      * @return Wallet
      */
     public function findOrCreateWallet(UserInterface $user, $description = 'current wallet')
     {
-
         if ($user->getMangoWalletId()) {
             $wallet = $this->mangopayHelper->Wallets->get($user->getMangoWalletId());
         // else, create a new mango user
@@ -50,8 +49,8 @@ class WalletHelper
     {
         $mangoUser = $this->userHelper->findOrCreateMangoUser($user);
         $mangoWallet = new Wallet();
-        $mangoWallet->Owners = array($mangoUser->Id);
-        $mangoWallet->Currency = "EUR";
+        $mangoWallet->Owners = [$mangoUser->Id];
+        $mangoWallet->Currency = 'EUR';
         $mangoWallet->Description = $description;
 
         $mangoWallet = $this->mangopayHelper->Wallets->create($mangoWallet);
@@ -61,5 +60,4 @@ class WalletHelper
 
         return $mangoWallet;
     }
-
 }
