@@ -7,7 +7,7 @@ use MangoPay\MangoPayApi;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * This class is an interface between raw MongoPay api object and symfony2.
+ * This class is an interface between raw Mangopay api object and symfony2.
  * It is declared as a service with application wide "clientId", "clientPassword" and "baseUrl" parameters
  * This service provides some shortcuts to interact with the api
  *

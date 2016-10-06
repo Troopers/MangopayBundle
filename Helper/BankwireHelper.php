@@ -1,25 +1,11 @@
 <?php
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
-use Troopers\MangopayBundle\Entity\Order;
-use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Event\CardRegistrationEvent;
-use Troopers\MangopayBundle\Event\PayInEvent;
-use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
-use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
-use MangoPay\CardPreAuthorization;
-use MangoPay\CardRegistration;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use MangoPay\PayInExecutionDetailsDirect;
 use MangoPay\PayInPaymentDetailsBankWire;
-use MangoPay\PayInPaymentDetailsPreAuthorized;
-use MangoPay\User;
 use MangoPay\Wallet;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  *

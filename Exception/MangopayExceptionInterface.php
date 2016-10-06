@@ -2,7 +2,7 @@
 
 namespace Troopers\MangopayBundle\Exception;
 
-interface MongopayExceptionInterface
+interface MangopayExceptionInterface
 {
 
 }
