@@ -2,7 +2,7 @@
 
 namespace Troopers\MangopayBundle\Exception;
 
-class MongopayPayInCreationException extends \Exception implements MongopayExceptionInterfaceInterface
+class MongopayPayInCreationException extends \Exception implements MongopayExceptionInterface
 {
 
 }
