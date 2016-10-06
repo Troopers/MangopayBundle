@@ -1,21 +1,14 @@
 <?php
+
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\BankInformationInterface;
-use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Event\UserEvent;
 use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
-use MangoPay\User;
-use MangoPay\UserNatural;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\BankInformationInterface;
 
 /**
- *
- * ref: troopers_mangopay.bank_information_helper
- *
+ * ref: troopers_mangopay.bank_information_helper.
  **/
 class BankInformationHelper
 {
@@ -46,9 +39,9 @@ class BankInformationHelper
         $mangoUser = $this->userHelper->findOrCreateMangoUser($bankInformation->getUser());
         //Create mango bank account
         $bankAccount = new BankAccount();
-        $bankAccount->OwnerName    = $bankInformation->getUser()->getFullName();
-        $bankAccount->UserId       = $mangoUser->Id;
-        $bankAccount->Type         = "IBAN";
+        $bankAccount->OwnerName = $bankInformation->getUser()->getFullName();
+        $bankAccount->UserId = $mangoUser->Id;
+        $bankAccount->Type = 'IBAN';
         $bankAccount->OwnerAddress = $bankInformation->getAddress();
 
         $bankAccountDetailsIban = new BankAccountDetailsIBAN();
@@ -65,5 +58,4 @@ class BankInformationHelper
 
         return $bankAccount;
     }
-
 }

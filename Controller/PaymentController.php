@@ -2,18 +2,18 @@
 
 namespace Troopers\MangopayBundle\Controller;
 
-use Troopers\MangopayBundle\TroopersMangopayEvents;
-use Troopers\MangopayBundle\Entity\Order;
-use Troopers\MangopayBundle\Event\OrderEvent;
-use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
-use Troopers\MangopayBundle\Form\CardType;
-use Troopers\MangopayBundle\OrderEvents;
 use MangoPay\CardRegistration;
 use MangoPay\PayIn;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Troopers\MangopayBundle\Entity\Order;
+use Troopers\MangopayBundle\Event\OrderEvent;
+use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
+use Troopers\MangopayBundle\Form\CardType;
+use Troopers\MangopayBundle\OrderEvents;
+use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
  * Manage payment.

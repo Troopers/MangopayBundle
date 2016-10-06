@@ -1,16 +1,15 @@
 <?php
+
 namespace Troopers\MangopayBundle\Helper;
 
-use Troopers\MangopayBundle\Entity\TransactionInterface;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Troopers\MangopayBundle\Entity\TransactionInterface;
 
 /**
- *
- * ref: troopers_mangopay.payment_direct_helper
- *
+ * ref: troopers_mangopay.payment_direct_helper.
  **/
 class PaymentDirectHelper
 {
@@ -27,13 +26,12 @@ class PaymentDirectHelper
 
     public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null)
     {
-
         $debitedFunds = new Money();
-        $debitedFunds->Currency = "EUR";
+        $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $transaction->getDebitedFunds();
 
         $fees = new Money();
-        $fees->Currency = "EUR";
+        $fees->Currency = 'EUR';
         $fees->Amount = $transaction->getFees();
 
         $payIn = new PayIn();
@@ -47,7 +45,7 @@ class PaymentDirectHelper
         $payIn->Type = 'PAYIN';
 
         $payIn->PaymentDetails = new \MangoPay\PayInPaymentDetailsCard();
-        $payIn->PaymentDetails->CardType = "CB_VISA_MASTERCARD";
+        $payIn->PaymentDetails->CardType = 'CB_VISA_MASTERCARD';
 
         //@TODO : Find a better way to send default to this function to set default
         if (!$executionDetails instanceof \MangoPay\PayInExecutionDetails) {
@@ -68,5 +66,4 @@ class PaymentDirectHelper
 
         return $mangoPayTransaction;
     }
-
 }
