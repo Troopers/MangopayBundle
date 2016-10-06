@@ -20,6 +20,7 @@ use MangoPay\User;
 use MangoPay\Wallet;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * ref: troopers_mangopay.payment_helper.
@@ -29,12 +30,14 @@ class PaymentHelper
     protected $mangopayHelper;
     protected $router;
     protected $dispatcher;
+    protected $translator;
 
-    public function __construct(MangopayHelper $mangopayHelper, Router $router, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, Router $router, EventDispatcherInterface $dispatcher, TranslatorInterface $translator)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->router = $router;
         $this->dispatcher = $dispatcher;
+        $this->translator = $translator;
     }
 
     public function prepareCardRegistrationCallback(User $user, Order $order)

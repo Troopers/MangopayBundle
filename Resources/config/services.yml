@@ -45,6 +45,7 @@ services:
             - @troopers_mangopay.mango_api
             - @router
             - "@event_dispatcher"
+            - "@translator"
 
     troopers_mangopay.payment_direct_helper:
         class: %troopers_mangopay.payment_direct_helper.class%
