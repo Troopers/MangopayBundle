@@ -18,7 +18,7 @@ use Troopers\MangopayBundle\Entity\UserInterface;
 use Troopers\MangopayBundle\Event\CardRegistrationEvent;
 use Troopers\MangopayBundle\Event\PayInEvent;
 use Troopers\MangopayBundle\Event\PreAuthorisationEvent;
-use Troopers\MangopayBundle\Exception\MongopayPayInCreationException;
+use Troopers\MangopayBundle\Exception\MangopayPayInCreationException;
 use Troopers\MangopayBundle\TroopersMangopayEvents;
 
 /**
@@ -178,7 +178,7 @@ class PaymentHelper
         $event = new PayInEvent($payIn);
         $this->dispatcher->dispatch(TroopersMangopayEvents::ERROR_PAY_IN, $event);
 
-        throw new MongopayPayInCreationException($this->translator->trans(
+        throw new MangopayPayInCreationException($this->translator->trans(
             'mangopay.error.'.$payIn->ResultCode,
             [], 'messages'
         ));
