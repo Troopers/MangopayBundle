@@ -52,18 +52,23 @@ function payAjaxOrRedirect(ajaxUrl,
                     window.location = successRedirect;
                 }
             } else {
-                $('#alert-container').empty();
                 if (json.message) {
                     var message = json.message;
                 } else {
                     var message = 'Une erreur s\'est produite lors de votre réservation, veuillez vérifier vos informations et réessayer. Si l\'erreur persiste, n\'hésitez pas à contacter le support.';
                 }
-                var alert = '<div class="alert alert-danger userBoard-alert">\
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
-                    <i class="fa fa-exclamation-circle"></i>\
-                    ' + message + '\
-                </div>';
-                $('#alert-container').append(alert);
+                if (typeof(mangopayAlert) !== 'undefined')
+                {
+                  mangopayAlert(message);
+                }else{
+                    $('#alert-container').empty();
+                    var alert = '<div class="alert alert-danger userBoard-alert">\
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                        <i class="fa fa-exclamation-circle"></i>\
+                        ' + message + '\
+                    </div>';
+                    $('#alert-container').append(alert);
+                }
                 window.scrollTo(0, 0);
                 $('#submit-button').attr('disabled', false);
             }
@@ -71,14 +76,19 @@ function payAjaxOrRedirect(ajaxUrl,
         },
         // Error ajax callback
         function(xhr, status, error){
-            $('#alert-container').empty();
-            var alert = '<div class="alert alert-danger userBoard-alert">\
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
-                <i class="fa fa-exclamation-circle"></i>\
-                Une erreur s\'est produite lors de votre achat, veuillez vérifier vos informations et réessayer. Si l\'erreur persiste, n\'hésitez pas à contacter le support.\
-            </div>';
-            window.scrollTo(0, 0);
-            $('#alert-container').append(alert);
+            if (typeof(mangopayAlert) !== 'undefined')
+            {
+              mangopayAlert(message);
+            }else{
+                $('#alert-container').empty();
+                var alert = '<div class="alert alert-danger userBoard-alert">\
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                    <i class="fa fa-exclamation-circle"></i>\
+                    Une erreur s\'est produite lors de votre achat, veuillez vérifier vos informations et réessayer. Si l\'erreur persiste, n\'hésitez pas à contacter le support.\
+                </div>';
+                window.scrollTo(0, 0);
+                $('#alert-container').append(alert);
+            }
             $('#submit-button').attr('disabled', false);
         }
     );
