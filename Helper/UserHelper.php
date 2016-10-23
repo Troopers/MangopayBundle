@@ -38,6 +38,7 @@ class UserHelper
 
     public function createMangoUser(UserInterface $user)
     {
+        $birthdate = null;
         if ($user->getBirthDate() instanceof \Datetime) {
             $birthdate = $user->getBirthDate()->getTimestamp();
         }
