@@ -133,7 +133,7 @@ class Transaction implements TransactionInterface
      *
      * @return int
      */
-    protected function getId()
+    public function getId()
     {
         return $this->id;
     }
