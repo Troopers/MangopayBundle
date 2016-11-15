@@ -6,7 +6,7 @@
 [![Version](https://img.shields.io/packagist/v/troopers/mangopay-bundle.svg)](https://packagist.org/packages/troopers/mangopay-bundle)
 [![Packagist DL](https://img.shields.io/packagist/dt/troopers/mangopay-bundle.svg)](https://packagist.org/packages/troopers/mangopay-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/4896b24c-74ee-4506-8c4c-842a9c660b66/mini.png)](https://insight.sensiolabs.com/projects/4896b24c-74ee-4506-8c4c-842a9c660b66)
-[![Twitter Follow](https://img.shields.io/twitter/follow/troopersagency.svg?style=social&label=Follow%20Troopers)]()
+[![Twitter Follow](https://img.shields.io/twitter/follow/troopersagency.svg?style=social&label=Follow%20Troopers)](https://twitter.com/troopersagency)
 =============
 
 MangopayBundle
