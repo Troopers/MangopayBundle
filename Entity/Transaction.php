@@ -9,7 +9,6 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * Transaction.
  *
  * @ORM\MappedSuperclass
- * @ORM\Entity
  */
 class Transaction implements TransactionInterface
 {
