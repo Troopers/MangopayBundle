@@ -11,6 +11,11 @@ interface UserInterface
     /**
      * @var int
      */
+    public function getId();
+
+    /**
+     * @var int
+     */
     public function getMangoUserId();
 
     /**
