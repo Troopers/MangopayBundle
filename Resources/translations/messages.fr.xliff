@@ -1121,6 +1121,26 @@
                 <source>mangopay.error.009201</source>
                 <target>Vous n'avez pas les permissions pour faire cet appel API</target>
             </trans-unit>
+
+            <trans-unit id="mangopay.error.105101" resname="mangopay.error.105101" datatype="plaintext">
+                <source>mangopay.error.105101</source>
+                <target>Numéro de carte invalide</target>
+            </trans-unit>
+
+            <trans-unit id="mangopay.error.105102" resname="mangopay.error.105102" datatype="plaintext">
+                <source>mangopay.error.105102</source>
+                <target>Nom du titulaire de carte non valide</target>
+            </trans-unit>
+
+            <trans-unit id="mangopay.error.105103" resname="mangopay.error.105103" datatype="plaintext">
+                <source>mangopay.error.105103</source>
+                <target>Code PIN non valide</target>
+            </trans-unit>
+
+            <trans-unit id="mangopay.error.105104" resname="mangopay.error.105104" datatype="plaintext">
+                <source>mangopay.error.105104</source>
+                <target>Format de code PIN incorrect</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
