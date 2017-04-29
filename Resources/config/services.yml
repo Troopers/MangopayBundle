@@ -70,11 +70,6 @@ services:
         arguments:
             - "@troopers_mangopay.mango_api"
 
-    troopers_mangopay.payment_out_helper:
-        class: "%troopers_mangopay.payment_out_helper.class%"
-        arguments:
-            - "@troopers_mangopay.mango_api"
-
     troopers_mangopay.form.card:
         class: "%troopers_mangopay.form.card%"
         tags:
