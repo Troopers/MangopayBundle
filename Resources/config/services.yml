@@ -47,12 +47,6 @@ services:
             - "@troopers_mangopay.mango_api"
             - "@doctrine.orm.entity_manager"
             - "@event_dispatcher"
-    troopers_mangopay.card_registration_helper:
-        class: "%troopers_mangopay.card_registration_helper.class%"
-        arguments:
-            - "@troopers_mangopay.mango_api"
-            - "@doctrine.orm.entity_manager"
-            - "@event_dispatcher"
     troopers_mangopay.payment_helper:
         class: "%troopers_mangopay.payment_helper.class%"
         arguments:
