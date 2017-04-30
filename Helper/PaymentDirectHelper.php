@@ -39,7 +39,7 @@ class PaymentDirectHelper
         return $paymentDetails;
     }
 
-    public function buildPayInExecutionDetailsDirect($secureModeReturnURL = 'http://vago.local/app_dev.php/server-time')
+    public function buildPayInExecutionDetailsDirect($secureModeReturnURL)
     {
         $executionDetails = new \MangoPay\PayInExecutionDetailsDirect();
         $executionDetails->SecureModeReturnURL = $secureModeReturnURL;
@@ -59,10 +59,10 @@ class PaymentDirectHelper
         return $transaction;
     }
 
-    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = null)
+    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = 'http://vago.local/app_dev.php/server-time')
     {
         $paymentDetails = $this->buildPayInPaymentDetailsCard($userDebited);
-        $executionDetails = $this->buildPayInExecutionDetailsDirect();
+        $executionDetails = $this->buildPayInExecutionDetailsDirect($secureModeReturnURL);
         $transaction = $this->buildTransaction($userDebited, $userCredited, $amount, $fees);
         $mangoTransaction = $this->createDirectTransaction($transaction, $executionDetails, $paymentDetails);
 
