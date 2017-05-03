@@ -59,7 +59,7 @@ class PaymentDirectHelper
         return $transaction;
     }
 
-    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = 'http://vago.local/app_dev.php/server-time')
+    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = null)
     {
         $paymentDetails = $this->buildPayInPaymentDetailsCard($userDebited);
         $executionDetails = $this->buildPayInExecutionDetailsDirect($secureModeReturnURL);
