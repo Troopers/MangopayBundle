@@ -59,18 +59,28 @@ class PaymentDirectHelper
         return $transaction;
     }
 
-    public function executeDirectTransaction(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $secureModeReturnURL = null)
-    {
+    public function executeDirectTransaction(
+        UserInterface $userDebited,
+        UserInterface $userCredited,
+        $amount,
+        $fees,
+        $secureModeReturnURL = null,
+        $payInTag = null
+    ) {
         $paymentDetails = $this->buildPayInPaymentDetailsCard($userDebited);
         $executionDetails = $this->buildPayInExecutionDetailsDirect($secureModeReturnURL);
         $transaction = $this->buildTransaction($userDebited, $userCredited, $amount, $fees);
-        $mangoTransaction = $this->createDirectTransaction($transaction, $executionDetails, $paymentDetails);
+        $mangoTransaction = $this->createDirectTransaction($transaction, $executionDetails, $paymentDetails, $payInTag);
 
         return $mangoTransaction;
     }
 
-    public function createDirectTransaction(TransactionInterface $transaction, $executionDetails = null, $paymentDetails = null)
-    {
+    public function createDirectTransaction(
+        TransactionInterface $transaction,
+        $executionDetails = null,
+        $paymentDetails = null,
+        $payInTag = null
+    ) {
         $debitedFunds = new Money();
         $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $transaction->getDebitedFunds();
@@ -85,6 +95,7 @@ class PaymentDirectHelper
         $payIn->CreditedWalletId = $transaction->getCreditedWalletId();
         $payIn->DebitedFunds = $debitedFunds;
         $payIn->Fees = $fees;
+        $payIn->Tag = $payInTag;
 
         $payIn->Nature = 'REGULAR';
         $payIn->Type = 'PAYIN';
