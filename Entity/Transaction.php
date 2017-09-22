@@ -25,6 +25,11 @@ class Transaction implements TransactionInterface
     protected $id;
 
     /**
+     * @var int
+     */
+    protected $mangoId;
+
+    /**
      * Author Id.
      *
      * @var int
@@ -100,7 +105,7 @@ class Transaction implements TransactionInterface
      * Execution date;.
      *
      * @var \DateTime
-     * @ORM\Column(name="executionDate", type="datetime")
+     * @ORM\Column(name="executionDate", type="datetime", nullable=true)
      */
     protected $executionDate;
 
@@ -124,7 +129,7 @@ class Transaction implements TransactionInterface
      * CardType { CB_VISA_MASTERCARD, MAESTRO, DINERS, P24″, MASTERPASS }.
      *
      * @var string
-     * @ORM\Column(name="cardType", type="string", length=255)
+     * @ORM\Column(name="cardType", type="string", length=255, nullable=true)
      */
     protected $cardType;
 
@@ -136,6 +141,24 @@ class Transaction implements TransactionInterface
     protected function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMangoId()
+    {
+        return $this->mangoId;
+    }
+
+    /**
+     * @param int $mangoId
+     * @return Transaction
+     */
+    public function setMangoId($mangoId)
+    {
+        $this->mangoId = $mangoId;
+        return $this;
     }
 
     /**
