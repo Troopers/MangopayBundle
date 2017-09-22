@@ -55,9 +55,9 @@ class Order
     protected $status;
 
     /**
-     * @var string
+     * @var Transaction
      *
-     * @ORM\OneToOne(targetEntity="Troopers\MangopayBundle\Entity\Transaction", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Troopers\MangopayBundle\Entity\Transaction", cascade={"persist", "remove"})
      */
     protected $payinTransaction;
 
@@ -113,7 +113,7 @@ class Order
     /**
      * Set payinTransaction.
      *
-     * @param int $payinTransaction
+     * @param Transaction $payinTransaction
      *
      * @return Order
      */
@@ -127,7 +127,7 @@ class Order
     /**
      * Get payinTransaction.
      *
-     * @return int
+     * @return Transaction
      */
     public function getPayinTransaction()
     {
