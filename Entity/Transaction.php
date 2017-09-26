@@ -26,6 +26,7 @@ class Transaction implements TransactionInterface
 
     /**
      * @var int
+     * @ORM\Column(name="mangoId", type="integer")
      */
     protected $mangoId;
 
