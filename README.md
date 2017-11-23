@@ -72,7 +72,14 @@ It can create a new user in mangopay as the User object implements the UserInter
 ```php
     $user = new User();
     $this->get('troopers_mangopay.user_helper')->createMangoUser($user);
+    
+    // UserLegal
+    $user = new User();
+    $this->get('troopers_mangopay.user_helper')->createMangoUser($user, 'BUSINESS'); 
+    // or    
+    $this->get('troopers_mangopay.user_helper')->createMangoUser($user, 'ORGANIZATION');    
 ```
+ 
 
 WalletHelper
 ---
