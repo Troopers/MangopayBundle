@@ -15,7 +15,7 @@
     "require": {
         "php": "~5.3|~7",
         "symfony/framework-bundle": ">=2.3",
-        "mangopay/php-sdk-v2": ">=2.0",
+        "mangopay/php-sdk-v2": ">=2.1",
         "stof/doctrine-extensions-bundle": "~1.2",
         "troopers/ajax-bundle": "~1.2"
     },
