@@ -52,7 +52,7 @@ interface UserInterface
     public function getLastname();
 
     /**
-     * @var date
+     * @var \DateTime
      *           User’s birthdate.
      */
     public function getBirthDate();
@@ -68,4 +68,22 @@ interface UserInterface
      *             User’s country of residence. ISO 3166-1 alpha-2 format is expected
      */
     public function getCountry();
+
+    /**
+     * @return string
+     *             Address’s first line.
+     */
+    public function getAddress();
+
+    /**
+     * @return string
+     *             Address’s city.
+     */
+    public function getCity();
+
+    /**
+     * @return mixed
+     *             Address’s city. alphanumeric, dashes or spaces
+     */
+    public function getPostalCode();
 }
