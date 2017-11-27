@@ -37,7 +37,7 @@ class UserHelper
         if ($mangoUserId = $user->getMangoUserId()) {
             $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
         } else {
-            $mangoUser = $this->createMangoUser($user);
+            $mangoUser = $this->createMangoUser($user, $userType);
         }
 
         return $mangoUser;
@@ -87,6 +87,38 @@ class UserHelper
         //@TODO: remove this, it's not bundle responsibility
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
+        return $mangoUser;
+    }
+
+    /**
+     * @param UserInterface $user
+     * @return UserLegal
+     */
+    public function update(UserInterface $user)
+    {
+        $mangoUserId = $user->getMangoUserId();
+        $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
+
+        if ($mangoUser instanceof UserLegal) {
+            $mangoUser->Name = $user->getLastname().' '.$user->getFirstname();
+            $mangoUser->Email = $user->getEmail();
+            $mangoUser->LegalRepresentativeFirstName = $user->getFirstname();
+            $mangoUser->LegalRepresentativeLastName = $user->getLastname();
+            $mangoUser->LegalRepresentativeBirthday = $user->getBirthDate();
+            $mangoUser->LegalRepresentativeNationality = $user->getNationality();
+            $mangoUser->LegalRepresentativeCountryOfResidence = $user->getCountry();
+        } elseif ($mangoUser instanceof UserNatural) {
+            $mangoUser->Email = $user->getEmail();
+            $mangoUser->FirstName = $user->getFirstname();
+            $mangoUser->LastName = $user->getLastname();
+            $mangoUser->Birthday = $user->getBirthDate();
+            $mangoUser->Nationality = $user->getNationality();
+            $mangoUser->CountryOfResidence = $user->getCountry();
+            $mangoUser->Tag = $user->getId();
+        }
+
+        $mangoUser = $this->mangopayHelper->Users->Update($mangoUser);
 
         return $mangoUser;
     }
