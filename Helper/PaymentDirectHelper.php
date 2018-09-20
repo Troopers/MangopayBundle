@@ -4,8 +4,8 @@ namespace Troopers\MangopayBundle\Helper;
 
 use MangoPay\Money;
 use MangoPay\PayIn;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Troopers\MangopayBundle\Entity\Transaction;
 use Troopers\MangopayBundle\Entity\TransactionInterface;
@@ -20,7 +20,7 @@ class PaymentDirectHelper
     private $router;
     private $dispatcher;
 
-    public function __construct(MangopayHelper $mangopayHelper, Router $router, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, UrlMatcherInterface $router, EventDispatcherInterface $dispatcher)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->router = $router;
