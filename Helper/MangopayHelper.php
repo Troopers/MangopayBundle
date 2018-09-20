@@ -19,10 +19,9 @@ class MangopayHelper extends MangoPayApi
     protected $clientPassword;
     protected $baseUrl;
     protected $dispatcher;
-    protected $entityManager;
     protected $debug;
 
-    public function __construct($clientId, $clientPassword, $baseUrl, EventDispatcherInterface $dispatcher, EntityManager $entityManager, $debug = false)
+    public function __construct($clientId, $clientPassword, $baseUrl, $debug = false, EventDispatcherInterface $dispatcher)
     {
         parent::__construct();
         $this->Config->ClientId = $clientId;
@@ -31,7 +30,6 @@ class MangopayHelper extends MangoPayApi
         $this->Config->BaseUrl = $baseUrl;
         $this->Config->DebugMode = $debug;
         $this->dispatcher = $dispatcher;
-        $this->entityManager = $entityManager;
 
         if (!is_dir($this->Config->TemporaryFolder)) {
             mkdir($this->Config->TemporaryFolder);

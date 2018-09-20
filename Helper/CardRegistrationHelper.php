@@ -16,10 +16,9 @@ class CardRegistrationHelper
     private $entityManager;
     private $dispatcher;
 
-    public function __construct(MangopayHelper $mangopayHelper, EntityManager $entityManager, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher)
     {
         $this->mangopayHelper = $mangopayHelper;
-        $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
     }
 

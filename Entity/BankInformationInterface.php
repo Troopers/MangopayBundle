@@ -9,11 +9,46 @@ namespace Troopers\MangopayBundle\Entity;
 interface BankInformationInterface
 {
     /**
-     * Author Mango Id.
+     * BankInformation address.
      *
      * @var string
      */
-    public function getAddress();
+    public function getBankInformationStreetAddress();
+
+    /**
+     * BankInformation address.
+     *
+     * @var string
+     */
+    public function getBankInformationAdditionalStreetAddress();
+
+    /**
+     * BankInformation address.
+     *
+     * @var string
+     */
+    public function getBankInformationCity();
+
+    /**
+     * BankInformation address.
+     *
+     * @var string
+     */
+    public function getBankInformationPostalCode();
+
+    /**
+     * BankInformation address.
+     *
+     * @var string
+     */
+    public function getBankInformationCountry();
+
+    /**
+     * BankInformation name.
+     *
+     * @var string
+     */
+    public function getBankInformationFullName();
 
     /**
      * It represents the amount debited on the bank account of the Author.In cents so 100€ will be written like « Amount » : 10000
@@ -22,4 +57,15 @@ interface BankInformationInterface
      * @var string
      */
     public function getIban();
+
+    /**
+     * The user bank informations belongs to
+     *
+     * @var UserInterface
+     */
+    public function getUser();
+
+    public function getMangoBankAccountId();
+
+    public function setMangoBankAccountId($mangoBankAccountId);
 }
