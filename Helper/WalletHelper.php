@@ -8,6 +8,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Troopers\MangopayBundle\Entity\UserInterface;
 use Troopers\MangopayBundle\Event\WalletEvent;
 use Troopers\MangopayBundle\TroopersMangopayEvents;
+use Troopers\MangopayBundle\Helper\User\UserHelper;
 
 /**
  * ref: troopers_mangopay.wallet_helper.
@@ -19,12 +20,11 @@ class WalletHelper
     private $dispatcher;
     private $entityManager;
 
-    public function __construct(MangopayHelper $mangopayHelper, UserHelper $userHelper, EntityManager $entityManager, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, UserHelper $userHelper, EventDispatcherInterface $dispatcher)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->userHelper = $userHelper;
         $this->dispatcher = $dispatcher;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -57,9 +57,6 @@ class WalletHelper
 
         $event = new WalletEvent($mangoWallet, $user);
         $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_WALLET, $event);
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
 
         return $mangoWallet;
     }

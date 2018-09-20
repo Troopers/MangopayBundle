@@ -2,7 +2,6 @@
 
 namespace Troopers\MangopayBundle\Helper;
 
-use Doctrine\ORM\EntityManager;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
 use MangoPay\User;
@@ -16,14 +15,12 @@ use Troopers\MangopayBundle\Entity\UserInterface;
 class BankInformationHelper
 {
     private $mangopayHelper;
-    private $entityManager;
     private $userHelper;
 
-    public function __construct(MangopayHelper $mangopayHelper, EntityManager $entityManager, UserHelper $userHelper)
+    public function __construct(MangopayHelper $mangopayHelper, UserHelper $userHelper)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->userHelper = $userHelper;
-        $this->entityManager = $entityManager;
     }
 
     public function findOrCreateBankAccount(BankInformationInterface $bankInformation)
