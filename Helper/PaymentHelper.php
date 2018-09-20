@@ -10,7 +10,7 @@ use MangoPay\PayInExecutionDetailsDirect;
 use MangoPay\PayInPaymentDetailsPreAuthorized;
 use MangoPay\User;
 use MangoPay\Wallet;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Troopers\MangopayBundle\Entity\CardPreAuthorisation;
 use Troopers\MangopayBundle\Entity\Order;
@@ -30,7 +30,7 @@ class PaymentHelper
     protected $router;
     protected $dispatcher;
 
-    public function __construct(MangopayHelper $mangopayHelper, Router $router, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, UrlMatcherInterface $router, EventDispatcherInterface $dispatcher)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->router = $router;
