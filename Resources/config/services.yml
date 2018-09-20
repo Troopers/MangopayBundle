@@ -3,7 +3,7 @@ services:
     Troopers\MangopayBundle\:
         autowire: true
         autoconfigure: true
-        resource: '../../*'
+        resource: '../../{Helper,Form}'
 
 
     Troopers\MangopayBundle\Helper\MangopayHelper:
