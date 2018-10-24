@@ -83,7 +83,7 @@ class BankInformationHelper
      * @return BankAccount
      * @throws \Exception
      */
-    public function udpateBankAccount(BankInformationInterface $bankInformation)
+    public function updateBankAccount(BankInformationInterface $bankInformation)
     {
         /** @var UserInterface $user */
         $user = $bankInformation->getUser();
@@ -111,7 +111,7 @@ class BankInformationHelper
             $bankAccount->Details->IBAN = $bankInformation->getIban();
         }
 
-        $bankAccount = $this->mangopayHelper->Us$bankInformation->getIban()ers->UpdateBankAccount($mangoUser->Id, $bankAccount);
+        $bankAccount = $this->mangopayHelper->Users->UpdateBankAccount($mangoUser->Id, $bankAccount);
 
         return $bankAccount;
     }
