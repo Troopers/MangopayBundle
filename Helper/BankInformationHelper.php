@@ -77,4 +77,42 @@ class BankInformationHelper
 
         return $bankAccount;
     }
+    
+    /**
+     * @param BankInformationInterface $bankInformation
+     * @return BankAccount
+     * @throws \Exception
+     */
+    public function udpateBankAccount(BankInformationInterface $bankInformation)
+    {
+        /** @var UserInterface $user */
+        $user = $bankInformation->getUser();
+        $bankAccount = $this->mangopayHelper->Users->GetBankAccount($user->getMangoUserId(), $bankInformation->getMangoBankAccountId());
+
+        $bankAccount->OwnerName = $bankInformation->getBankInformationFullName();
+        $bankAccount->UserId = $mangoUser->Id;
+        $bankAccount->Type = 'IBAN';
+
+        $address = new \MangoPay\Address();
+        $userAddress = $bankInformation->getBankInformationStreetAddress();
+        $city = $bankInformation->getBankInformationCity();
+        $postalCode = $bankInformation->getBankInformationPostalCode();
+        if (null == $userAddress || null == $city || null == $postalCode) {
+            throw new NotFoundHttpException(sprintf('address, city or postalCode missing for BankInformation of User id : %s', $user->getId()));
+        }
+        $address->AddressLine1 = $userAddress;
+        $address->AddressLine2 = $bankInformation->getBankInformationAdditionalStreetAddress();
+        $address->City = $city;
+        $address->Country = $bankInformation->getBankInformationCountry();
+        $address->PostalCode = $postalCode;
+        $bankAccount->OwnerAddress = $address;
+
+        if ($bankInformation->getIban() !== $bankAccount->Details->IBAN) {
+            $bankAccount->Details->IBAN = $bankInformation->getIban();
+        }
+
+        $bankAccount = $this->mangopayHelper->Us$bankInformation->getIban()ers->UpdateBankAccount($mangoUser->Id, $bankAccount);
+
+        return $bankAccount;
+    }
 }

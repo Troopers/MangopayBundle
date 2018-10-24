@@ -11,42 +11,42 @@ interface BankInformationInterface
     /**
      * BankInformation address.
      *
-     * @var string
+     * @return string
      */
     public function getBankInformationStreetAddress();
 
     /**
      * BankInformation address.
      *
-     * @var string
+     * @return string
      */
     public function getBankInformationAdditionalStreetAddress();
 
     /**
      * BankInformation address.
      *
-     * @var string
+     * @return string
      */
     public function getBankInformationCity();
 
     /**
      * BankInformation address.
      *
-     * @var string
+     * @return string
      */
     public function getBankInformationPostalCode();
 
     /**
      * BankInformation address.
      *
-     * @var string
+     * @return string
      */
     public function getBankInformationCountry();
 
     /**
      * BankInformation name.
      *
-     * @var string
+     * @return string
      */
     public function getBankInformationFullName();
 
@@ -54,14 +54,14 @@ interface BankInformationInterface
      * It represents the amount debited on the bank account of the Author.In cents so 100€ will be written like « Amount » : 10000
      * DebitedFunds – Fees = CreditedFunds (amount received on wallet).
      *
-     * @var string
+     * @return string
      */
     public function getIban();
 
     /**
      * The user bank informations belongs to
      *
-     * @var UserInterface
+     * @return UserInterface
      */
     public function getUser();
 
