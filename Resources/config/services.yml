@@ -13,6 +13,10 @@ services:
             - "%troopers_mangopay.base_url%"
             - "%troopers_mangopay.debug_mode%"
             - "@event_dispatcher"
+        calls:
+            - method: setLogger
+              arguments:
+                  - '@logger'
 
     troopers_mangopay.mango_api:
         alias: Troopers\MangopayBundle\Helper\MangopayHelper

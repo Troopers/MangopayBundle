@@ -23,8 +23,6 @@ class MandateHelper
     public function __construct(MangopayHelper $mangopayHelper)
     {
         $this->mangopayHelper = $mangopayHelper;
-        $this->userHelper = $userHelper;
-        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -36,17 +34,17 @@ class MandateHelper
     {
         $bankInformationId = $bankInformation->getMangoBankAccountId();
         $userId = $bankInformation->getUser()->getMangoUserId();
-        $mandates = $this->mangopayHelper->Users->GetMandatesForBankAccount($userId, $bankInformationId, null, (new Sorting())->AddField('CreationDate', 'DESC'));
-        $mandate = $mandates->first();
+        $pagination = null;
+        $mandates = $this->mangopayHelper->Users->GetMandatesForBankAccount($userId, $bankInformationId, $pagination, (new Sorting())->AddField('CreationDate', 'DESC'));
         
         if (empty($mandates)) {
             $mandate = $this->createMandateForBankInformation($bankInformation);
         // else, create a new mango user
         } else {
-            $mandate = $mandates->first();
+            $mandate = array_shift($mandates);
         }
 
-        return $wallet;
+        return $mandate;
     }
 
     public function createMandateForBankInformation(BankInformationInterface $bankInformation, $returnUrl = 'http://example.com/')
