@@ -5,22 +5,16 @@ namespace Troopers\MangopayBundle\Helper;
 use MangoPay\Money;
 use MangoPay\PayIn;
 use MangoPay\PayInPaymentDetailsDirectDebitDirect;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Troopers\MangopayBundle\Entity\Transaction;
-use Troopers\MangopayBundle\Entity\TransactionInterface;
 use Troopers\MangopayBundle\Entity\UserInterface;
+use Troopers\MangopayBundle\Helper\MangopayHelper;
 
 class PaymentDirectDebitHelper
 {
-    private $mangopayHelper;
-    private $router;
-    private $dispatcher;
+    protected $mangopayHelper;
     /**
      * @var MandateHelper
      */
-    private $mandateHelper;
+    protected $mandateHelper;
 
     public function __construct(MangopayHelper $mangopayHelper, MandateHelper $mandateHelper)
     {
@@ -28,9 +22,17 @@ class PaymentDirectDebitHelper
         $this->mandateHelper = $mandateHelper;
     }
 
+    /**
+     * @param UserInterface $userDebited
+     * @param UserInterface $userCredited
+     * @param int $amount
+     * @param int $fees
+     * @param string|null $statementDescriptor
+     * @return PayIn
+     */
     public function createDirectDebitPayin(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $statementDescriptor = null)
     {
-        $mandate = $this->mandateHelper->findOrCreateMandate($delivery->getFreightForwarder()->getManagedCompany());
+        $mandate = $this->mandateHelper->findOrCreateMandate($userDebited);
 
         $payin = new PayIn();
         $payin->AuthorId = $userDebited->getMangoUserId();
@@ -47,12 +49,16 @@ class PaymentDirectDebitHelper
 
         $payin->DebitedFunds = $debitedFunds;
         $payin->Fees = $fees;
-        $payin->MandateId = $mandate->Id;
 
         $payin->PaymentDetails = new PayInPaymentDetailsDirectDebitDirect();
         $payin->PaymentDetails->MandateId = $mandate->Id;
         $payin->PaymentDetails->StatementDescriptor = $statementDescriptor;
 
         return $this->mangopayHelper->PayIns->Create($payin);
+    }
+
+    public function getPayin()
+    {
+        return $this->mangopayHelper->PayIns->Get($payin);
     }
 }
