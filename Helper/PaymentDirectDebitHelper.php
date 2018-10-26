@@ -57,8 +57,8 @@ class PaymentDirectDebitHelper
         return $this->mangopayHelper->PayIns->Create($payin);
     }
 
-    public function getPayin()
+    public function getPayin($payinId)
     {
-        return $this->mangopayHelper->PayIns->Get($payin);
+        return $this->mangopayHelper->PayIns->Get($payinId);
     }
 }
