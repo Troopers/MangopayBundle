@@ -23,7 +23,7 @@ class PaymentOutHelper
     public function buildPayOutPaymentDetailsBankWire(UserInterface $user)
     {
         $meanOfPaymentDetails = new PayOutPaymentDetailsBankWire();
-        if (null == $bankAccountId = $user->getBankAccountId()) {
+        if (null == $bankAccountId = $user->getMangoBankAccountId()) {
             throw new NotFoundHttpException(sprintf('bankAccount not found for id : %s', $user->getId()));
         }
         $meanOfPaymentDetails->BankAccountId = $bankAccountId;
@@ -42,17 +42,15 @@ class PaymentOutHelper
 
     public function createPayOutForUser(UserInterface $user, $debitedFunds, $fees = '0')
     {
-        $debitedFunds = $this->buildMoney($debitedFunds);
-        $fees = $this->buildMoney($fees);
         $meanOfPaymentDetails = $this->buildPayOutPaymentDetailsBankWire($user);
 
         $payOut = new PayOut();
         $payOut->AuthorId = $user->getMangoUserId();
         $payOut->DebitedWalletId = $user->getMangoWalletId();
         $payOut->PaymentType = 'BANK_WIRE';
-        $payOut->DebitedFunds = $debitedFunds;
+        $payOut->DebitedFunds = $this->buildMoney($debitedFunds);
         $payOut->MeanOfPaymentDetails = $meanOfPaymentDetails;
-        $payOut->fees = $fees;
+        $payOut->fees = $this->buildMoney($fees);
 
         return $this->mangopayHelper->PayOuts->Create($payOut);
     }
