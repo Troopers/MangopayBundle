@@ -38,4 +38,9 @@ interface UserInterface
      * @var int
      */
     public function getMangoBankAccountId();
+
+    /**
+     * @var int
+     */
+    public function getBankInformation();
 }
