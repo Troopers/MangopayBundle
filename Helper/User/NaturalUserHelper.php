@@ -18,11 +18,13 @@ class NaturalUserHelper
 {
     private $mangopayHelper;
     private $dispatcher;
+    private $mangopaySandbox;
 
-    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher, $mangopaySandbox)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->dispatcher = $dispatcher;
+        $this->mangopaySandbox = $mangopaySandbox;
     }
 
     public function createMangoUser(NaturalUserInterface $user)
@@ -35,7 +37,11 @@ class NaturalUserHelper
         }
         $mangoUser = new UserNatural();
         $mangoUser->Email = $user->getEmail();
-        $mangoUser->FirstName = $user->getFirstName();
+        $firstname = $user->getFirstName();
+        if ($this->mangopaySandbox) {
+            $firstname = "Successful";
+        }
+        $mangoUser->FirstName = $firstname;
         $mangoUser->LastName = $user->getLastName();
         $mangoUser->Birthday = $birthday ? $birthday->getTimestamp() : null;
         $mangoUser->Nationality = $user->getNationality();
@@ -60,7 +66,12 @@ class NaturalUserHelper
         $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
 
         $mangoUser->Email = $user->getEmail();
-        $mangoUser->FirstName = $user->getFirstname();
+
+        $firstname = $user->getFirstName();
+        if ($this->mangopaySandbox) {
+            $firstname = "Successful";
+        }
+        $mangoUser->FirstName = $firstname;
         $mangoUser->LastName = $user->getLastname();
         $mangoUser->Birthday = $birthdate;
         $mangoUser->Nationality = $user->getNationality();

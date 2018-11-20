@@ -68,4 +68,6 @@ interface BankInformationInterface
     public function getMangoBankAccountId();
 
     public function setMangoBankAccountId($mangoBankAccountId);
+    public function setMangoMandateId($mangoMandateId);
+    public function setMangoMandateUrl($mangoMandateUrl);
 }

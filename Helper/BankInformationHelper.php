@@ -13,11 +13,13 @@ class BankInformationHelper
 {
     private $mangopayHelper;
     private $userHelper;
+    private $mangopaySandbox;
 
-    public function __construct(MangopayHelper $mangopayHelper, UserHelper $userHelper)
+    public function __construct(MangopayHelper $mangopayHelper, UserHelper $userHelper, $mangopaySandbox)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->userHelper = $userHelper;
+        $this->mangopaySandbox = $mangopaySandbox;
     }
 
     /**
@@ -67,7 +69,12 @@ class BankInformationHelper
         $bankAccount->OwnerAddress = $address;
 
         $bankAccountDetailsIban = new BankAccountDetailsIBAN();
-        $bankAccountDetailsIban->IBAN = $bankInformation->getIban();
+
+        $iban = $bankInformation->getIban();
+        if ($this->mangopaySandbox) {
+            $iban = "FR7611808009101234567890147";
+        }
+        $bankAccountDetailsIban->IBAN = $iban;
 
         $bankAccount->Details = $bankAccountDetailsIban;
 
@@ -108,7 +115,11 @@ class BankInformationHelper
         $bankAccount->OwnerAddress = $address;
 
         if ($bankInformation->getIban() !== $bankAccount->Details->IBAN) {
-            $bankAccount->Details->IBAN = $bankInformation->getIban();
+            $iban = $bankInformation->getIban();
+            if ($this->mangopaySandbox) {
+                $iban = "FR7611808009101234567890147";
+            }
+            $bankAccount->Details->IBAN = $iban;
         }
 
         $bankAccount = $this->mangopayHelper->Users->UpdateBankAccount($mangoUser->Id, $bankAccount);

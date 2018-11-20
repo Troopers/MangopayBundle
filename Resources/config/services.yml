@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        bind:
+            $mangopaySandbox: '%troopers_mangopay.sandbox_mode%'
 
     Troopers\MangopayBundle\:
         autowire: true

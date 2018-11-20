@@ -24,12 +24,14 @@ class LegalUserHelper
     private $mangopayHelper;
     private $dispatcher;
     private $KYCHelper;
+    private $mangopaySandbox;
 
-    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher, KYCHelper $KYCHelper)
+    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher, KYCHelper $KYCHelper, $mangopaySandbox)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->dispatcher = $dispatcher;
         $this->KYCHelper = $KYCHelper;
+        $this->mangopaySandbox = $mangopaySandbox;
     }
 
     public function createMangoUser(LegalUserInterface $user)
@@ -44,7 +46,11 @@ class LegalUserHelper
         $mangoUser->LegalPersonType = $user->getLegalPersonType();
         $mangoUser->Name = $user->getName();
         $mangoUser->Email = $user->getEmail();
-        $mangoUser->LegalRepresentativeFirstName = $user->getLegalRepresentativeFirstName();
+        $legalRepresentativeFirstName = $user->getLegalRepresentativeFirstName();
+        if ($this->mangopaySandbox) {
+            $legalRepresentativeFirstName = "Successful";
+        }
+        $mangoUser->LegalRepresentativeFirstName = $legalRepresentativeFirstName;
         $mangoUser->LegalRepresentativeLastName = $user->getLegalRepresentativeLastName();
         $mangoUser->LegalRepresentativeBirthday = $birthday ? $birthday->getTimestamp() : null;
         $mangoUser->LegalRepresentativeNationality = $user->getLegalRepresentativeNationality();
