@@ -4,9 +4,11 @@ namespace Troopers\MangopayBundle\Helper;
 
 use MangoPay\Money;
 use MangoPay\PayIn;
+use MangoPay\PayInExecutionDetailsDirect;
+use MangoPay\PayInPaymentDetailsDirectDebit;
 use MangoPay\PayInPaymentDetailsDirectDebitDirect;
+use MangoPay\PayInPaymentType;
 use Troopers\MangopayBundle\Entity\UserInterface;
-use Troopers\MangopayBundle\Helper\MangopayHelper;
 
 class PaymentDirectDebitHelper
 {
@@ -43,16 +45,18 @@ class PaymentDirectDebitHelper
         $debitedFunds->Currency = 'EUR';
         $debitedFunds->Amount = $amount;
 
-        $fees = new Money();
-        $fees->Currency = 'EUR';
-        $fees->Amount = $fees;
+        $mangoFees = new Money();
+        $mangoFees->Currency = 'EUR';
+        $mangoFees->Amount = $fees;
 
         $payin->DebitedFunds = $debitedFunds;
-        $payin->Fees = $fees;
+        $payin->Fees = $mangoFees;
 
-        $payin->PaymentDetails = new PayInPaymentDetailsDirectDebitDirect();
+        $payin->PaymentDetails = new PayInPaymentDetailsDirectDebit();
         $payin->PaymentDetails->MandateId = $mandate->Id;
         $payin->PaymentDetails->StatementDescriptor = $statementDescriptor;
+
+        $payin->ExecutionDetails = new PayInExecutionDetailsDirect();
 
         return $this->mangopayHelper->PayIns->Create($payin);
     }
