@@ -30,7 +30,7 @@ class MandateHelper
      *
      * @return Mandate
      */
-    public function findOrCreateMandate(BankInformationInterface $bankInformation)
+    public function findOrCreateMandate(BankInformationInterface $bankInformation, $returnUrl = 'http://example.com/')
     {
         $bankInformationId = $bankInformation->getMangoBankAccountId();
         $userId = $bankInformation->getUser()->getMangoUserId();
@@ -38,7 +38,7 @@ class MandateHelper
         $mandates = $this->mangopayHelper->Users->GetMandatesForBankAccount($userId, $bankInformationId, $pagination, (new Sorting())->AddField('CreationDate', 'DESC'));
         
         if (empty($mandates)) {
-            $mandate = $this->createMandateForBankInformation($bankInformation);
+            $mandate = $this->createMandateForBankInformation($bankInformation, $returnUrl);
         // else, create a new mango user
         } else {
             $mandate = array_shift($mandates);
@@ -62,10 +62,13 @@ class MandateHelper
         }
         $mandate->Culture = $culture;
         $mandate->ReturnURL = $returnUrl;
-        $mangoMandate = $this->mangopayHelper->Mandates->Create($mandate, json_encode([
+        $mangoMandate = $this->mangopayHelper->Mandates->Create($mandate, md5(json_encode([
             'bankInformation' => $bankInformationId,
             'user' => $userId,
-        ]));
+        ])));
+
+        $bankInformation->setMangoMandateId($mandate->Id);
+        $bankInformation->setMangoMandateUrl($mandate->RedirectURL);
 
         return $mangoMandate;
     }
