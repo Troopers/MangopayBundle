@@ -27,7 +27,7 @@ class NaturalUserHelper
         $this->mangopaySandbox = $mangopaySandbox;
     }
 
-    public function createMangoUser(NaturalUserInterface $user)
+    public function createMangoUser(UserInterface $user)
     {
         $birthday = null;
         if ($user->getBirthday() instanceof \Datetime) {
@@ -59,8 +59,9 @@ class NaturalUserHelper
     public function updateMangoUser(NaturalUserInterface $user)
     {
 
+        $birthday = null;
         if ($user->getBirthday() instanceof \Datetime) {
-            $birthdate = $user->getBirthday()->getTimestamp();
+            $birthday = $user->getBirthday()->getTimestamp();
         }
         $mangoUserId = $user->getMangoUserId();
         $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
@@ -73,7 +74,7 @@ class NaturalUserHelper
         }
         $mangoUser->FirstName = $firstname;
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $birthdate;
+        $mangoUser->Birthday = $birthday;
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();

@@ -39,7 +39,7 @@ class  KYCHelper
     {
         $page = new KycPage();
 
-        if (false === $file = @file_get_contents($value->getPathname(), FILE_BINARY)) {
+        if (false === $file = @file_get_contents($file->getPathname(), FILE_BINARY)) {
             throw new TransformationFailedException(sprintf('Unable to read the "%s" file', $value->getPathname()));
         }
 

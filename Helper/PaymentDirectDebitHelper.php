@@ -34,7 +34,7 @@ class PaymentDirectDebitHelper
      */
     public function createDirectDebitPayin(UserInterface $userDebited, UserInterface $userCredited, $amount, $fees, $statementDescriptor = null)
     {
-        $mandate = $this->mandateHelper->findOrCreateMandate($userDebited);
+        $mandate = $this->mandateHelper->findOrCreateMandate($userDebited->getBankInformation());
 
         $payin = new PayIn();
         $payin->AuthorId = $userDebited->getMangoUserId();

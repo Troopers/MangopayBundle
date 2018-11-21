@@ -23,21 +23,25 @@ interface UserInterface
      * @var int
      */
     public function getMangoUserId();
+    public function setMangoUserId($id);
 
     /**
      * @var int
      */
     public function getMangoWalletId();
+    public function setMangoWalletId($id);
 
     /**
      * @var int
      */
     public function getMangoCardId();
+    public function setMangoCardId($id);
 
     /**
      * @var int
      */
     public function getMangoBankAccountId();
+    public function setMangoBankAccountId($id);
 
     /**
      * @var int

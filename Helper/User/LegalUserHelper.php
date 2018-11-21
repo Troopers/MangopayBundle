@@ -34,7 +34,7 @@ class LegalUserHelper
         $this->mangopaySandbox = $mangopaySandbox;
     }
 
-    public function createMangoUser(LegalUserInterface $user)
+    public function createMangoUser(UserInterface $user)
     {
         $birthday = null;
         if ($user->getLegalRepresentativeBirthday() instanceof \Datetime) {
@@ -80,19 +80,19 @@ class LegalUserHelper
         if (null !== $document = $user->getProofOfRegistration()) {
             $mangoDocument = $this->createDocument($document, $user);
             $mangoUser->ProofOfRegistration = $mangoDocument->Id;
-            $user->getProofOfRegistrationId($mangoDocument->Id);
+            $user->setProofOfRegistrationId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getLegalRepresentativeProofOfIdentity()) {
             $mangoDocument = $this->createDocument($document, $user);
             $mangoUser->LegalRepresentativeProofOfIdentity = $mangoDocument->Id;
-            $user->getLegalRepresentativeProofOfIdentityId($mangoDocument->Id);
+            $user->setLegalRepresentativeProofOfIdentityId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getStatute()) {
             $mangoDocument = $this->createDocument($document, $user);
             $mangoUser->Statute = $mangoDocument->Id;
-            $user->getStatuteId($mangoDocument->Id);
+            $user->setStatuteId($mangoDocument->Id);
         }
 
         $event = new UserEvent($user, $mangoUser);
@@ -101,8 +101,9 @@ class LegalUserHelper
         return $mangoUser;
     }
 
-    public function updateMangoUser(LegalUserInterface $user)
+    public function updateMangoUser(UserInterface $user)
     {
+        $birthday = null;
         if ($user->getLegalRepresentativeBirthday() instanceof \Datetime) {
             $birthday = $user->getLegalRepresentativeBirthday()->getTimestamp();
         }

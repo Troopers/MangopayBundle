@@ -97,7 +97,7 @@ class BankInformationHelper
         $bankAccount = $this->mangopayHelper->Users->GetBankAccount($user->getMangoUserId(), $bankInformation->getMangoBankAccountId());
 
         $bankAccount->OwnerName = $bankInformation->getBankInformationFullName();
-        $bankAccount->UserId = $mangoUser->Id;
+        $bankAccount->UserId = $user->getMangoUserId();
         $bankAccount->Type = 'IBAN';
 
         $address = new \MangoPay\Address();

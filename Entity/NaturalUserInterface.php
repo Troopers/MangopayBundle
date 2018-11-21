@@ -60,7 +60,7 @@ interface NaturalUserInterface extends UserInterface
      * @var \DateTime
      *           User’s birthdate.
      */
-    public function getBirthday() :?\DateTime;
+    public function getBirthday();
 
     /**
      * @var string
