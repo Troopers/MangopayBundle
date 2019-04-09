@@ -77,11 +77,11 @@ class WalletHelper
         $tranfer->CreditedUserId = $creditedUser->getMangoUserId();
 
         $debited = new Money();
-        $debited->Amount = $debited;
+        $debited->Amount = $debitedAmount;
         $debited->Currency = 'EUR';
 
         $fees = new Money();
-        $fees->Amount = $fees;
+        $fees->Amount = $feesAmount;
         $fees->Currency = 'EUR';
 
         $tranfer->DebitedFunds = $debited;
