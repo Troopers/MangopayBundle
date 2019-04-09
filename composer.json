@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "~5.3|~7",
+        "php": "~5.5|~7",
         "symfony/framework-bundle": "~3.4|~4",
         "mangopay/php-sdk-v2": ">=2.0",
         "stof/doctrine-extensions-bundle": "~1.2",

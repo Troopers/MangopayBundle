@@ -18,14 +18,16 @@ class NaturalUserHelper
 {
     private $mangopayHelper;
     private $dispatcher;
+    private $mangopaySandbox;
 
-    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher)
+    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher, $mangopaySandbox)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->dispatcher = $dispatcher;
+        $this->mangopaySandbox = $mangopaySandbox;
     }
 
-    public function createMangoUser(NaturalUserInterface $user)
+    public function createMangoUser(UserInterface $user)
     {
         $birthday = null;
         if ($user->getBirthday() instanceof \Datetime) {
@@ -35,7 +37,11 @@ class NaturalUserHelper
         }
         $mangoUser = new UserNatural();
         $mangoUser->Email = $user->getEmail();
-        $mangoUser->FirstName = $user->getFirstName();
+        $firstname = $user->getFirstName();
+        if ($this->mangopaySandbox) {
+            $firstname = "Successful";
+        }
+        $mangoUser->FirstName = $firstname;
         $mangoUser->LastName = $user->getLastName();
         $mangoUser->Birthday = $birthday ? $birthday->getTimestamp() : null;
         $mangoUser->Nationality = $user->getNationality();
@@ -53,16 +59,22 @@ class NaturalUserHelper
     public function updateMangoUser(NaturalUserInterface $user)
     {
 
+        $birthday = null;
         if ($user->getBirthday() instanceof \Datetime) {
-            $birthdate = $user->getBirthday()->getTimestamp();
+            $birthday = $user->getBirthday()->getTimestamp();
         }
         $mangoUserId = $user->getMangoUserId();
         $mangoUser = $this->mangopayHelper->Users->get($mangoUserId);
 
         $mangoUser->Email = $user->getEmail();
-        $mangoUser->FirstName = $user->getFirstname();
+
+        $firstname = $user->getFirstName();
+        if ($this->mangopaySandbox) {
+            $firstname = "Successful";
+        }
+        $mangoUser->FirstName = $firstname;
         $mangoUser->LastName = $user->getLastname();
-        $mangoUser->Birthday = $birthdate;
+        $mangoUser->Birthday = $birthday;
         $mangoUser->Nationality = $user->getNationality();
         $mangoUser->CountryOfResidence = $user->getCountry();
         $mangoUser->Tag = $user->getId();

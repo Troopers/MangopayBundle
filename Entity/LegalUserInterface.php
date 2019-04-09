@@ -140,6 +140,7 @@ interface LegalUserInterface extends UserInterface
      *             behalf of the legal entity
      */
     public function  getLegalRepresentativeProofOfIdentityId();
+    public function  setLegalRepresentativeProofOfIdentityId($id);
 
     /**
      * @var string
@@ -147,6 +148,7 @@ interface LegalUserInterface extends UserInterface
      *             the following information is mentioned: business name, activity, registered address, shareholding…
      */
     public function  getStatuteId();
+    public function  setStatuteId($id);
 
     /**
      * @var string
@@ -155,12 +157,14 @@ interface LegalUserInterface extends UserInterface
      *             authority
      */
     public function  getProofOfRegistrationId();
+    public function  setProofOfRegistrationId($id);
 
     /**
      * @var string
      *             Shareholder declaration (as https://www.mangopay.com/terms/shareholder-declaration/Shareholder_Declaration-EN.pdf)
      */
     public function  getShareholderDeclarationId();
+    public function  setShareholderDeclarationId($id);
 
     /**
      * @var File

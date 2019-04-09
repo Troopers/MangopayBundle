@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        bind:
+            $mangopaySandbox: '%troopers_mangopay.sandbox_mode%'
 
     Troopers\MangopayBundle\:
         autowire: true
@@ -13,6 +16,10 @@ services:
             - "%troopers_mangopay.base_url%"
             - "%troopers_mangopay.debug_mode%"
             - "@event_dispatcher"
+        calls:
+            - method: setLogger
+              arguments:
+                  - '@logger'
 
     troopers_mangopay.mango_api:
         alias: Troopers\MangopayBundle\Helper\MangopayHelper

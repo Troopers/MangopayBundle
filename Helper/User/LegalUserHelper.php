@@ -3,7 +3,10 @@
 namespace Troopers\MangopayBundle\Helper\User;
 
 use Doctrine\ORM\EntityManager;
+use MangoPay\KycDocument;
+use MangoPay\KycDocumentStatus;
 use MangoPay\KycLevel;
+use MangoPay\KycPage;
 use MangoPay\User;
 use MangoPay\UserLegal;
 use MangoPay\UserNatural;
@@ -18,21 +21,24 @@ use Troopers\MangopayBundle\TroopersMangopayEvents;
 use Troopers\MangopayBundle\Helper\MangopayHelper;
 use MangoPay\BankAccount;
 use MangoPay\BankAccountDetailsIBAN;
+use MangoPay\KycDocumentType;
 
 class LegalUserHelper
 {
     private $mangopayHelper;
     private $dispatcher;
     private $KYCHelper;
+    private $mangopaySandbox;
 
-    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher, KYCHelper $KYCHelper)
+    public function __construct(MangopayHelper $mangopayHelper, EventDispatcherInterface $dispatcher, KYCHelper $KYCHelper, $mangopaySandbox)
     {
         $this->mangopayHelper = $mangopayHelper;
         $this->dispatcher = $dispatcher;
         $this->KYCHelper = $KYCHelper;
+        $this->mangopaySandbox = $mangopaySandbox;
     }
 
-    public function createMangoUser(LegalUserInterface $user)
+    public function createMangoUser(UserInterface $user)
     {
         $birthday = null;
         if ($user->getLegalRepresentativeBirthday() instanceof \Datetime) {
@@ -44,7 +50,11 @@ class LegalUserHelper
         $mangoUser->LegalPersonType = $user->getLegalPersonType();
         $mangoUser->Name = $user->getName();
         $mangoUser->Email = $user->getEmail();
-        $mangoUser->LegalRepresentativeFirstName = $user->getLegalRepresentativeFirstName();
+        $legalRepresentativeFirstName = $user->getLegalRepresentativeFirstName();
+        if ($this->mangopaySandbox) {
+            $legalRepresentativeFirstName = "Successful";
+        }
+        $mangoUser->LegalRepresentativeFirstName = $legalRepresentativeFirstName;
         $mangoUser->LegalRepresentativeLastName = $user->getLegalRepresentativeLastName();
         $mangoUser->LegalRepresentativeBirthday = $birthday ? $birthday->getTimestamp() : null;
         $mangoUser->LegalRepresentativeNationality = $user->getLegalRepresentativeNationality();
@@ -72,21 +82,27 @@ class LegalUserHelper
         $user->setMangoUserId($mangoUser->Id);
 
         if (null !== $document = $user->getProofOfRegistration()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::RegistrationProof);
             $mangoUser->ProofOfRegistration = $mangoDocument->Id;
-            $user->getProofOfRegistrationId($mangoDocument->Id);
+            $user->setProofOfRegistrationId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getLegalRepresentativeProofOfIdentity()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::IdentityProof);
             $mangoUser->LegalRepresentativeProofOfIdentity = $mangoDocument->Id;
-            $user->getLegalRepresentativeProofOfIdentityId($mangoDocument->Id);
+            $user->setLegalRepresentativeProofOfIdentityId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getStatute()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::ArticlesOfAssociation);
             $mangoUser->Statute = $mangoDocument->Id;
-            $user->getStatuteId($mangoDocument->Id);
+            $user->setStatuteId($mangoDocument->Id);
+        }
+
+        if (null !== $document = $user->getShareholderDeclaration()) {
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::ShareholderDeclaration);
+            $mangoUser->ShareholderDeclaration = $mangoDocument->Id;
+            $user->setShareholderDeclarationId($mangoDocument->Id);
         }
 
         $event = new UserEvent($user, $mangoUser);
@@ -95,8 +111,9 @@ class LegalUserHelper
         return $mangoUser;
     }
 
-    public function updateMangoUser(LegalUserInterface $user)
+    public function updateMangoUser(UserInterface $user)
     {
+        $birthday = null;
         if ($user->getLegalRepresentativeBirthday() instanceof \Datetime) {
             $birthday = $user->getLegalRepresentativeBirthday()->getTimestamp();
         }
@@ -122,25 +139,25 @@ class LegalUserHelper
 
 
         if (null !== $document = $user->getProofOfRegistration()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::RegistrationProof);
             $mangoUser->ProofOfRegistration = $mangoDocument->Id;
             $user->setProofOfRegistrationId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getLegalRepresentativeProofOfIdentity()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::IdentityProof);
             $mangoUser->LegalRepresentativeProofOfIdentity = $mangoDocument->Id;
             $user->setLegalRepresentativeProofOfIdentityId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getStatute()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::ArticlesOfAssociation);
             $mangoUser->Statute = $mangoDocument->Id;
             $user->setStatuteId($mangoDocument->Id);
         }
 
         if (null !== $document = $user->getShareholderDeclaration()) {
-            $mangoDocument = $this->createDocument($document, $user);
+            $mangoDocument = $this->createDocument($document, $user, KycDocumentType::ShareholderDeclaration);
             $mangoUser->ShareholderDeclaration = $mangoDocument->Id;
             $user->setShareholderDeclarationId($mangoDocument->Id);
         }
@@ -150,10 +167,20 @@ class LegalUserHelper
         return $mangoUser;
     }
 
-    protected function createDocument(File $file, UserInterface $user)
+    protected function createDocument($fileContent, UserInterface $user, $type)
     {
-        $document = $this->KYCHelper->createDocument($file);
-        $document = $this->mangopayHelper->Users->CreateKycDocument($user->getMangoUserId(), $document);
+        $kycDocument = new KycDocument();
+        $kycDocument->UserId = $user->getMangoUserId();
+        $kycDocument->Type = $type;
+        $kycDocument->Status = KycDocumentStatus::ValidationAsked;
+
+        $document = $this->mangopayHelper->Users->CreateKycDocument($user->getMangoUserId(), $kycDocument);
+
+        $page = new KycPage();
+        $page->File = $fileContent;
+
+        $this->mangopayHelper->Users->CreateKycPage($user->getMangoUserId(), $document->Id, $page);
+
 
         return $document;
     }

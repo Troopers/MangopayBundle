@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->booleanNode('sandbox_mode')->defaultValue(false)->end()
                 ->booleanNode('debug_mode')->defaultValue(false)->end()
                 ->scalarNode('client_id')->isRequired()->end()
                 ->scalarNode('client_password')->isRequired()->end()
