@@ -3,6 +3,7 @@
 namespace Troopers\MangopayBundle\Helper;
 
 use Doctrine\ORM\EntityManager;
+use MangoPay\Transfer;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Troopers\MangopayBundle\Entity\UserInterface;
@@ -64,5 +65,33 @@ class WalletHelper
     public function getTransactions($walletId)
     {
         return $this->mangopayHelper->Wallets->GetTransactions($walletId);
+    }
+
+    public function createTransfer(UserInterface $debitedUser, UserInterface $creditedUser, int $debitedAmount, int $feesAmount, string $tag = null, UserInterface $author = null)
+    {
+        $tranfer = new Transfer();
+
+        $tranfer->CreditedWalletId = $creditedUser->getMangoWalletId();
+        $tranfer->DebitedWalletId = $debitedUser->getMangoWalletId();
+        $tranfer->CreditedUserId = $creditedUser->getMangoUserId();
+
+        $debited = new Money();
+        $debited->Amount = $debited;
+        $debited->Currency = 'EUR';
+
+        $fees = new Money();
+        $fees->Amount = $fees;
+        $fees->Currency = 'EUR';
+
+        $tranfer->DebitedFunds = $debited;
+        $tranfer->Fees = $fees;
+
+        $tranfer->Tag = $tag;
+
+        if ($author) {
+            $tranfer->AuthorId = $author->getMangoUserId();
+        }
+
+        return $this->mangopayHelper->Transfers->Create($tranfer);
     }
 }
