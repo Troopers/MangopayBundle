@@ -3,6 +3,7 @@
 namespace Troopers\MangopayBundle\Helper;
 
 use Doctrine\ORM\EntityManager;
+use MangoPay\Money;
 use MangoPay\Transfer;
 use MangoPay\Wallet;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
