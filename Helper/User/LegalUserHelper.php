@@ -172,7 +172,6 @@ class LegalUserHelper
         $kycDocument = new KycDocument();
         $kycDocument->UserId = $user->getMangoUserId();
         $kycDocument->Type = $type;
-        $kycDocument->Status = KycDocumentStatus::ValidationAsked;
 
         $document = $this->mangopayHelper->Users->CreateKycDocument($user->getMangoUserId(), $kycDocument);
 
@@ -181,6 +180,9 @@ class LegalUserHelper
 
         $this->mangopayHelper->Users->CreateKycPage($user->getMangoUserId(), $document->Id, $page);
 
+        $document->Status = KycDocumentStatus::ValidationAsked;
+
+        $this->mangopayHelper->Users->UpdateKycDocument($user->getMangoUserId(), $document);
 
         return $document;
     }
